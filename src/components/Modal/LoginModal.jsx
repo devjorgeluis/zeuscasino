@@ -1,52 +1,48 @@
-import { useContext, useState, useEffect } from "react";
-import { NavigationContext } from "../Layout/NavigationContext";
+import { useContext, useState, useEffect, useRef } from "react";
 import { AppContext } from "../../AppContext";
 import { callApi } from "../../utils/Utils";
 
 const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
     const { contextData, updateSession } = useContext(AppContext);
-    const { setShowFullDivLoading } = useContext(NavigationContext);
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
-    const [notificationsWidth, setNotificationsWidth] = useState("100%");
+    const [isLoading, setIsLoading] = useState(false);
+    const usernameRef = useRef(null);
 
     useEffect(() => {
-        if (!errorMsg) return;
+        if (isOpen && usernameRef.current) usernameRef.current.focus();
+    }, [isOpen]);
 
-        setNotificationsWidth("100%");
-        const startTimer = setTimeout(() => setNotificationsWidth("0%"), 50);
-        const hideTimer = setTimeout(() => setErrorMsg(""), 5000);
-
-        return () => {
-            clearTimeout(startTimer);
-            clearTimeout(hideTimer);
-        };
-    }, [errorMsg]);
+    useEffect(() => {
+        function onKey(e) {
+            if (e.key === 'Escape') onClose();
+        }
+        if (isOpen) document.addEventListener('keydown', onKey);
+        return () => document.removeEventListener('keydown', onKey);
+    }, [isOpen, onClose]);
 
     const handleSubmit = (event) => {
-        const form = event.currentTarget;
         event.preventDefault();
-        event.stopPropagation();
-        if (form.checkValidity()) {
-            setShowFullDivLoading(true);
+        setIsLoading(true);
 
-            let body = {
-                username: username,
-                password: password,
-            };
-            callApi(
-                contextData,
-                "POST",
-                "/login/",
-                callbackSubmitLogin,
-                JSON.stringify(body)
-            );
-        }
+        const body = {
+            username: username,
+            password: password,
+        };
+
+        callApi(
+            contextData,
+            "POST",
+            "/login/",
+            callbackSubmitLogin,
+            JSON.stringify(body)
+        );
     };
 
     const callbackSubmitLogin = (result) => {
-        setShowFullDivLoading(false);
+        setIsLoading(false);
         if (result.status === "success") {
             localStorage.setItem("session", JSON.stringify(result));
             updateSession(result);
@@ -58,60 +54,94 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                 onClose();
             }, 1000);
         } else {
-            setErrorMsg("Correo electrónico o contraseña no válidos");
+            setErrorMsg("Combinación de nombre de usuario y contraseña no válida.");
         }
     };
+
 
     if (!isOpen) return null;
 
     return (
-        <div className="jquery-modal blocker current" style={{ opacity: 1 }}>
-            <div id="auth" className="modal" style={{ opacity: 1, display: "inline-block" }}>
-                <div className="modal_head">
-                    <div>Ingresar</div>
-                    <a href="#" rel="modal:close" onClick={() => onClose()}></a>
-                </div>
-                <div className="modal_content">
-                    <form method="post" id="auth_form" onSubmit={handleSubmit}>
-                        <div className="input-block">
-                            <input
-                                className="form-control"
-                                type="text"
-                                name="username"
-                                placeholder=""
-                                autoComplete="username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                required
-                            />
-                            <span className="placeholder">Nombre de usuario</span>
-                        </div>
-                        <div className="input-block">
-                            <input
-                                id="password"
-                                className="form-control"
-                                type="password"
-                                name="password"
-                                placeholder=""
-                                autoComplete="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
-                            <span className="placeholder">Contraseña</span>
-                        </div>
-                        {
-                            errorMsg !== "" && (
-                                <div className="notificationsMessage notifications_error" onClick={() => setErrorMsg("")}>
-                                    <div className="notificationsText">{errorMsg}</div>
-                                    <div className="notificationsIndicator">
-                                        <div style={{ overflow: 'hidden', width: notificationsWidth, transition: 'width 5s linear' }}></div>
+        <div
+            id="login"
+            tabIndex={-1}
+            aria-labelledby="loginLabel"
+            data-bs-backdrop="true"
+            className="modal fade show"
+            style={{ backgroundColor: 'rgba(0,0,0,0.5)', display: 'block' }}
+            aria-modal="true"
+            role="dialog"
+        >
+            <div className="modal-dialog modal-dialog-lg modal-dialog-centered">
+                <div
+                    className="modal-content exo-2"
+                    style={{ borderRadius: '20px', backgroundColor: 'rgb(4, 7, 19)', fontFamily: '"Exo 2", sans-serif' }}
+                >
+                    <button
+                        id="closeLogin1"
+                        type="button"
+                        aria-label="Close"
+                        className="btn-close"
+                        style={{ color: 'rgb(204, 204, 204)' }}
+                        onClick={() => onClose()}
+                    >
+                        <i className="fas fa-times"></i>
+                    </button>
+                    <h6 id="exampleModalLabel" className="modal-title title text-center m-1 mb-5 p-0">
+                        Ingrese su usuario y contraseña para<br />
+                        empezar a jugar.
+                    </h6>
+                    <div className="modal-body p-1">
+                        <div className="text-center">
+                            <form className="p-2 my-3" onSubmit={handleSubmit}>
+                                <div className="w-100">
+                                    <div className="pb-2 font-size-custom mb-2 my-1 d-flex justify-content-center w-100">
+                                        <input
+                                            id="username"
+                                            type="text"
+                                            placeholder="Usuario"
+                                            autoComplete="username"
+                                            className="form-control input-login mr-sm-2 my-sm-0"
+                                            value={username}
+                                            onChange={(e) => setUsername(e.target.value)}
+                                            ref={usernameRef}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="pb-2 font-size-custom mb-3 my-1 d-flex justify-content-center">
+                                        <input
+                                            id="password"
+                                            type="password"
+                                            placeholder="Contraseña"
+                                            maxLength={64}
+                                            autoComplete="current-password"
+                                            className="form-control input-login mr-sm-2 my-sm-0"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                        />
                                     </div>
                                 </div>
-                            )
-                        }
-                        <button type="submit">Ingresar</button>
-                    </form>
+                                <div className="d-flex mb-3 align-content-center justify-content-center">
+                                    <button
+                                        id="submit_btn"
+                                        type="submit"
+                                        className="btn p-2 login-btn"
+                                        style={{ color: 'black', width: '100%', backgroundColor: 'rgb(218, 65, 103)' }}
+                                        disabled={isLoading}
+                                    >
+                                        {isLoading ? 'INGRESANDO...' : 'INGRESAR'}
+                                    </button>
+                                </div>
+                            </form>
+
+                            {errorMsg && (
+                                <div role="alert" className="alert alert-danger">
+                                    {errorMsg}
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1328,16 +1328,6 @@
   background: linear-gradient(40deg, #292d3d, #03040d) !important
 }
 
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .5
-}
-
 .login-user-control {
   color: #fff;
   margin-left: 2.5rem;
@@ -1382,16 +1372,6 @@ h1 {
   color: #fff;
   border-bottom: none;
   background: linear-gradient(40deg, #292d3d, #03040d) !important
-}
-
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .5
 }
 
 .login-user-control {
@@ -1588,16 +1568,6 @@ h1 {
   background: linear-gradient(40deg, #292d3d, #03040d) !important
 }
 
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .5
-}
-
 .login-user-control {
   color: #fff;
   margin-left: 2.5rem;
@@ -1626,16 +1596,6 @@ h1 {
   color: #fff;
   border-bottom: none;
   background: linear-gradient(40deg, #292d3d, #03040d) !important
-}
-
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .5
 }
 
 .login-user-control {
@@ -1994,12 +1954,6 @@ h1 {
   border: 1px solid hsla(0, 0%, 9%, .082)
 }
 
-.title {
-  color: #ebebd3 !important;
-  height: 60px !important;
-  font-size: 1rem !important
-}
-
 .login-btn,
 .title {
   font-family: Exo\ 2, sans-serif;
@@ -2028,6 +1982,12 @@ h1 {
   line-height: .75em
 }
 
+.input-login:focus {
+  background-color: #020f1d;
+  color: #fff;
+}
+
+
 .modal-fade {
   border-radius: 10px 10px 10px 10px
 }
@@ -2039,10 +1999,6 @@ h1 {
   margin-bottom: 0 !important;
   height: 60px;
   padding: 1rem !important
-}
-
-.close2 {
-  opacity: .5
 }
 
 .login-user-control {
@@ -2064,23 +2020,7 @@ h1 {
   font-weight: 800
 }
 
-.modal-title {
-  height: 80px;
-  color: #fff;
-  border-bottom: none;
-  font-size: 20px;
-  font-family: Exo 2, sans-serif
-}
 
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .8
-}
 
 .login-user-control,
 .submit_btn {
@@ -2101,16 +2041,6 @@ h1 {
   height: auto;
   font-family: Exo 2, sans-serif;
   font-weight: 800
-}
-
-.title {
-  font-family: Exo\ 2, sans-serif;
-  color: #ebebd3 !important;
-  height: 10px !important;
-  font-size: 1rem !important;
-  font-weight: 700;
-  margin-bottom: 2px;
-  margin: .5rem auto
 }
 
 .login-btn {
@@ -2126,32 +2056,8 @@ h1 {
   font-family: Exo\ 2, sans-serif !important
 }
 
-.input-login {
-  background-color: #020f1d;
-  font-family: Exo\ 2, sans-serif;
-  border: none;
-  color: #fff;
-  font-size: medium;
-  border-radius: 6px;
-  padding: 10px 20px;
-  line-height: .75em
-}
-
 .modal-fade {
   border-radius: 10px 10px 10px 10px
-}
-
-.modal-title {
-  margin-left: 5% !important;
-  margin-right: 5% !important;
-  margin-top: .15rem !important;
-  margin-bottom: 0 !important;
-  height: 10px;
-  padding: .5rem !important
-}
-
-.close2 {
-  opacity: .5
 }
 
 .login-user-control {
@@ -2171,14 +2077,6 @@ h1 {
   height: auto;
   font-family: Exo 2, sans-serif;
   font-weight: 800
-}
-
-.modal-title {
-  height: 50px;
-  color: #fff;
-  border-bottom: none;
-  font-size: 20px;
-  font-family: Exo 2, sans-serif
 }
 
 .close2 {
@@ -2210,16 +2108,6 @@ h1 {
   height: auto;
   font-family: Exo 2, sans-serif;
   font-weight: 800
-}
-
-.title {
-  font-family: Exo\ 2, sans-serif;
-  color: #ebebd3 !important;
-  height: 10px !important;
-  font-size: 1rem !important;
-  font-weight: 700;
-  margin-bottom: 2px;
-  margin: .5rem auto
 }
 
 .login-btn {
@@ -2235,32 +2123,8 @@ h1 {
   font-family: Exo\ 2, sans-serif !important
 }
 
-.input-login {
-  background-color: #020f1d;
-  font-family: Exo\ 2, sans-serif;
-  border: none;
-  color: #fff;
-  font-size: medium;
-  border-radius: 6px;
-  padding: 10px 20px;
-  line-height: .75em
-}
-
 .modal-fade {
   border-radius: 10px 10px 10px 10px
-}
-
-.modal-title {
-  margin-left: 5% !important;
-  margin-right: 5% !important;
-  margin-top: .15rem !important;
-  margin-bottom: 0 !important;
-  height: 10px;
-  padding: .5rem !important
-}
-
-.close2 {
-  opacity: .5
 }
 
 .login-user-control {
@@ -2282,23 +2146,7 @@ h1 {
   font-weight: 800
 }
 
-.modal-title {
-  height: 50px;
-  color: #fff;
-  border-bottom: none;
-  font-size: 20px;
-  font-family: Exo 2, sans-serif
-}
 
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .8
-}
 
 .login-user-control,
 .submit_btn {
@@ -2331,16 +2179,6 @@ h1 {
   color: #fff;
   border-bottom: none;
   background: linear-gradient(40deg, #292d3d, #03040d) !important
-}
-
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .5
 }
 
 .login-user-control {
@@ -2387,16 +2225,6 @@ h1 {
   color: #fff;
   border-bottom: none;
   background: linear-gradient(40deg, #292d3d, #03040d) !important
-}
-
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .5
 }
 
 .login-user-control {
@@ -2445,13 +2273,9 @@ h1 {
 }
 
 .title {
-  font-family: Exo\ 2, sans-serif;
   color: #ebebd3 !important;
-  height: 10px !important;
+  height: 60px !important;
   font-size: 1rem !important;
-  font-weight: 700;
-  margin-bottom: 2px;
-  margin: .5rem auto
 }
 
 .login-btn {
@@ -2467,32 +2291,8 @@ h1 {
   font-family: Exo\ 2, sans-serif !important
 }
 
-.input-login {
-  background-color: #020f1d;
-  font-family: Exo\ 2, sans-serif;
-  border: none;
-  color: #fff;
-  font-size: medium;
-  border-radius: 6px;
-  padding: 10px 20px;
-  line-height: .75em
-}
-
 .modal-fade {
   border-radius: 10px 10px 10px 10px
-}
-
-.modal-title {
-  margin-left: 5% !important;
-  margin-right: 5% !important;
-  margin-top: .15rem !important;
-  margin-bottom: 0 !important;
-  height: 10px;
-  padding: .5rem !important
-}
-
-.close2 {
-  opacity: .5
 }
 
 .login-user-control {
@@ -2514,23 +2314,7 @@ h1 {
   font-weight: 800
 }
 
-.modal-title {
-  height: 50px;
-  color: #fff;
-  border-bottom: none;
-  font-size: 20px;
-  font-family: Exo 2, sans-serif
-}
 
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .8
-}
 
 .login-user-control,
 .submit_btn {
@@ -2798,21 +2582,6 @@ h3 {
   color: #00b7ff
 }
 
-.input-login {
-  background-color: #020f1d;
-  font-family: Exo\ 2, sans-serif;
-  border: none;
-  color: #fff;
-  font-size: medium;
-  border-radius: 5px;
-  padding: 5px 10px;
-  line-height: .75em;
-  margin-bottom: 10px;
-  width: 60%;
-  max-width: 250px;
-  max-height: 30px
-}
-
 .login-btn {
   font-family: Exo\ 2, sans-serif;
   color: #008bb7;
@@ -2840,16 +2609,6 @@ h3 {
   color: #fff;
   border-bottom: none;
   background: linear-gradient(40deg, #292d3d, #03040d) !important
-}
-
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .5
 }
 
 .login-user-control {
@@ -3208,14 +2967,6 @@ input[type=file]:focus {
   line-height: .875rem
 }
 
-.btn-close {
-  background: transparent;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: #fff
-}
-
 .data-container {
   padding: 1.25rem 20.625rem 0 20.625rem
 }
@@ -3397,30 +3148,6 @@ input[type=file]:focus {
   align-items: center;
   height: 100%;
   margin-top: 1rem
-}
-
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .5
-}
-
-.title {
-  font-weight: 700;
-  font-size: 1.625rem;
-  line-height: 100%;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  font-feature-settings: "pnum" on, "lnum" on;
-  color: #fff;
-  font-family: Roboto, Arial, sans-serif;
-  margin-bottom: 1.875rem
 }
 
 .search-filter-slots-desktop__input-wrapper {
@@ -5078,24 +4805,6 @@ a {
   background-position: 0 -16px;
   transform: rotate(-180deg);
   transition: transform .25s ease-out
-}
-
-.close2 {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .5
-}
-
-.title {
-  font-weight: 700;
-  font-size: 1.1rem;
-  line-height: 100%;
-  color: #fff;
-  font-family: Roboto, Arial, sans-serif
 }
 
 .search-filter-slots-desktop__input-wrapper {

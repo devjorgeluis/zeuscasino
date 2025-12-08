@@ -6,7 +6,9 @@ const Header = ({
     isLogin,
     isMobile,
     link,
-    userBalance
+    userBalance,
+    handleLoginClick,
+    handleLogoutClick
 }) => {
     const navigate = useNavigate();
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -185,7 +187,7 @@ const Header = ({
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" className="dropdown-item" onClick={() => setDropdownOpen(false)}>
+                                        <a href="#" className="dropdown-item" onClick={handleLogoutClick}>
                                             <i className="fa fa-power-off"></i> Salir
                                         </a>
                                     </li>
@@ -203,6 +205,7 @@ const Header = ({
                                 transition: "0.3s",
                                 float: "right",
                             }}
+                            onClick={handleLoginClick}
                         >
                             <span style={{ display: "table-cell", verticalAlign: "middle" }}>
                                 INGRESAR

@@ -398,10 +398,10 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-    animation: _ngcontent-ng-c4067845233_shimmer 3s infinite;
+    animation: shimmer 3s infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_shimmer {
+@keyframes shimmer {
     0% {
         left: -100%;
     }
@@ -450,10 +450,10 @@
 
 .title-icon {
     font-size: 20px;
-    animation: _ngcontent-ng-c4067845233_sparkle 2s infinite alternate;
+    animation: sparkle 2s infinite alternate;
 }
 
-@keyframes _ngcontent-ng-c4067845233_sparkle {
+@keyframes sparkle {
 
     0%,
     to {
@@ -558,10 +558,10 @@
     opacity: 0;
     z-index: -1;
     transition: opacity 0.3s ease;
-    animation: _ngcontent-ng-c4067845233_borderRotate 3s linear infinite;
+    animation: borderRotate 3s linear infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_borderRotate {
+@keyframes borderRotate {
     0% {
         transform: rotate(0);
     }
@@ -581,10 +581,10 @@
 }
 
 .jackpot-card.pulse {
-    animation: _ngcontent-ng-c4067845233_cardPulse 2s infinite;
+    animation: cardPulse 2s infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_cardPulse {
+@keyframes cardPulse {
 
     0%,
     to {
@@ -604,10 +604,10 @@
     height: 200%;
     background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
     transform: rotate(45deg);
-    animation: _ngcontent-ng-c4067845233_cardShine 4s infinite;
+    animation: cardShine 4s infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_cardShine {
+@keyframes cardShine {
     0% {
         transform: translate(-100%) rotate(45deg);
     }
@@ -685,10 +685,10 @@
     border-radius: 50%;
     filter: blur(15px);
     opacity: 0.6;
-    animation: _ngcontent-ng-c4067845233_iconPulse 2s infinite;
+    animation: iconPulse 2s infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_iconPulse {
+@keyframes iconPulse {
 
     0%,
     to {
@@ -774,10 +774,10 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: _ngcontent-ng-c4067845233_progressShine 2s infinite;
+    animation: progressShine 2s infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_progressShine {
+@keyframes progressShine {
     0% {
         left: -100%;
     }
@@ -847,10 +847,10 @@
     align-items: center;
     justify-content: center;
     z-index: 10000;
-    animation: _ngcontent-ng-c4067845233_fadeIn 0.3s ease;
+    animation: fadeIn 0.3s ease;
 }
 
-@keyframes _ngcontent-ng-c4067845233_fadeIn {
+@keyframes fadeIn {
     0% {
         opacity: 0;
     }
@@ -860,20 +860,7 @@
     }
 }
 
-.modal-content {
-    background: linear-gradient(145deg, #2a0845, #1a0535);
-    border-radius: 20px;
-    max-width: 500px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    border: 2px solid rgba(255, 215, 0, 0.3);
-    box-shadow: 0 20px 60px #00000080;
-    animation: _ngcontent-ng-c4067845233_slideUp 0.3s ease;
-}
-
-@keyframes _ngcontent-ng-c4067845233_slideUp {
+@keyframes slideUp {
     0% {
         transform: translateY(50px);
         opacity: 0;
@@ -925,10 +912,10 @@
     justify-content: center;
     font-size: 48px;
     box-shadow: 0 10px 30px #00000080;
-    animation: _ngcontent-ng-c4067845233_modalIconFloat 3s infinite;
+    animation: modalIconFloat 3s infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_modalIconFloat {
+@keyframes modalIconFloat {
 
     0%,
     to {
@@ -1097,10 +1084,10 @@
     align-items: center;
     justify-content: center;
     z-index: 3;
-    animation: _ngcontent-ng-c4067845233_winFadeIn 0.5s ease;
+    animation: winFadeIn 0.5s ease;
 }
 
-@keyframes _ngcontent-ng-c4067845233_winFadeIn {
+@keyframes winFadeIn {
     0% {
         opacity: 0;
     }
@@ -1123,10 +1110,10 @@
         0 30px 80px #ffd70066,
         0 0 100px #ffd70033,
         inset 0 0 50px #ffd7000d;
-    animation: _ngcontent-ng-c4067845233_winSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: winSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes _ngcontent-ng-c4067845233_winSlideUp {
+@keyframes winSlideUp {
     0% {
         transform: translateY(100px) scale(0.8);
         opacity: 0;
@@ -1189,10 +1176,10 @@
             transparent 180deg,
             rgba(255, 215, 0, 0.1) 225deg,
             transparent 270deg);
-    animation: _ngcontent-ng-c4067845233_rotateRays 10s linear infinite;
+    animation: rotateRays 10s linear infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_rotateRays {
+@keyframes rotateRays {
     0% {
         transform: translate(-50%, -50%) rotate(0);
     }
@@ -1213,10 +1200,10 @@
         radial-gradient(2px 2px at 90% 60%, rgba(255, 107, 107, 0.8), transparent),
         radial-gradient(2px 2px at 30% 80%, rgba(78, 205, 196, 0.8), transparent);
     background-size: 200% 200%;
-    animation: _ngcontent-ng-c4067845233_particlesFloat 15s ease-in-out infinite;
+    animation: particlesFloat 15s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_particlesFloat {
+@keyframes particlesFloat {
 
     0%,
     to {
@@ -1245,10 +1232,10 @@
     width: 100%;
     height: 100%;
     background: transparent;
-    animation: _ngcontent-ng-c4067845233_sparkle 2s ease-in-out infinite;
+    animation: sparkle 2s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_sparkle {
+@keyframes sparkle {
 
     0%,
     to {
@@ -1269,10 +1256,10 @@
 
 .win-title-section {
     margin-bottom: 20px;
-    animation: _ngcontent-ng-c4067845233_titlePulse 2s ease-in-out infinite;
+    animation: titlePulse 2s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_titlePulse {
+@keyframes titlePulse {
 
     0%,
     to {
@@ -1296,10 +1283,10 @@
         0 0 40px rgba(255, 215, 0, 0.8),
         0 0 60px rgba(255, 215, 0, 0.6),
         0 4px 10px rgba(0, 0, 0, 0.8);
-    animation: _ngcontent-ng-c4067845233_glowPulse 2s ease-in-out infinite;
+    animation: glowPulse 2s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_glowPulse {
+@keyframes glowPulse {
 
     0%,
     to {
@@ -1347,10 +1334,10 @@
     border-radius: 50%;
     filter: blur(40px);
     opacity: 0.6;
-    animation: _ngcontent-ng-c4067845233_iconGlowPulse 2s ease-in-out infinite;
+    animation: iconGlowPulse 2s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_iconGlowPulse {
+@keyframes iconGlowPulse {
 
     0%,
     to {
@@ -1370,10 +1357,10 @@
     height: 100%;
     border: 3px solid rgba(255, 215, 0, 0.3);
     border-radius: 50%;
-    animation: _ngcontent-ng-c4067845233_ringExpand 2s ease-out infinite;
+    animation: ringExpand 2s ease-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_ringExpand {
+@keyframes ringExpand {
     0% {
         transform: scale(1);
         opacity: 1;
@@ -1398,12 +1385,12 @@
     box-shadow:
         0 0 30px #ffd70080,
         inset 0 0 30px #ffd7001a;
-    animation: _ngcontent-ng-c4067845233_iconBounce 2s ease-in-out infinite;
+    animation: iconBounce 2s ease-in-out infinite;
     position: relative;
     z-index: 2;
 }
 
-@keyframes _ngcontent-ng-c4067845233_iconBounce {
+@keyframes iconBounce {
 
     0%,
     to {
@@ -1422,10 +1409,10 @@
 .win-icon-emoji {
     font-size: 80px;
     filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.8));
-    animation: _ngcontent-ng-c4067845233_emojiSpin 3s ease-in-out infinite;
+    animation: emojiSpin 3s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_emojiSpin {
+@keyframes emojiSpin {
 
     0%,
     to {
@@ -1450,10 +1437,10 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     box-shadow: 0 8px 20px #00000080;
-    animation: _ngcontent-ng-c4067845233_badgeFloat 3s ease-in-out infinite;
+    animation: badgeFloat 3s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_badgeFloat {
+@keyframes badgeFloat {
 
     0%,
     to {
@@ -1536,10 +1523,10 @@
     text-shadow:
         0 0 20px rgba(255, 215, 0, 0.6),
         0 4px 10px rgba(0, 0, 0, 0.8);
-    animation: _ngcontent-ng-c4067845233_numberCount 0.8s ease-out;
+    animation: numberCount 0.8s ease-out;
 }
 
-@keyframes _ngcontent-ng-c4067845233_numberCount {
+@keyframes numberCount {
     0% {
         transform: scale(0.5);
         opacity: 0;
@@ -1594,10 +1581,10 @@
     height: 200%;
     background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transform: rotate(45deg);
-    animation: _ngcontent-ng-c4067845233_buttonShine 3s infinite;
+    animation: buttonShine 3s infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_buttonShine {
+@keyframes buttonShine {
     0% {
         transform: translate(-100%) rotate(45deg);
     }
@@ -1637,7 +1624,7 @@
     background: gold;
     top: -10%;
     opacity: 0;
-    animation: _ngcontent-ng-c4067845233_confettiFall 3s linear infinite;
+    animation: confettiFall 3s linear infinite;
 }
 
 .confetti:nth-child(1) {
@@ -1760,7 +1747,7 @@
     background: #ff6b6b;
 }
 
-@keyframes _ngcontent-ng-c4067845233_confettiFall {
+@keyframes confettiFall {
     0% {
         top: -10%;
         opacity: 1;
@@ -1898,10 +1885,10 @@
         0 30px 80px #4ecdc466,
         0 0 100px #4ecdc433,
         inset 0 0 50px #4ecdc40d;
-    animation: _ngcontent-ng-c4067845233_successSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: successSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes _ngcontent-ng-c4067845233_successSlideUp {
+@keyframes successSlideUp {
     0% {
         transform: translateY(100px) scale(0.8);
         opacity: 0;
@@ -1938,7 +1925,7 @@
             transparent 180deg,
             rgba(78, 205, 196, 0.1) 225deg,
             transparent 270deg);
-    animation: _ngcontent-ng-c4067845233_rotateRays 10s linear infinite;
+    animation: rotateRays 10s linear infinite;
 }
 
 .success-particles {
@@ -1950,7 +1937,7 @@
         radial-gradient(2px 2px at 50% 50%, rgba(78, 205, 196, 0.8), transparent),
         radial-gradient(2px 2px at 80% 10%, rgba(255, 215, 0, 0.8), transparent);
     background-size: 200% 200%;
-    animation: _ngcontent-ng-c4067845233_particlesFloat 15s ease-in-out infinite;
+    animation: particlesFloat 15s ease-in-out infinite;
 }
 
 .success-content {
@@ -1978,10 +1965,10 @@
     border-radius: 50%;
     background: #4ecdc499;
     filter: blur(40px);
-    animation: _ngcontent-ng-c4067845233_successGlowPulse 2s ease-in-out infinite;
+    animation: successGlowPulse 2s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_successGlowPulse {
+@keyframes successGlowPulse {
 
     0%,
     to {
@@ -2001,7 +1988,7 @@
     height: 100%;
     border: 3px solid rgba(78, 205, 196, 0.3);
     border-radius: 50%;
-    animation: _ngcontent-ng-c4067845233_ringExpand 2s ease-out infinite;
+    animation: ringExpand 2s ease-out infinite;
 }
 
 .success-icon {
@@ -2015,12 +2002,12 @@
     box-shadow:
         0 0 30px #4ecdc4cc,
         inset 0 0 30px #ffffff1a;
-    animation: _ngcontent-ng-c4067845233_successBounce 0.8s ease-out;
+    animation: successBounce 0.8s ease-out;
     position: relative;
     z-index: 2;
 }
 
-@keyframes _ngcontent-ng-c4067845233_successBounce {
+@keyframes successBounce {
     0% {
         transform: scale(0);
     }
@@ -2039,10 +2026,10 @@
     color: #fff;
     font-weight: 900;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    animation: _ngcontent-ng-c4067845233_checkAppear 0.5s ease-out 0.3s both;
+    animation: checkAppear 0.5s ease-out 0.3s both;
 }
 
-@keyframes _ngcontent-ng-c4067845233_checkAppear {
+@keyframes checkAppear {
     0% {
         transform: scale(0) rotate(-45deg);
         opacity: 0;
@@ -2069,10 +2056,10 @@
         0 0 20px rgba(78, 205, 196, 1),
         0 0 40px rgba(78, 205, 196, 0.8),
         0 4px 10px rgba(0, 0, 0, 0.8);
-    animation: _ngcontent-ng-c4067845233_successTextGlow 2s ease-in-out infinite;
+    animation: successTextGlow 2s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_successTextGlow {
+@keyframes successTextGlow {
 
     0%,
     to {
@@ -2117,10 +2104,10 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     box-shadow: 0 8px 20px #4ecdc480;
-    animation: _ngcontent-ng-c4067845233_badgePulse 2s ease-in-out infinite;
+    animation: badgePulse 2s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_badgePulse {
+@keyframes badgePulse {
 
     0%,
     to {
@@ -2134,10 +2121,10 @@
 
 .badge-icon {
     font-size: 20px;
-    animation: _ngcontent-ng-c4067845233_iconRotate 2s ease-in-out infinite;
+    animation: iconRotate 2s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_iconRotate {
+@keyframes iconRotate {
 
     0%,
     to {
@@ -2192,10 +2179,10 @@
     text-shadow:
         0 0 20px rgba(78, 205, 196, 0.6),
         0 4px 10px rgba(0, 0, 0, 0.8);
-    animation: _ngcontent-ng-c4067845233_numberPop 0.8s ease-out;
+    animation: numberPop 0.8s ease-out;
 }
 
-@keyframes _ngcontent-ng-c4067845233_numberPop {
+@keyframes numberPop {
     0% {
         transform: scale(0);
         opacity: 0;
@@ -2226,10 +2213,10 @@
     height: 8px;
     background: #4ecdc4;
     border-radius: 50%;
-    animation: _ngcontent-ng-c4067845233_dotPulse 1.5s ease-in-out infinite;
+    animation: dotPulse 1.5s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_dotPulse {
+@keyframes dotPulse {
 
     0%,
     to {
@@ -2285,10 +2272,10 @@
     border-radius: 15px;
     padding: 20px;
     margin: 25px 0;
-    animation: _ngcontent-ng-c4067845233_ctaPulse 3s ease-in-out infinite;
+    animation: ctaPulse 3s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_ctaPulse {
+@keyframes ctaPulse {
 
     0%,
     to {
@@ -2317,10 +2304,10 @@
 
 .cta-icon {
     font-size: 20px;
-    animation: _ngcontent-ng-c4067845233_fireFlicker 1s ease-in-out infinite alternate;
+    animation: fireFlicker 1s ease-in-out infinite alternate;
 }
 
-@keyframes _ngcontent-ng-c4067845233_fireFlicker {
+@keyframes fireFlicker {
 
     0%,
     to {
@@ -2378,7 +2365,7 @@
     height: 200%;
     background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transform: rotate(45deg);
-    animation: _ngcontent-ng-c4067845233_buttonShine 3s infinite;
+    animation: buttonShine 3s infinite;
 }
 
 .button-text {
@@ -2435,10 +2422,10 @@
 
 .ticker-pulse {
     color: #ff6b6b;
-    animation: _ngcontent-ng-c4067845233_tickerPulse 1s ease-in-out infinite;
+    animation: tickerPulse 1s ease-in-out infinite;
 }
 
-@keyframes _ngcontent-ng-c4067845233_tickerPulse {
+@keyframes tickerPulse {
 
     0%,
     to {
@@ -2470,7 +2457,7 @@
     font-size: 24px;
     top: -10%;
     opacity: 0;
-    animation: _ngcontent-ng-c4067845233_coinFall 4s linear infinite;
+    animation: coinFall 4s linear infinite;
 }
 
 .coin:nth-child(1) {
@@ -2548,7 +2535,7 @@
     animation-delay: 2.5s;
 }
 
-@keyframes _ngcontent-ng-c4067845233_coinFall {
+@keyframes coinFall {
     0% {
         top: -10%;
         opacity: 1;

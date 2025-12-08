@@ -76,7 +76,7 @@ const Layout = () => {
     };
 
     const callbackGetPage = () => {
-        
+
     };
 
     const callbackGetStatus = (result) => {
@@ -106,6 +106,11 @@ const Layout = () => {
         }, null);
     };
 
+    const handleLoginSuccess = (balance) => {
+        const parsed = balance ? parseFloat(balance) : 0;
+        setUserBalance(Number.isFinite(parsed) ? parsed : 0);
+    };
+
     const layoutContextValue = {
         isLogin,
         userBalance,
@@ -123,7 +128,7 @@ const Layout = () => {
                 value={{ selectedPage, setSelectedPage, getPage }}
             >
                 <>
-                {showLoginModal && (
+                    {showLoginModal && (
                         <LoginModal
                             isMobile={isMobile}
                             isOpen={showLoginModal}
@@ -137,6 +142,7 @@ const Layout = () => {
                         isSlotsOnly={isSlotsOnly}
                         userBalance={userBalance}
                         handleLoginClick={handleLoginClick}
+                        handleLogoutClick={handleLogoutClick}
                     />
                     {/* <Sidebar isSlotsOnly={isSlotsOnly} isMobile={isMobile} /> */}
                     <main className="main">
