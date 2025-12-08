@@ -8,7 +8,6 @@ import PlayConfirmModal from "./PlayConfirmModal";
 import GameCard from "../GameCard"
 import LoadApi from "../Loading/LoadApi";
 import SearchInput from "../SearchInput";
-import ImgNoResult from "/src/assets/img/no-image.png";
 
 
 let selectedGameId = null;
@@ -179,7 +178,6 @@ const FilterModal = ({ isLogin, isMobile, onClose }) => {
                     </div>
                 ) : txtSearch !== "" && games.length === 0 && (
                     <div className="no-results">
-                        <img src={ImgNoResult} alt="No results found" />
                         <div>No se encontraron resultados</div>
                     </div>
                 )

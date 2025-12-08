@@ -8,7 +8,6 @@ import IconChevronLeft from "/src/assets/svg/chevron-left.svg";
 import IconChevronRight from "/src/assets/svg/chevron-right.svg";
 import IconDoubleLeft from "/src/assets/svg/double-arrow-left.svg";
 import IconDoubleRight from "/src/assets/svg/double-arrow-right.svg";
-import ImgNoResult from "/src/assets/img/no-transaction.png";
 
 const ProfileHistory = () => {
     const navigate = useNavigate();
@@ -151,7 +150,6 @@ const ProfileHistory = () => {
                 </div>
             ) : (
                 <div className="no-results">
-                    <img src={ImgNoResult} alt="No results found" />
                     <div className="mt-5">No hay transacciones</div>
                 </div>
             )}

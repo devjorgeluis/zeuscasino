@@ -6,6 +6,7 @@ import { LayoutContext } from "./LayoutContext";
 import { callApi } from "../../utils/Utils";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import LoginModal from "../Modal/LoginModal";
 import { NavigationContext } from "./NavigationContext";
 
 const Layout = () => {
@@ -13,8 +14,9 @@ const Layout = () => {
     const [selectedPage, setSelectedPage] = useState("lobby");
     const [isLogin, setIsLogin] = useState(contextData.session !== null);
     const [isMobile, setIsMobile] = useState(false);
-    const [userBalance, setUserBalance] = useState("");
+    const [userBalance, setUserBalance] = useState(0);
     const [isSlotsOnly, setIsSlotsOnly] = useState("");
+    const [showLoginModal, setShowLoginModal] = useState(false);
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const [showMobileSearch, setShowMobileSearch] = useState(false);
     const navigate = useNavigate();
@@ -27,7 +29,8 @@ const Layout = () => {
         if (contextData.session != null) {
             setIsLogin(true);
             if (contextData.session.user && contextData.session.user.balance) {
-                setUserBalance(contextData.session.user.balance);
+                const parsed = parseFloat(contextData.session.user.balance);
+                setUserBalance(Number.isFinite(parsed) ? parsed : 0);
             }
 
             refreshBalance();
@@ -53,12 +56,13 @@ const Layout = () => {
     }, []);
 
     const refreshBalance = () => {
-        setUserBalance("");
+        setUserBalance(0);
         callApi(contextData, "GET", "/get-user-balance", callbackRefreshBalance, null);
     };
 
     const callbackRefreshBalance = (result) => {
-        setUserBalance(result && result.balance);
+        const parsed = result && result.balance ? parseFloat(result.balance) : 0;
+        setUserBalance(Number.isFinite(parsed) ? parsed : 0);
     };
 
     const getStatus = () => {
@@ -85,6 +89,10 @@ const Layout = () => {
         if (result && result.user === null) {
             localStorage.removeItem("session");
         }
+    };
+
+    const handleLoginClick = () => {
+        setShowLoginModal(true);
     };
 
     const handleLogoutClick = () => {
@@ -115,18 +123,25 @@ const Layout = () => {
                 value={{ selectedPage, setSelectedPage, getPage }}
             >
                 <>
-                    <div className="home-page-container">
-                        <div className="home-page">
-                            <div className="content">
-
-                            </div>
-                        </div>
-                        <Header isSlotsOnly={isSlotsOnly} isMobile={isMobile} />
-                        {/* <Sidebar isSlotsOnly={isSlotsOnly} isMobile={isMobile} /> */}
-                            <main className="main">
-                                <Outlet context={{ isSlotsOnly, isLogin, isMobile }} />
-                            </main>
-                    </div>
+                {showLoginModal && (
+                        <LoginModal
+                            isMobile={isMobile}
+                            isOpen={showLoginModal}
+                            onClose={() => setShowLoginModal(false)}
+                            onLoginSuccess={handleLoginSuccess}
+                        />
+                    )}
+                    <Header
+                        isLogin={isLogin}
+                        isMobile={isMobile}
+                        isSlotsOnly={isSlotsOnly}
+                        userBalance={userBalance}
+                        handleLoginClick={handleLoginClick}
+                    />
+                    {/* <Sidebar isSlotsOnly={isSlotsOnly} isMobile={isMobile} /> */}
+                    <main className="main">
+                        <Outlet context={{ isSlotsOnly, isLogin, isMobile }} />
+                    </main>
                 </>
             </NavigationContext.Provider>
         </LayoutContext.Provider>

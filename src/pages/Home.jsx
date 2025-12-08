@@ -201,11 +201,15 @@ const Home = () => {
         />
       ) : (
         <>
-          <Header isLogin={isLogin} isMobile={isMobile} link="/" />
-          <div className="main-content">
-            <div className="page__row">
-              <Slideshow />
+          <div className="home-page-container">
+            <div className="home-page">
+              <div className="content">
+                <Slideshow />
+              </div>
             </div>
+          </div>
+          
+          <div className="main-content">
             <MenuContainer />
             <div className="hot-games">
               {topGames.length > 0 && <HotGameSlideshow games={topGames} name="games" title="Juegos" icon="" link="/casino" onGameClick={(game) => {
