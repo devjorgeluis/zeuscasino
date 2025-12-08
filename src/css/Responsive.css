@@ -1,0 +1,234 @@
+.mobile-slots-game {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .footer {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-form {
+        position: fixed;
+        height: 50vh;
+    }
+
+    .page:not(.lk) .column {
+        display: none;
+    }
+
+    .page:not(.lk) .page__wrap {
+        width: 100vw;
+        margin-inline-start: 0;
+        padding: 0;
+    }
+
+    .main-content {
+        padding: 1em .625em 60px;
+    }
+
+
+    .page {
+        min-width: auto;
+        min-height: 80vh;
+    }
+
+    .page .content__row {
+        display: none;
+    }
+
+    .slider .btn {
+        display: none;
+    }
+
+    .slider__item {
+        padding: 1.5625em 1.875em 2em;
+        border-radius: 10px;
+    }
+
+    .casino .slider__item {
+        height: 150px;
+    }
+
+    .slider__title {
+        box-shadow: none;
+        padding: 0;
+        background-color: transparent;
+        text-transform: capitalize;
+        font-size: 16px;
+        font-weight: 500;
+        color: white;
+    }
+
+    .slider__text {
+        color: #fde4a5;
+    }
+
+    .slider .swiper-pagination-bullet {
+        width: .5em;
+        background-color: #8e8e8e;
+        border-radius: 50%;
+        margin: 0 1.5px !important;
+    }
+
+    .slider .swiper-container {
+        padding-bottom: 7px;
+    }
+
+    .slider .swiper-pagination-bullet:hover,
+    .slider .swiper-pagination-bullet-active {
+        background: yellow;
+    }
+
+    .page__wrap .slider .swiper-pagination {
+        background-color: #333;
+        width: fit-content;
+        right: 0;
+        margin: auto;
+        border-radius: 20px;
+        padding: 0 5px;
+        bottom: 0;
+    }
+
+    .content-tile__body .swiper-container {
+        max-width: unset;
+    }
+
+    .content-tile__arrows,
+    .slots-games__arrows {
+        display: none;
+    }
+
+    .slots-games__bg,
+    .slots-games__item {
+        background-image: unset !important;
+        border: none;
+        background-color: #292929;
+        border-radius: 15px;
+    }
+
+    .slots-games__item {
+        padding-top: 0;
+    }
+
+    .hot-games .slots-games__item,
+    .hot-games .slots-games__bg {
+        background-color: transparent;
+    }
+
+    .mobile-slots-game {
+        display: block;
+    }
+
+    .mobile-slots-game img {
+        width: 100%;
+        height: 130px;
+        border-radius: 15px;
+    }
+
+    .hot-games .mobile-slots-game img {
+        height: 80px;
+    }
+
+    .slots-games-description {
+        text-align: left;
+        padding: 15px 10px;
+    }
+
+    .hot-games .slots-games-description {
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .slots-games-name {
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 3px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 130px;
+        color: #fff;
+    }
+
+    .hot-games .slots-games-name {
+        width: 100%;
+        font-size: 11px;
+        white-space: inherit;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+    }
+
+    .slots-games-provider {
+        font-size: 10px;
+        color: #737373;
+    }
+
+    .hot-games .slots-games-provider {
+        display: none;
+    }
+
+    .more-icon {
+        width: 24px;
+        height: 24px;
+        background-color: #1A1A14;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        position: absolute;
+        right: 5px;
+        bottom: 15px;
+        color: #fff;
+    }
+
+    .hot-games .more-icon {
+        display: none;
+    }
+
+    .more-icon i {
+        font-size: 20px;
+    }
+
+    .slots-games__item:hover .slots-games__overlay {
+        opacity: 0;
+    }
+
+    .content-tile {
+        background-color: transparent;
+        border: none;
+    }
+
+    .content-tile__header {
+        padding: 8px;
+        padding-top: 0;
+        text-transform: capitalize;
+        font-size: 18px;
+        letter-spacing: 0;
+        font-weight: bold;
+        justify-content: space-between;
+    }
+
+    .category-header {
+        padding: 16px;
+    }
+
+    .category-header .category-title {
+        font-size: 16px;
+    }
+
+    .category-header .back-btn .material-icons,
+    .category-header .filter-btn .material-icons {
+        font-size: 22px;
+    }
+
+    .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .slots-games__item-wrap {
+        width: 20%;
+    }
+}

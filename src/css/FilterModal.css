@@ -1,0 +1,443 @@
+.filter-modal {
+    background-color: #1c1c1e;
+    height: 100vh;
+    color: white;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    overflow: scroll;
+    padding-bottom: 60px;
+}
+
+.filter-header {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #2c2c2e;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.back-filter-button {
+    color: #989898;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.search-container {
+    flex: 1;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #141414;
+    border: none;
+    border-radius: 20px;
+    color: #989898;
+    font-size: 14px;
+    padding-left: 2.5rem;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    color: #989898;
+}
+
+.tabs-container {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #2c2c2e;
+}
+
+.tab {
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tab.active {
+    background-color: #ffd700;
+    color: black;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.filter-modal .games-grid {
+    padding: 12px;
+}
+
+.game-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+}
+
+.game-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+}
+
+.game-title {
+    font-size: 0.9rem;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.game-provider {
+    font-size: 0.8rem;
+    color: #8e8e93;
+    margin: 0;
+}
+
+.bottom-navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #2c2c2e;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #8e8e93;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.nav-item.active {
+    color: #ffd700;
+}
+
+.nav-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.load-container {
+    margin-top: 50px;
+}
+
+.main {
+    position: relative;
+}
+
+.provider-modal {
+    background-color: #1f1f1f;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+}
+
+.provider-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #1f1f1f;
+    padding: 36px 12px 8px;
+    min-height: 80px;
+}
+
+.provider-title {
+    flex: 1;
+    text-align: left;
+    color: #bdbdbd;
+    font-weight: 600;
+}
+
+.provider-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.provider-actions .search-btn {
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.provider-actions .search-btn.active {
+    background: #FDDC8D;
+    color: #292929;
+}
+
+.provider-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 12px;
+}
+
+.provider-item {
+    background: #292929;
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.provider-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+.provider-item img {
+    max-width: 100%;
+    max-height: 40px;
+    object-fit: contain;
+}
+
+.provider-name {
+    color: #dcdcdc;
+    font-size: 12px;
+    text-align: center;
+}
+
+.provider-header .back-btn .material-icons {
+    font-size: 24px;
+}
+
+.provider-modal .provider-title {
+    font-size: 16px;
+}
+
+.provider-actions {
+    width: 40px;
+}
+
+.filter-content {
+    padding: 0 20px;
+}
+
+.filter-section {
+    margin-bottom: 30px;
+}
+
+.filter-section-title {
+    font-size: 12px;
+    color: #fff;
+    margin-bottom: 8px;
+    text-transform: capitalize;
+}
+
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-tag {
+    background: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    color: #999;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter-tag.active {
+    background: #4a4a4a;
+    color: #fff;
+    border-color: #5a5a5a;
+}
+
+.select-providers-btn {
+    width: 100%;
+    background: #2a2a2a;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.select-providers-btn .provider-arrow {
+    background-color: #1f1f1f;
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select-providers-btn .material-icons {
+    font-size: 20px;
+    color: #FDDC8D;
+}
+
+.provider-search {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: #1f1f1f;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.search-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.search-icon {
+    color: #666;
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.provider-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 12px;
+}
+
+.provider-item .provider-name {
+    padding: 8px;
+}
+
+/* Add this CSS to your stylesheet */
+
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: #292929;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 50px;
+}
+
+.category-header .back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.category-header .back-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.category-header .back-btn .material-icons {
+    font-size: 24px;
+}
+
+.category-header .category-title {
+    flex: 1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #bdbdbd;
+    padding: 0 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.category-header .filter-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.category-header .filter-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.category-header .filter-btn .material-icons {
+    font-size: 24px;
+}
+
+.load-more {
+    background-color: #35353a;
+    padding: 8px 15px;
+    color: #C9B58B;
+    font-size: 14px;
+    border-radius: 10px;
+    margin: 20px auto;
+    display: block;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.no-results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #989898;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.no-results img {
+    width: 100px;
+}
+
+.no-results .mt-5 {
+    margin-top: 30px;
+}
