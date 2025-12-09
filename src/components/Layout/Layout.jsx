@@ -145,10 +145,7 @@ const Layout = () => {
                         handleLogoutClick={handleLogoutClick}
                     />
                     {/* <Sidebar isSlotsOnly={isSlotsOnly} isMobile={isMobile} /> */}
-                    <main className="main">
-                        <Outlet context={{ isSlotsOnly, isLogin, isMobile }} />
-                    </main>
-
+                    <Outlet context={{ isSlotsOnly, isLogin, isMobile }} />
                     <Footer isLogin={isLogin} isSlotsOnly={isSlotsOnly} />
                 </>
             </NavigationContext.Provider>

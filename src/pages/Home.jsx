@@ -5,8 +5,7 @@ import { callApi } from "../utils/Utils";
 import Slideshow from "../components/Home/Slideshow";
 import CategoryContainer from "../components/CategoryContainer";
 import ProviderContainer from "../components/ProviderContainer";
-import MenuContainer from "../components/Home/MenuContainer";
-import GameSlideshow from "../components/Home/GameSlideshow";
+import BannerContainer from "../components/Home/BannerContainer";
 import HotGameSlideshow from "../components/Home/HotGameSlideshow";
 import GameModal from "../components/Modal/GameModal";
 import PlayConfirmModal from "../components/Modal/PlayConfirmModal";
@@ -467,84 +466,84 @@ const Home = () => {
           <div className="home-page-container">
             <div className="home-page">
               <div className="content">
-                <Slideshow />
-                <CategoryContainer
-                  categories={tags}
-                  selectedCategoryIndex={selectedCategoryIndex}
-                  selectedProvider={selectedProvider}
-                  onCategoryClick={(tag, _id, _table, index) => {
-                    if (window.location.hash !== `#${tag.code}`) {
-                      window.location.hash = `#${tag.code}`;
-                    } else {
-                      setSelectedCategoryIndex(index);
-                      getPage(tag.code);
-                    }
-                  }}
-                  onCategorySelect={handleCategorySelect}
-                  isMobile={isMobile}
-                  pageType="casino"
-                />
-                <ProviderContainer
-                  categories={categories}
-                  selectedProvider={selectedProvider}
-                  setSelectedProvider={setSelectedProvider}
-                  onProviderSelect={handleProviderSelect}
-                />
+                <div className="main">
+                  <Slideshow />
+                  <CategoryContainer
+                    categories={tags}
+                    selectedCategoryIndex={selectedCategoryIndex}
+                    selectedProvider={selectedProvider}
+                    onCategoryClick={(tag, _id, _table, index) => {
+                      if (window.location.hash !== `#${tag.code}`) {
+                        window.location.hash = `#${tag.code}`;
+                      } else {
+                        setSelectedCategoryIndex(index);
+                        getPage(tag.code);
+                      }
+                    }}
+                    onCategorySelect={handleCategorySelect}
+                    isMobile={isMobile}
+                    pageType="casino"
+                  />
+                  <ProviderContainer
+                    categories={categories}
+                    selectedProvider={selectedProvider}
+                    setSelectedProvider={setSelectedProvider}
+                    onProviderSelect={handleProviderSelect}
+                  />
 
-                {
-                  (txtSearch !== "" || selectedProvider || isSingleCategoryView) ? (
-                    <div className="games-no-live-page">
-                      <div className="content">
-                        <div className="search-text-desktop">
-                          <div className="games-category">
-                            <h3 className="title">
-                              <span className="name-name">{txtSearch !== "" ? "BUSQUEDA: " + txtSearch : activeCategory?.name}</span>
-                            </h3>
-                            
-                            <SearchInput
-                              txtSearch={txtSearch}
-                              setTxtSearch={setTxtSearch}
-                              searchRef={searchRef}
-                              search={search}
-                              isMobile={isMobile}
-                            />
+                  <div className="games-container">
+                    <div className="home-section-container">
+                      {
+                        (txtSearch !== "" || selectedProvider || isSingleCategoryView) ? (
+                          <div className="games-no-live-page">
+                            <div className="content">
+                              <div className="search-text-desktop">
+                                <div className="games-category">
+                                  <h3 className="title">
+                                    <span className="name-name">{txtSearch !== "" ? "BUSQUEDA: " + txtSearch : activeCategory?.name}</span>
+                                  </h3>
+
+                                  <SearchInput
+                                    txtSearch={txtSearch}
+                                    setTxtSearch={setTxtSearch}
+                                    searchRef={searchRef}
+                                    search={search}
+                                    isMobile={isMobile}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div className="games-grid">
+                              {games.map((game) => (
+                                <GameCard
+                                  key={game.id}
+                                  id={game.id}
+                                  title={game.name}
+                                  text={isLogin ? "Jugar" : "Ingresar"}
+                                  imageSrc={game.image_local !== null ? contextData.cdnUrl + game.image_local : game.image_url}
+                                  mobileShowMore={mobileShowMore}
+                                  onClick={() => (isLogin ? launchGame(game, "slot", "tab") : handleLoginClick())}
+                                />
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                      <div className="games-grid">
-                        {games.map((game) => (
-                          <GameCard
-                            key={game.id}
-                            id={game.id}
-                            title={game.name}
-                            text={isLogin ? "Jugar" : "Ingresar"}
-                            imageSrc={game.image_local !== null ? contextData.cdnUrl + game.image_local : game.image_url}
-                            mobileShowMore={mobileShowMore}
-                            onClick={() => (isLogin ? launchGame(game, "slot", "tab") : handleLoginClick())}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  ) :
-                    <div className="games-no-live-page">
-                      {isSingleCategoryView ? (
-                        <div className="games-grid">
-                          {games.map((game) => (
-                            <GameCard
-                              key={game.id}
-                              id={game.id}
-                              title={game.name}
-                              text={isLogin ? "Jugar" : "Ingresar"}
-                              imageSrc={game.image_local !== null ? contextData.cdnUrl + game.image_local : game.image_url}
-                              mobileShowMore={mobileShowMore}
-                              onClick={() => (isLogin ? launchGame(game, "slot", "tab") : handleLoginClick())}
-                            />
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="main">
-                          <div className="games-container">
-                            <div className="home-section-container">
+                        ) :
+                          <div className="games-no-live-page">
+                            {isSingleCategoryView ? (
+                              <div className="games-grid">
+                                {games.map((game) => (
+                                  <GameCard
+                                    key={game.id}
+                                    id={game.id}
+                                    title={game.name}
+                                    text={isLogin ? "Jugar" : "Ingresar"}
+                                    imageSrc={game.image_local !== null ? contextData.cdnUrl + game.image_local : game.image_url}
+                                    mobileShowMore={mobileShowMore}
+                                    onClick={() => (isLogin ? launchGame(game, "slot", "tab") : handleLoginClick())}
+                                  />
+                                ))}
+                              </div>
+                            ) : (
                               <div className="home-section">
                                 <div className="home-title">
                                   <h3>
@@ -586,12 +585,14 @@ const Home = () => {
                                   }} />}
                                 </div>
                               </div>
-                            </div>
+                            )}
                           </div>
-                        </div>
-                      )}
+                      }
+
+                      <BannerContainer isSlotsOnly={isSlotsOnly} />
                     </div>
-                }
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -1,61 +1,66 @@
 import { useNavigate } from "react-router-dom";
-import Icons from '/src/assets/svg/icons.svg';
 
 const Footer = ({ isSlotsOnly }) => {
     const navigate = useNavigate();
-
     const isSlotsOnlyMode = isSlotsOnly === "true" || isSlotsOnly === true;
 
     const menuItems = !isSlotsOnlyMode ? [
         {
             id: 'home',
             name: 'Home',
-            icon: 'home',
             href: '/'
         },
         {
             id: 'casino',
-            name: 'Tragamonedas',
-            icon: 'cherry',
+            name: 'Casino',
             href: '/casino'
         },
         {
             id: 'live-casino',
-            name: 'Casino en Vivo',
-            icon: 'spades',
+            name: 'Casino En Vivo',
             href: '/live-casino',
         },
         {
             id: 'sports',
             name: 'Deportes',
-            icon: 'cup',
             href: '/sports'
         }
     ] : [
         {
             id: 'casino',
-            name: 'Tragamonedas',
-            icon: 'cherry',
+            name: 'Casino',
             href: '/casino'
         }
     ];
 
     return (
-        <div className="footer">
-            {menuItems.map((menu, index) => (
-                <a
-                    href={menu.href}
-                    className={`footer-menu__item ${menu.href === location.pathname && "active"}`}
-                    key={index}
-                >
-                    <div className="column-menu__item">
-                        <svg className="column-menu__ico">
-                            <use xlinkHref={`${Icons}#${menu.icon}`}></use>
-                        </svg>
+        <div className="footer-app">
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="left">
+                        <p className="copyright">2024 Todos los derechos reservados. Sitio Operado bajo Licencia de Curazao - Antillas Holandesas.</p>
                     </div>
-                    <span>{menu.name}</span>
-                </a>
-            ))}
+                    <div className="right">
+                        <div className="row-right">
+                            <div className="col">
+                                <h4>Secciones</h4>
+                                <ul>
+                                    {menuItems.map((menu, index) => (
+                                        <li>
+                                            <a
+                                                key={index}
+                                                onClick={() => navigate(menu.href)}
+                                            >
+                                                {menu.name}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
