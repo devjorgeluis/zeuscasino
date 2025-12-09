@@ -23,17 +23,19 @@ const SearchInput = ({
     };
 
     return (
-        <div className="search-container">
-            <i className="material-icons search-icon">search</i>
+        <div className="input-group">
             <input
                 ref={searchRef}
-                className="search-input"
-                placeholder="Buscar"
+                className="ng-pristine ng-valid ng-touched"
+                placeholder="Busca tu juego favorito..."
                 value={txtSearch}
                 onChange={handleChange}
                 onKeyUp={search}
                 onFocus={handleFocus}
             />
+            <button>
+                <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
         </div>
     );
 };

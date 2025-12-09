@@ -178,7 +178,7 @@
 .top-game-item {
     flex: 0 0 auto;
     width: 180px;
-    height: 150px;
+    height: 150px !important;
     background-color: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -192,7 +192,7 @@
 @media (max-width: 540px) {
     .top-game-item {
         width: 85px;
-        height: 89px;
+        height: 89px !important;
     }
 }
 
@@ -225,8 +225,12 @@
 }
 
 .scroll-button i {
-    padding: 0.1px;
+    padding: 6px;
     font-size: 30px;
+}
+
+.scroll-button.right i {
+    padding: 6px 4px;
 }
 
 .scroll-button.left {
@@ -2593,6 +2597,8 @@
 .categories-container {
     background-color: #1a152b;
     white-space: nowrap;
+    font-family: "Exo 2", sans-serif;
+    overflow-x: hidden;
 }
 
 .content::-webkit-scrollbar {
@@ -2619,9 +2625,9 @@
 
 .item img {
     display: flex;
-    width: 25px;
+    width: 30px;
     min-height: 25px;
-    max-height: 25px;
+    max-height: 30px;
 }
 
 @media (max-width: 996px) {
@@ -2678,7 +2684,33 @@
     align-items: center;
 }
 
-.item {
+.categories-container .content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    overflow: auto;
+    flex-direction: row;
+}
+
+.brands-container .content {
+    background-color: #272650;
+    flex: 1 1 auto;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    padding: 8px 10px;
+    flex-direction: row;
+}
+
+.brands-container {
+    font-family: "Exo 2", sans-serif;
+}
+
+.brands-container .item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -2686,24 +2718,10 @@
     flex: 1 1 10%;
     flex: 1;
     gap: 5px;
-    transition: all 0.3s ease;
+    transition: all .3s ease;
 }
 
-.item:hover {
-    color: #bf8200;
-    cursor: pointer;
-    border-color: #bf8200;
-}
-
-.item:hover .provider-name {
-    color: #bf8200;
-}
-
-.item:hover .image {
-    border-color: #bf8200;
-}
-
-.item .image {
+.brands-container .item .image {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2712,14 +2730,15 @@
     height: 40px;
     border-radius: 50%;
     border: 1px solid rgba(0, 0, 0, 0);
-    transition: all 0.3s ease;
+    transition: all .3s ease;
 }
 
-.item .image img {
-    max-width: 24px;
-    max-height: 24px;
-    border-radius: 50%;
-    object-fit: cover;
+.brands-container .item:hover .image {
+    border-color: #bf8200;
+}
+
+.brands-container .item:hover .provider-name {
+    color: #bf8200;
 }
 
 .provider-name {
@@ -2856,14 +2875,6 @@
     margin-left: -15px;
 }
 
-.left {
-    font-weight: 700;
-    font-size: 1.25em;
-    text-align: left;
-    flex: 0 0 50%;
-    max-width: 50%;
-}
-
 .img-container {
     padding: 0;
     color: #bf8200 !important;
@@ -2881,12 +2892,6 @@
     font-size: 0.85rem;
     margin: 2rem 0;
     max-width: 36%;
-}
-
-.right {
-    display: flex;
-    flex: 0 0 50%;
-    max-width: 50%;
 }
 
 .row-right {
@@ -2928,15 +2933,6 @@
 
     .row-right {
         margin-right: 0;
-    }
-
-    .left {
-        max-width: 100%;
-    }
-
-    .right {
-        max-width: 100%;
-        padding: 0;
     }
 
     .row {
@@ -3022,4 +3018,79 @@ button.next {
 
 .indicators span.active {
     background-color: #bbb;
+}
+
+.games-grid {
+    background-color: #1c1c1c;
+    padding: 20px 0;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto;
+    border-radius: 6px;
+}
+
+.game {
+    box-sizing: border-box;
+    border-radius: 10px;
+    position: relative;
+    transition: transform .3s ease;
+}
+
+.picture {
+    position: relative;
+    padding-top: 85%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.picture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    transition: transform .3s ease;
+}
+
+.input-group {
+    margin-top: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: auto;
+    font-size: .85rem;
+}
+
+.input-group input {
+    background: #ffffff26;
+    border: none;
+    border-radius: 7px 0 0 7px;
+    width: 415px;
+    font-size: .85rem;
+    color: #ffffffbf;
+    outline: none;
+    padding: 10px 20px;
+}
+
+.input-group button {
+    padding: 10px 20px;
+    background-color: #da4167;
+    border: 0px solid;
+    font-size: .85rem;
+    border-radius: 0 7px 7px 0;
+    color: #2e2e2e;
+    transition: .3s all ease;
+}
+
+.games-category {
+    z-index: 20;
+    padding: 15px 0 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.games-no-live-page {
+    padding: 0 10px;
+    background-color: #000032;
 }

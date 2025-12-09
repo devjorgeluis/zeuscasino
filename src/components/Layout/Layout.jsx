@@ -5,7 +5,7 @@ import { AppContext } from "../../AppContext";
 import { LayoutContext } from "./LayoutContext";
 import { callApi } from "../../utils/Utils";
 import Header from "./Header";
-import Sidebar from "./Sidebar";
+import Footer from "./Footer";
 import LoginModal from "../Modal/LoginModal";
 import { NavigationContext } from "./NavigationContext";
 
@@ -148,6 +148,8 @@ const Layout = () => {
                     <main className="main">
                         <Outlet context={{ isSlotsOnly, isLogin, isMobile }} />
                     </main>
+
+                    <Footer isLogin={isLogin} isSlotsOnly={isSlotsOnly} />
                 </>
             </NavigationContext.Provider>
         </LayoutContext.Provider>

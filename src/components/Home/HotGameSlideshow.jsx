@@ -21,70 +21,51 @@ const HotGameSlideshow = ({ games, name, title, icon, link, onGameClick }) => {
     };
 
     return (
-        <div className="content-tile">
-            <div className="content-tile__header">
-                <div className="content-tile-with-icon">
-                    {icon && (
-                    <svg className="content-tile__ico">
-                        <use xlinkHref={`${Icons}#${icon}`}></use>
-                    </svg>
-                )}
-                    <span className="content-tile__title">{title}</span>
-                </div>
-                
-                <span className="content-title__all" onClick={() => navigate(link)}>Todo</span>
+        <div className="swiper-container">
+            <Swiper
+                ref={swiperRef}
+                modules={[Navigation]}
+                spaceBetween={10}
+                slidesPerView={9}
+                navigation={{
+                    prevEl: `.${uniqueId}-back`,
+                    nextEl: `.${uniqueId}-next`,
+                }}
+                className="row-top-games"
+                style={{ width: '100%' }}
+            >
+                {games?.map((game, index) => (
+                    <SwiperSlide key={game.id || index} className="top-game-item">
+                        <GameCard
+                            key={game.id}
+                            id={game.id}
+                            provider={'Casino'}
+                            title={game.name}
+                            type="slideshow"
+                            imageSrc={game.image_local !== null ? contextData.cdnUrl + game.image_local : game.image_url}
+                            onGameClick={() => {
+                                handleGameClick(game);
+                            }}
+                        />
+                    </SwiperSlide>
+                ))}
+                <span className="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            </Swiper>
+            <div
+                className={`scroll-button left ${uniqueId}-back content-tile__back`}
+                tabIndex={0}
+                role="button"
+                aria-label="Previous slide"
+            >
+                <i className="fa-solid fa-chevron-left"></i>
             </div>
-            <div className="content-tile__body">
-                <Swiper
-                    ref={swiperRef}
-                    modules={[Navigation]}
-                    spaceBetween={3}
-                    slidesPerView={4}
-                    navigation={{
-                        prevEl: `.${uniqueId}-back`,
-                        nextEl: `.${uniqueId}-next`,
-                    }}
-                    className="swiper-container"
-                    style={{ width: '100%' }}
-                >
-                    {games?.map((game, index) => (
-                        <SwiperSlide key={game.id || index} className="swiper-slide">
-                            <GameCard
-                                key={game.id}
-                                id={game.id}
-                                provider={'Casino'}
-                                title={game.name}
-                                imageSrc={game.image_local !== null ? contextData.cdnUrl + game.image_local : game.image_url}
-                                onGameClick={() => {
-                                    handleGameClick(game);
-                                }}
-                            />
-                        </SwiperSlide>
-                    ))}
-                    <span className="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                </Swiper>
-                <div className="content-tile__arrows">
-                    <div
-                        className={`content-tile__arrow ${uniqueId}-back content-tile__back`}
-                        tabIndex={0}
-                        role="button"
-                        aria-label="Previous slide"
-                    >
-                        <svg className="content-tile__ico">
-                            <use xlinkHref={`${Icons}#arrow-left`}></use>
-                        </svg>
-                    </div>
-                    <div
-                        className={`content-tile__arrow ${uniqueId}-next content-tile__next`}
-                        tabIndex={0}
-                        role="button"
-                        aria-label="Next slide"
-                    >
-                        <svg className="content-tile__ico">
-                            <use xlinkHref={`${Icons}#arrow-right`}></use>
-                        </svg>
-                    </div>
-                </div>
+            <div
+                className={`scroll-button right ${uniqueId}-next content-tile__next`}
+                tabIndex={0}
+                role="button"
+                aria-label="Next slide"
+            >
+                <i className="fa-solid fa-chevron-right"></i>
             </div>
         </div>
     );

@@ -1954,8 +1954,7 @@ h1 {
   border: 1px solid hsla(0, 0%, 9%, .082)
 }
 
-.login-btn,
-.title {
+.login-btn {
   font-family: Exo\ 2, sans-serif;
   font-weight: 700;
   margin-bottom: 12px;
@@ -2273,9 +2272,9 @@ h1 {
 }
 
 .title {
-  color: #ebebd3 !important;
-  height: 60px !important;
-  font-size: 1rem !important;
+  color: #fff;
+  display: flex;
+  align-items: center
 }
 
 .login-btn {
@@ -2573,9 +2572,13 @@ h1 {
 h3 {
   font-family: Exo\ 2, sans-serif;
   color: #fff;
-  font-weight: 400;
-  font-size: 25px;
-  padding-bottom: 10px
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
 }
 
 .color-text {
@@ -3506,10 +3509,10 @@ input[type=file]:focus {
   background: #fff3
 }
 
-.active {
+/* .active {
   background: #fff3;
   color: #fff
-}
+} */
 
 .dropdown-toggle:after {
   display: none
