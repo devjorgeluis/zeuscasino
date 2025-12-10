@@ -3140,3 +3140,204 @@ button.next {
     flex: 1;
     background: linear-gradient(to left, transparent, #e2e2e2);
 }
+
+.modal-providers-container {
+    background: #2e2e2e;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-height: 80vh;
+    margin-top: 10vh;
+    overflow-y: auto;
+}
+
+.modal-providers {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 500px;
+    overflow-y: auto;
+}
+
+.providers-list-container {
+    flex-grow: 1;
+    position: relative;
+    overflow-y: auto;
+}
+
+.close-button span {
+    cursor: pointer;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #2e2e2e;
+    display: flex;
+    align-items: flex-start;
+}
+
+.casino-filters {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #212529;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 5px;
+    position: sticky;
+    z-index: 10;
+}
+
+.casino-filters input {
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+.list-exclusive {
+    background-color: #2e2e2e;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-exclusive li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.list-exclusive i {
+    color: #bf8200;
+    font-size: 1.125rem;
+    margin-right: 7px;
+}
+
+.list-exclusive li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    color: #fff;
+    padding: 1px;
+    border-radius: 32px;
+    transition: all 0.3s;
+}
+
+.list-exclusive li a:hover {
+    background-color: #bf8200;
+}
+
+.list-exclusive li a:hover i {
+    color: #2e2e2e;
+}
+
+.list-exclusive i {
+    color: #bf8200;
+    font-size: 1.125rem;
+    margin-right: 7px;
+}
+
+.list {
+    background-color: #222;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.list li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    color: #fff;
+    padding: 1px;
+    border-radius: 32px;
+}
+
+.list li a:hover {
+    background-color: #bf8200;
+}
+
+.list li a:hover i {
+    color: #2e2e2e;
+}
+
+.provider {
+    display: flex;
+    align-items: center;
+}
+
+.provider-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    background: #000;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.provider-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 50%;
+}
+
+.modal-wrapper .provider-name {
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
+.modal-providers-container::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.modal-providers-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-providers-container::-webkit-scrollbar-thumb {
+    background-color: #bf8200;
+    border-radius: 0;
+}
+
+@media (max-width: 530px) {
+    .modal-providers {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 90vw;
+        overflow-y: auto;
+    }
+}
+
+.badge-jack {
+    margin-left: 8px;
+    animation: _ngcontent-ng-c1899858944_titilar 1s infinite;
+}
+
+@keyframes _ngcontent-ng-c1899858944_titilar {
+
+    0%,
+    to {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}

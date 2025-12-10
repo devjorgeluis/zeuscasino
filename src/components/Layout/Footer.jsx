@@ -46,9 +46,8 @@ const Footer = ({ isSlotsOnly }) => {
                                 <h4>Secciones</h4>
                                 <ul>
                                     {menuItems.map((menu, index) => (
-                                        <li>
+                                        <li key={index}>
                                             <a
-                                                key={index}
                                                 onClick={() => navigate(menu.href)}
                                             >
                                                 {menu.name}

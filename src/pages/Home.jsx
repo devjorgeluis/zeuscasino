@@ -8,7 +8,7 @@ import ProviderContainer from "../components/ProviderContainer";
 import BannerContainer from "../components/Home/BannerContainer";
 import HotGameSlideshow from "../components/Home/HotGameSlideshow";
 import GameModal from "../components/Modal/GameModal";
-import PlayConfirmModal from "../components/Modal/PlayConfirmModal";
+import ProviderModal from "../components/Modal/ProviderModal";
 import SearchInput from "../components/SearchInput";
 import GameCard from "../components/GameCard";
 
@@ -28,8 +28,6 @@ import ImgCategoryMegaways from "/src/assets/svg/megaways.svg";
 
 const Home = () => {
   const { contextData } = useContext(AppContext);
-  const [showPlayConfirm, setShowPlayConfirm] = useState(false);
-  const [selectedGameForPlay, setSelectedGameForPlay] = useState(null);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
   const [games, setGames] = useState([]);
   const [topGames, setTopGames] = useState([]);
@@ -47,9 +45,8 @@ const Home = () => {
   const [pageData, setPageData] = useState({});
   const [gameUrl, setGameUrl] = useState("");
   const [isSingleCategoryView, setIsSingleCategoryView] = useState(false);
-  const [isExplicitSingleCategoryView, setIsExplicitSingleCategoryView] = useState(false);
   const [shouldShowGameModal, setShouldShowGameModal] = useState(false);
-  const [isGameLoadingError, setIsGameLoadingError] = useState(false);
+  const [showFilterModal, setShowFilterModal] = useState(false);
   const [isLoadingGames, setIsLoadingGames] = useState(false);
   const [mobileShowMore, setMobileShowMore] = useState(false);
   const refGameModal = useRef();
@@ -67,7 +64,6 @@ const Home = () => {
     if (tagIndex !== -1 && selectedCategoryIndex !== tagIndex) {
       setSelectedCategoryIndex(tagIndex);
       setIsSingleCategoryView(false);
-      setIsExplicitSingleCategoryView(false);
       getPage(hashCode);
     }
   }, [location.hash]);
@@ -82,7 +78,6 @@ const Home = () => {
     setShouldShowGameModal(false);
     setActiveCategory({});
     setIsSingleCategoryView(false);
-    setIsExplicitSingleCategoryView(false);
 
     getPage("home");
     getStatus();
@@ -135,7 +130,6 @@ const Home = () => {
     setCategories([]);
     setGames([]);
     setIsSingleCategoryView(false);
-    setIsExplicitSingleCategoryView(false);
 
     callApi(contextData, "GET", `/get-page?page=${page}`, (result) => {
       pendingPageRef.current.delete(page);
@@ -153,8 +147,6 @@ const Home = () => {
     if (result.status === 500 || result.status === 422) {
 
     } else {
-      console.log(result.data);
-
       setCategoryType(result.data.page_group_type);
       setSelectedProvider(null);
       setPageData(result.data);
@@ -182,7 +174,6 @@ const Home = () => {
         }
       } else if (result.data && result.data.page_group_type === "games") {
         setIsSingleCategoryView(true);
-        setIsExplicitSingleCategoryView(false);
         setCategories(mainCategories.length > 0 ? mainCategories : []);
         configureImageSrc(result);
         setGames(result.data.categories || []);
@@ -255,7 +246,6 @@ const Home = () => {
     }
 
     setIsSingleCategoryView(true);
-    setIsExplicitSingleCategoryView(true);
     setSelectedCategoryIndex(categoryIndex);
     setActiveCategory(category);
 
@@ -343,8 +333,6 @@ const Home = () => {
           setGameUrl(result.url);
           break;
       }
-    } else {
-      setIsGameLoadingError(true);
     }
   };
 
@@ -361,7 +349,6 @@ const Home = () => {
   const handleProviderSelect = (provider, index = 0) => {
     setSelectedProvider(provider);
     setTxtSearch("");
-    setIsExplicitSingleCategoryView(true);
 
     if (provider) {
       setActiveCategory(null);
@@ -391,7 +378,6 @@ const Home = () => {
   const search = (e) => {
     let keyword = e.target.value;
     setTxtSearch(keyword);
-    setIsExplicitSingleCategoryView(true);
 
     if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
       let keyword = e.target.value;
@@ -489,6 +475,7 @@ const Home = () => {
                     selectedProvider={selectedProvider}
                     setSelectedProvider={setSelectedProvider}
                     onProviderSelect={handleProviderSelect}
+                    onOpenProviders={() => setShowFilterModal(true)}
                   />
 
                   <div className="games-container">
@@ -500,7 +487,7 @@ const Home = () => {
                               <div className="search-text-desktop">
                                 <div className="games-category">
                                   <h3 className="title">
-                                    <span className="name-name">{txtSearch !== "" ? "BUSQUEDA: " + txtSearch : activeCategory?.name}</span>
+                                    <span className="name-name">{txtSearch !== "" ? "BUSQUEDA: " + txtSearch : selectedProvider?.name ? selectedProvider.name : activeCategory?.name}</span>
                                   </h3>
 
                                   <SearchInput
@@ -553,32 +540,28 @@ const Home = () => {
                                 <div className="home-item">
                                   {topGames.length > 0 && <HotGameSlideshow games={topGames} name="games" title="Juegos" icon="" link="/casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      setSelectedGameForPlay(game);
-                                      setShowPlayConfirm(true);
+                                      launchGame(game);
                                     } else {
                                       navigate("/login");
                                     }
                                   }} />}
                                   {topArcade.length > 0 && <HotGameSlideshow games={topArcade} name="arcade" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      setSelectedGameForPlay(game);
-                                      setShowPlayConfirm(true);
+                                      launchGame(game);
                                     } else {
                                       navigate("/login");
                                     }
                                   }} />}
                                   {topCasino.length > 0 && <HotGameSlideshow games={topCasino} name="casino" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      setSelectedGameForPlay(game);
-                                      setShowPlayConfirm(true);
+                                      launchGame(game);
                                     } else {
                                       navigate("/login");
                                     }
                                   }} />}
                                   {topLiveCasino.length > 0 && <HotGameSlideshow games={topLiveCasino} name="liveCasino" title="Casino en Vivo" icon="spades" link="/live-casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      setSelectedGameForPlay(game);
-                                      setShowPlayConfirm(true);
+                                      launchGame(game);
                                     } else {
                                       navigate("/login");
                                     }
@@ -599,15 +582,30 @@ const Home = () => {
         </>
       )}
 
-      <PlayConfirmModal
-        isOpen={showPlayConfirm}
-        onClose={() => setShowPlayConfirm(false)}
-        onPlay={() => {
-          setShowPlayConfirm(false);
-          if (selectedGameForPlay) launchGame(selectedGameForPlay, "slot", "tab");
+      <ProviderModal
+        isOpen={showFilterModal}
+        onClose={() => setShowFilterModal(false)}
+        onCategorySelect={(category) => {
+          handleCategorySelect(category);
         }}
-        gameName={selectedGameForPlay?.name}
-        costText={selectedGameForPlay?.costText}
+        onCategoryClick={(tag, _id, _table, index) => {
+          setIsLoadingGames(true);
+          if (window.location.hash !== `#${tag.code}`) {
+            window.location.hash = `#${tag.code}`;
+          } else {
+            setSelectedCategoryIndex(index);
+            setIsSingleCategoryView(false);
+            getPage(tag.code);
+          }
+        }}
+        onSelectProvider={(provider) => {
+          handleProviderSelect(provider);
+          setShowFilterModal(false);
+        }}
+        contextData={contextData}
+        tags={tags}
+        categories={categories}
+        selectedCategoryIndex={selectedCategoryIndex}
       />
     </>
   );

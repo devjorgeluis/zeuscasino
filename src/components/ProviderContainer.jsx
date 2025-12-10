@@ -5,7 +5,8 @@ import { useLocation } from "react-router-dom";
 const ProviderContainer = ({
     categories,
     selectedProvider,
-    onProviderSelect
+    onProviderSelect,
+    onOpenProviders
 }) => {
     const { contextData } = useContext(AppContext);
     const location = useLocation();
@@ -25,9 +26,9 @@ const ProviderContainer = ({
     return (
         <div className="brands-container">
             <div className="content">
-                <div className="ver-todos">
+                <div className="ver-todos" role="button" tabIndex={0} onClick={(e) => { e.preventDefault(); if (onOpenProviders) onOpenProviders(); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (onOpenProviders) onOpenProviders(); } }}>
                     <span>Ver todos</span>
-                </div>                
+                </div>
                 {providers.slice(0, 9).map((provider) => {
                     const selected = isSelected(provider);
                     const imageSrc = provider.image_local

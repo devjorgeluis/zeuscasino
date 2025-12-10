@@ -10,7 +10,7 @@ const ProviderModal = ({
     contextData,
     tags = [],
     categories = [],
-    selectedCategoryIndex 
+    selectedCategoryIndex
 }) => {
     const [query, setQuery] = useState('');
     const [showSearch, setShowSearch] = useState(false);
@@ -58,130 +58,50 @@ const ProviderModal = ({
     if (!isOpen) return null;
 
     return (
-        <div className="auth-error-modal-overlay" onClick={onClose}>
-            <div className="provider-modal" onClick={e => e.stopPropagation()}>
-
-                {view === 'filter' && (
-                    <>
-                        <div className="provider-header">
-                            <button className="back-btn" onClick={onClose}>
-                                <span className="material-icons">close</span>
-                            </button>
-                            <div className="provider-title">Filtrar</div>
-                        </div>
-
-                        <div className="filter-content">
-                            <div className="filter-section">
-                                <div className="filter-section-title">Por categoría</div>
-                                <div className="filter-tags">
-                                    {tags.map((tag, idx) => (
-                                        <button
-                                            key={tag.code || idx}
-                                            className={`filter-tag ${selectedCategoryIndex === idx ? 'active' : ''}`}
-                                            onClick={() => handleCategoryClick(tag, idx)}
-                                        >
-                                            {tag.name}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {
-                                isCasino && <div className="filter-section">
-                                    <div className="filter-section-title">Por proveedor</div>
-                                    <button
-                                        className="select-providers-btn"
-                                        onClick={() => setView('providers')}
-                                    >
-                                        <span>Seleccionar proveedores</span>
-                                        <div className="provider-arrow">
-                                            <span className="material-icons">chevron_right</span>
+        <div className="modal-wrapper" onClick={onClose}>
+            <div>
+                <div className="modal-providers-container" onClick={e => e.stopPropagation()}>
+                    {view === 'filter' && (
+                        <>
+                            <div className="modal-providers">
+                                <div className="providers-list-container">
+                                    <div className="casino-filters">
+                                        <div className="close-button">
+                                            <span onClick={onClose}>Cerrar</span>
                                         </div>
-                                    </button>
-                                </div>
-                            }
-                            
-                        </div>
-                    </>
-                )}
+                                    </div>
+                                    <ul className="list-exclusive">
+                                        {categories.map((p, idx) => {
+                                            const imageDataSrc = p.image_local != null
+                                                ? contextData.cdnUrl + p.image_local
+                                                : p.image_url;
 
-                {view === 'providers' && (
-                    <>
-                        <div className="provider-header">
-                            <button className="back-btn" onClick={handleBack}>
-                                <span className="material-icons">arrow_back</span>
-                            </button>
-                            <div className="provider-title">Seleccionar proveedores</div>
-                            <div className="provider-actions">
-                                <button
-                                    className="search-btn"
-                                    onClick={() => setView('provider-search')}
-                                >
-                                    <span className="material-icons">search</span>
-                                </button>
+                                            return (
+                                                <li
+                                                    key={p.id || idx}
+                                                    onClick={() => {
+                                                        // forward selection
+                                                        onSelectProvider && onSelectProvider(p);
+                                                    }}
+                                                >
+                                                    <a href="#" onClick={(e) => { e.preventDefault(); onSelectProvider && onSelectProvider(p); }}>
+                                                        <div className="provider">
+                                                            <div className="provider-logo">
+                                                                <img src={imageDataSrc} alt={p.name} />
+                                                            </div>
+                                                            <span className="provider-name">{p.name}</span>
+                                                        </div>
+                                                        <i className="fa-solid fa-fire-flame-curved"></i>
+                                                    </a>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="provider-grid">
-                            {categories.map((p, idx) => (
-                                <div
-                                    key={p.id || idx}
-                                    className="provider-item"
-                                    onClick={() => {
-                                        onSelectProvider && onSelectProvider(p);
-                                    }}
-                                >
-                                    {p.imageDataSrc ? (
-                                        <img src={p.imageDataSrc} alt={p.name} />
-                                    ) : (
-                                        <div className="provider-name">{p.name}</div>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </>
-                )}
-
-                {view === 'provider-search' && (
-                    <>
-                        <div className="provider-search">
-                            <button
-                                className="back-btn"
-                                onClick={handleBack}
-                            >
-                                <span className="material-icons">arrow_back</span>
-                            </button>
-                            <div className="search-container">
-                                <i className="material-icons search-icon">search</i>
-                                <input
-                                    className="search-input"
-                                    value={query}
-                                    onChange={(e) => setQuery(e.target.value)}
-                                    placeholder="Buscar"
-                                    autoFocus
-                                />
-                            </div>
-                        </div>
-
-                        <div className="provider-grid">
-                            {filteredProviders.map((p, idx) => (
-                                <div
-                                    key={p.id || idx}
-                                    className="provider-item"
-                                    onClick={() => {
-                                        onSelectProvider && onSelectProvider(p);
-                                    }}
-                                >
-                                    {p.imageDataSrc ? (
-                                        <img src={p.imageDataSrc} alt={p.name} />
-                                    ) : (
-                                        <div className="provider-name">{p.name}</div>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </>
-                )}
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     );
