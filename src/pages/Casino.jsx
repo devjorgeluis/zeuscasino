@@ -3,7 +3,6 @@ import { useLocation, useOutletContext, useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { LayoutContext } from "../components/Layout/LayoutContext";
 import { callApi } from "../utils/Utils";
-import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
 import Slideshow from "../components/Home/Slideshow";
 import GameSlideshow from "../components/Home/GameSlideshow";
@@ -398,12 +397,6 @@ const Casino = () => {
         <div className="casino">
           {!selectedProvider && !isExplicitSingleCategoryView && !isSingleCategoryView && !isLoadingGames && (
             <>
-              <Header
-                isLogin={isLogin}
-                isMobile={isMobile}
-                link="/casino"
-                onOpenProviders={() => setShowFilterModal(true)}
-              />
               <div className="page__row">
                 <Slideshow />
               </div>
@@ -517,7 +510,6 @@ const Casino = () => {
               </>
             )}
           </div>
-          <Footer isLogin={isLogin} isSlotsOnly={isSlotsOnly} />
           {isLoadingGames && <LoadApi />}
         </div>
       )}

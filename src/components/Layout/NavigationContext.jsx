@@ -3,5 +3,7 @@ import { createContext } from "react";
 export const NavigationContext = createContext({
     selectedPage: "",
     setSelectedPage: () => { },
-    getPage: () => { }
+    getPage: () => { },
+    showFullDivLoading: false,
+    setShowFullDivLoading: () => { },
 });

@@ -7259,7 +7259,7 @@ body {
 }
 
 .holds-the-iframe {
-  background: url(/img/loader2.0e4cffeb.gif) 50% no-repeat;
+  background: url("../assets/img/loader.gif") 50% no-repeat;
   min-height: 200px;
   width: 100%;
   overflow-x: hidden;

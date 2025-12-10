@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { AppContext } from "../AppContext";
+import { NavigationContext } from "../components/Layout/NavigationContext";
 import { callApi } from "../utils/Utils";
 import Slideshow from "../components/Home/Slideshow";
 import CategoryContainer from "../components/CategoryContainer";
@@ -29,6 +30,7 @@ import ImgCategoryMegaways from "/src/assets/svg/megaways.svg";
 const Home = () => {
   const { contextData } = useContext(AppContext);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
+  const { setShowFullDivLoading } = useContext(NavigationContext);
   const [games, setGames] = useState([]);
   const [topGames, setTopGames] = useState([]);
   const [topArcade, setTopArcade] = useState([]);
@@ -317,6 +319,7 @@ const Home = () => {
 
   const launchGame = (game, type, launcher) => {
     setShouldShowGameModal(true);
+    setShowFullDivLoading(true);
     selectedGameId = game.id !== null ? game.id : selectedGameId;
     selectedGameType = type !== null ? type : selectedGameType;
     selectedGameLauncher = launcher !== null ? launcher : selectedGameLauncher;
@@ -326,6 +329,7 @@ const Home = () => {
   };
 
   const callbackLaunchGame = (result) => {
+    setShowFullDivLoading(false);
     if (result.status === "0") {
       switch (selectedGameLauncher) {
         case "modal":
@@ -407,6 +411,7 @@ const Home = () => {
 
     setGames([]);
     setIsLoadingGames(true);
+    setShowFullDivLoading(true);
 
     let pageSize = 30;
 

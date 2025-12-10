@@ -8,6 +8,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import LoginModal from "../Modal/LoginModal";
 import { NavigationContext } from "./NavigationContext";
+import FullDivLoading from "../Loading/FullDivLoading";
 
 const Layout = () => {
     const { contextData } = useContext(AppContext);
@@ -19,6 +20,7 @@ const Layout = () => {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const [showMobileSearch, setShowMobileSearch] = useState(false);
+    const [showFullDivLoading, setShowFullDivLoading] = useState(false);
     const navigate = useNavigate();
 
     const toggleSidebar = () => {
@@ -71,12 +73,13 @@ const Layout = () => {
 
     const getPage = (page) => {
         setSelectedPage(page);
+        setShowFullDivLoading(true);
         callApi(contextData, "GET", "/get-page?page=" + page, callbackGetPage, null);
         navigate("/" + (page === "home" ? "" : page));
     };
 
     const callbackGetPage = () => {
-
+        setShowFullDivLoading(false);
     };
 
     const callbackGetStatus = (result) => {
@@ -125,9 +128,10 @@ const Layout = () => {
     return (
         <LayoutContext.Provider value={layoutContextValue}>
             <NavigationContext.Provider
-                value={{ selectedPage, setSelectedPage, getPage }}
+                value={{ selectedPage, setSelectedPage, getPage, showFullDivLoading, setShowFullDivLoading }}
             >
                 <>
+                    <FullDivLoading show={showFullDivLoading} />
                     {showLoginModal && (
                         <LoginModal
                             isMobile={isMobile}

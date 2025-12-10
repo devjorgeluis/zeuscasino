@@ -46,6 +46,7 @@ const Header = ({
                             width="90%"
                             alt="Zeus Casino Logo"
                             style={{ maxWidth: "170px", maxHeight: "45px" }}
+                            onClick={() => navigate("/")}
                         />
                     </div>
                     <div
