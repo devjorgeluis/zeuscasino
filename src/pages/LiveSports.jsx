@@ -1,12 +1,12 @@
 import { useContext, useState, useEffect } from "react";
-import { useLocation, useOutletContext } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { callApi } from "../utils/Utils";
 import LoadApi from "../components/Loading/LoadApi";
 import "animate.css";
 
-const Sports = () => {
-    const pageTitle = "Sports";
+const LiveSports = () => {
+    const pageTitle = "Live Sports";
     const { contextData } = useContext(AppContext);
     const [sportsEmbedUrl, setSportsEmbedUrl] = useState("");
     const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +18,7 @@ const Sports = () => {
 
     const loadSportsPage = () => {
         setIsLoading(true);
-        callApi(contextData, "GET", "/get-page?page=sports", callbackGetPage, null);
+        callApi(contextData, "GET", "/get-page?page=sportslive", callbackGetPage, null);
     };
 
     const callbackGetPage = (result) => {        
@@ -30,24 +30,20 @@ const Sports = () => {
     };
 
     return (
-        <>
+        <div className="sports">
             {isLoading ? (
-                <div className="loading-page">
-                    <LoadApi />
-                </div>
+                <LoadApi />
             ) : sportsEmbedUrl ? (
-                <>
-                    <div className="game-iframe-view_gameIframeWrapper game-iframe-view_sportbook">
-                        <iframe
-                            src={sportsEmbedUrl}
-                            title="Sportsbook"
-                            className="game-iframe-view_gameIframe game-iframe-view_sportbook"
-                            allowFullScreen
-                            loading="lazy"
-                            style={{ border: 'none' }}
-                        />
-                    </div>
-                </>
+                <div className="game-iframe-view_gameIframeWrapper game-iframe-view_sportbook">
+                    <iframe
+                        src={sportsEmbedUrl}
+                        title="Sportsbook"
+                        className="game-iframe-view_gameIframe game-iframe-view_sportbook"
+                        allowFullScreen
+                        loading="lazy"
+                        style={{ border: 'none' }}
+                    />
+                </div>
             ) : (
                 <div className="game-iframe-view_gameIframeWrapper game-iframe-view_sportbook">
                     <div className="no-game">
@@ -63,8 +59,8 @@ const Sports = () => {
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 };
 
-export default Sports;
+export default LiveSports;

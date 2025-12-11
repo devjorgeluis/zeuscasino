@@ -24,6 +24,11 @@ const Footer = ({ isSlotsOnly }) => {
             id: 'sports',
             name: 'Deportes',
             href: '/sports'
+        },
+        {
+            id: 'live-sports',
+            name: 'Deportes En Vivo',
+            href: '/live-sports'
         }
     ] : [
         {

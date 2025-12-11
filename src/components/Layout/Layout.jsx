@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../AppContext";
 import { LayoutContext } from "./LayoutContext";
@@ -26,6 +26,9 @@ const Layout = () => {
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
     };
+
+    const location = useLocation();
+    const isSportsPage = location.pathname === "/sports" || location.pathname === "/live-sports";    
 
     useEffect(() => {
         if (contextData.session != null) {
@@ -150,7 +153,7 @@ const Layout = () => {
                     />
                     {/* <Sidebar isSlotsOnly={isSlotsOnly} isMobile={isMobile} /> */}
                     <Outlet context={{ isSlotsOnly, isLogin, isMobile }} />
-                    <Footer isLogin={isLogin} isSlotsOnly={isSlotsOnly} />
+                    {!isSportsPage &&  <Footer isLogin={isLogin} isSlotsOnly={isSlotsOnly} /> }
                 </>
             </NavigationContext.Provider>
         </LayoutContext.Provider>
