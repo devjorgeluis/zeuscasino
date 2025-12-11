@@ -3039,11 +3039,15 @@ button.next {
     border-radius: 6px;
 }
 
-.game {
+.single-games-grid .game {
     box-sizing: border-box;
     border-radius: 10px;
     position: relative;
     transition: transform .3s ease;
+    display: block;
+    overflow: unset;
+    padding: 0;
+    background-color: transparent;
 }
 
 .picture {
@@ -3063,11 +3067,13 @@ button.next {
     transition: transform .3s ease;
 }
 
-.casino-page .picture {
+.casino-page .picture,
+.home-page .picture {
     position: unset;
     padding-top: unset;
     overflow: unset;
     border-radius: unset;
+    color: white;
 }
 
 .input-group {
@@ -3472,7 +3478,7 @@ button.next {
 }
 
 .game:hover img {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
 }
 
 .modal-wrapper {
@@ -3762,4 +3768,10 @@ button.next {
 
 .clickable {
     cursor: pointer
+}
+
+.loading-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #1c1c1c;
 }

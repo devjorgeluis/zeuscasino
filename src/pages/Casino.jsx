@@ -12,6 +12,7 @@ import ProviderModal from "../components/Modal/ProviderModal";
 import CategoryContainer from "../components/CategoryContainer";
 import ProviderContainer from "../components/ProviderContainer";
 import SearchInput from "../components/SearchInput";
+import LoadApi from "../components/Loading/LoadApi";
 import "animate.css";
 
 let selectedGameId = null;
@@ -43,6 +44,7 @@ const Casino = () => {
   const [categories, setCategories] = useState([]);
   const [mainCategories, setMainCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState({});
+  const [categoryType, setCategoryType] = useState("");
   const [selectedProvider, setSelectedProvider] = useState(null);
   const [pageData, setPageData] = useState({});
   const [gameUrl, setGameUrl] = useState("");
@@ -52,6 +54,7 @@ const Casino = () => {
   const [isExplicitSingleCategoryView, setIsExplicitSingleCategoryView] = useState(false);
   const [hasMoreGames, setHasMoreGames] = useState(true);
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [isLoadingGames, setIsLoadingGames] = useState(false);
   const refGameModal = useRef();
   const location = useLocation();
   const { isSlotsOnly, isMobile } = useOutletContext();
@@ -109,6 +112,7 @@ const Casino = () => {
   }, [isSlotsOnly]);
 
   const getPage = (page) => {
+    setIsLoadingGames(true);
     setShowFullDivLoading(true);
     setGames([]);
     setFirstFiveCategoriesGames([]);
@@ -119,8 +123,10 @@ const Casino = () => {
 
   const callbackGetPage = (result, page) => {
     if (result.status === 500 || result.status === 422) {
+      setIsLoadingGames(false);
       setShowFullDivLoading(false);
     } else {
+      setCategoryType(result.data.page_group_type);
       setSelectedProvider(null);
       setPageData(result.data);
 
@@ -157,6 +163,7 @@ const Casino = () => {
       }
 
       setShowFullDivLoading(false);
+      setIsLoadingGames(false);
     }
   };
 
@@ -226,12 +233,13 @@ const Casino = () => {
 
   const loadMoreGames = () => {
     if (!activeCategory) return;
+    setIsLoadingGames(true);
     fetchContent(activeCategory, activeCategory.id, activeCategory.table_name, selectedCategoryIndex, false);
   };
 
   const fetchContent = (category, categoryId, tableName, categoryIndex, resetCurrentPage, pageGroupCode) => {
     let pageSize = 30;
-    setShowFullDivLoading(true);
+    setIsLoadingGames(true);
 
     if (resetCurrentPage) {
       pageCurrent = 0;
@@ -241,7 +249,7 @@ const Casino = () => {
     setActiveCategory(category);
     setSelectedCategoryIndex(categoryIndex);
 
-    const groupCode = pageGroupCode || pageData.page_group_code;
+    const groupCode = categoryType === "categories" ? pageGroupCode || pageData.page_group_code : "default_pages_home"
 
     let apiUrl =
       "/get-content?page_group_type=categories&page_group_code=" +
@@ -266,6 +274,7 @@ const Casino = () => {
     if (result.status === 500 || result.status === 422) {
       setHasMoreGames(false);
       setShowFullDivLoading(false);
+      setIsLoadingGames(false);
     } else {
       if (pageCurrent == 0) {
         configureImageSrc(result);
@@ -278,6 +287,7 @@ const Casino = () => {
       pageCurrent += 1;
     }
     setShowFullDivLoading(false);
+    setIsLoadingGames(false);
   };
 
   const configureImageSrc = (result) => {
@@ -327,41 +337,32 @@ const Casino = () => {
   };
 
   const handleProviderSelect = (provider, index = 0) => {
+    setSelectedProvider(provider);
+    setTxtSearch("");
+    setIsExplicitSingleCategoryView(true);
+
     if (provider) {
-      setSelectedProvider(provider);
-      setIsExplicitSingleCategoryView(true);
-      setIsSingleCategoryView(true);
-      setTxtSearch("");
-      if (categories.length > 0 && provider) {
-        setActiveCategory(provider);
-        setSelectedCategoryIndex(index);
-        fetchContent(provider, provider.id, provider.table_name, index, true, "default_pages_home");
-        lastLoadedTagRef.current = provider.code;
-        if (isMobile) {
-          setMobileShowMore(true);
-        }
+      setActiveCategory(null);
+      setSelectedCategoryIndex(-1);
+
+      fetchContent(
+        provider,
+        provider.id,
+        provider.table_name,
+        index,
+        true
+      );
+
+      if (isMobile) {
+        setMobileShowMore(true);
       }
     } else {
-      setSelectedProvider(null);
-      setIsSingleCategoryView(false);
-      setIsExplicitSingleCategoryView(false);
-      setGames([]);
-      setFirstFiveCategoriesGames([]);
-
-      if (categories.length > 0) {
-        const firstFiveCategories = categories.slice(0, 5);
-        if (firstFiveCategories.length > 0) {
-          pendingCategoryFetchesRef.current = firstFiveCategories.length;
-          setShowFullDivLoading(true);
-          firstFiveCategories.forEach((item, index) => {
-            fetchContentForCategory(item, item.id, item.table_name, index, true, "default_pages_home");
-          });
-        } else {
-          setShowFullDivLoading(false);
-        }
+      const firstCategory = categories[0];
+      if (firstCategory) {
+        setActiveCategory(firstCategory);
+        setSelectedCategoryIndex(0);
+        fetchContent(firstCategory, firstCategory.id, firstCategory.table_name, 0, true);
       }
-      navigate("/casino", { replace: true });
-      lastLoadedTagRef.current = "";
     }
   };
 
@@ -513,6 +514,7 @@ const Casino = () => {
                           />
                         ))}
                       </div>
+                      {isLoadingGames && <LoadApi />}
 
                       {(isExplicitSingleCategoryView || selectedProvider) &&
                         hasMoreGames &&
@@ -552,6 +554,7 @@ const Casino = () => {
                               />
                             ))}
                           </div>
+                          {isLoadingGames && <LoadApi />}
 
                           {games.length > 0 && (
                             <div className="text-center">
