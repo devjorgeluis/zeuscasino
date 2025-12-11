@@ -1,18 +1,38 @@
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ImgLogo from "/src/assets/img/logo.webp";
 
 const Header = ({
     isLogin,
     isMobile,
-    link,
+    isSlotsOnly,
     userBalance,
     handleLoginClick,
     handleLogoutClick
 }) => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const pathname = location?.pathname ?? "";
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
+
+    const navItems = isSlotsOnly === "false" ? [
+        { path: ["/", "/home"], label: "INICIO" },
+        { path: ["/casino"], label: "CASINO" },
+        { path: ["/live-casino"], label: "CASINO EN VIVO" },
+        { path: ["/sports"], label: "DEPORTES" },
+        { path: ["/live-sports"], label: "DEPORTES EN VIVO" }
+    ] : [
+        { path: ["/", "/home"], label: "INICIO" },
+        { path: ["/casino"], label: "CASINO" }
+    ];
+
+    const isActive = (paths) => {
+        if (Array.isArray(paths)) {
+            return paths.some(p => p === "/" ? pathname === "/" : pathname.startsWith(p));
+        }
+        return pathname.startsWith(paths);
+    };
 
     useEffect(() => {
         function handleDocClick(e) {
@@ -46,7 +66,7 @@ const Header = ({
                             width="90%"
                             alt="Zeus Casino Logo"
                             style={{ maxWidth: "170px", maxHeight: "45px" }}
-                            onClick={() => navigate("/")}
+                            onClick={() => navigate("/home")}
                         />
                     </div>
                     <div
@@ -63,56 +83,18 @@ const Header = ({
                                     "--border": "2px solid #da4167"
                                 }}
                             >
-                                <li role="presentation" className="nav-item">
-                                    <button
-                                        type="button"
-                                        className="nav-link text-center active"
-                                        style={{ textTransform: "uppercase" }}
-                                        onClick={() => navigate("/home")}
-                                    >
-                                        <span>INICIO</span>
-                                    </button>
-                                </li>
-                                <li role="presentation" className="nav-item">
-                                    <button
-                                        type="button"
-                                        className="nav-link text-center"
-                                        style={{ textTransform: "uppercase" }}
-                                        onClick={() => navigate("/casino")}
-                                    >
-                                        <span>CASINO</span>
-                                    </button>
-                                </li>
-                                <li role="presentation" className="nav-item">
-                                    <button
-                                        type="button"
-                                        className="nav-link text-center"
-                                        style={{ textTransform: "uppercase" }}
-                                        onClick={() => navigate("/live-casino")}
-                                    >
-                                        <span>CASINO EN VIVO</span>
-                                    </button>
-                                </li>
-                                <li role="presentation" className="nav-item">
-                                    <button
-                                        type="button"
-                                        className="nav-link text-center"
-                                        style={{ textTransform: "uppercase" }}
-                                        onClick={() => navigate("/sports")}
-                                    >
-                                        <span>DEPORTES</span>
-                                    </button>
-                                </li>
-                                <li role="presentation" className="nav-item">
-                                    <button
-                                        type="button"
-                                        className="nav-link text-center"
-                                        style={{ textTransform: "uppercase" }}
-                                        onClick={() => navigate("/live-sports")}
-                                    >
-                                        <span>DEPORTES EN VIVO</span>
-                                    </button>
-                                </li>
+                                {navItems.map((item, idx) => (
+                                    <li key={idx} role="presentation" className="nav-item">
+                                        <button
+                                            type="button"
+                                            className={"nav-link text-center" + (isActive(item.path) ? " active" : "")}
+                                            style={{ textTransform: "uppercase" }}
+                                            onClick={() => navigate(Array.isArray(item.path) ? item.path[item.path.length - 1] : item.path)}
+                                        >
+                                            <span>{item.label}</span>
+                                        </button>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
