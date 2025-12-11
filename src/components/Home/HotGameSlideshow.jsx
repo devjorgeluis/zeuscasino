@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import Icons from '/src/assets/svg/icons.svg';
 import GameCard from '../GameCard';
 
 const HotGameSlideshow = ({ games, name, title, icon, link, onGameClick }) => {

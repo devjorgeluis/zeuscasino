@@ -57,6 +57,15 @@ const Header = ({
         };
     }, []);
 
+    
+    const formatBalance = (value) => {
+        const num = parseFloat(value);
+        return num.toLocaleString('de-DE', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    };
+
     return (
         <>
             <nav
@@ -115,7 +124,7 @@ const Header = ({
                             </div>
                             <div className="nav-item mx-1" style={{ cursor: "pointer", color: "rgb(204, 204, 204)" }}>
                                 <span className="pr-0 mx-1" style={{ fontWeight: 300, cursor: "pointer" }}>CRÉDITOS</span>
-                                <span style={{ fontWeight: 800 }}>{parseFloat(userBalance).toFixed(2)}</span>
+                                <span style={{ fontWeight: 800 }}>{formatBalance(userBalance)}</span>
                             </div>
                             <div className="user-info mx-1">
                                 <div className="avatar px-1 py-1 pb-0">
@@ -153,11 +162,6 @@ const Header = ({
                                             onClick={() => { setDropdownOpen(false); handleMyProfileHistoryClick(); }}
                                         >
                                             <i className="fa fa-history"></i> Historial de cuenta
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="dropdown-item" onClick={() => setDropdownOpen(false)}>
-                                            <i className="fa fa-book"></i> Reglamento deportivo
                                         </a>
                                     </li>
                                     <li>
