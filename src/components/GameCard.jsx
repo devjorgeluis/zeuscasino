@@ -34,6 +34,7 @@ const GameCard = (props) => {
                     <img src={props.imageSrc} alt={props.title} className="zoom-img" /> :
                     <div className="picture">
                         <img src={props.imageSrc} alt={props.title} />
+                        <div className="overlay"></div>
                     </div>
             }
         </div>

@@ -6,19 +6,25 @@ const SearchInput = ({
     setTxtSearch,
     searchRef,
     search,
-    isMobile
+    isMobile,
+    onSearchClick  // Add this new prop
 }) => {
     const { setShowMobileSearch } = useContext(LayoutContext);
 
     const handleChange = (event) => {
         const value = event.target.value;
         setTxtSearch(value);
-        search({ target: { value }, key: event.key, keyCode: event.keyCode });
     };
 
     const handleFocus = () => {
         if (isMobile) {
             setShowMobileSearch(true);
+        }
+    };
+
+    const handleSearchClick = () => {
+        if (onSearchClick) {
+            onSearchClick(txtSearch);
         }
     };
 
@@ -33,7 +39,7 @@ const SearchInput = ({
                 onKeyUp={search}
                 onFocus={handleFocus}
             />
-            <button>
+            <button onClick={handleSearchClick}>
                 <i className="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>

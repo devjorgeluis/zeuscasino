@@ -9,6 +9,7 @@ import ProviderContainer from "../components/ProviderContainer";
 import BannerContainer from "../components/Home/BannerContainer";
 import HotGameSlideshow from "../components/Home/HotGameSlideshow";
 import GameModal from "../components/Modal/GameModal";
+import LoginModal from "../components/Modal/LoginModal";
 import ProviderModal from "../components/Modal/ProviderModal";
 import SearchInput from "../components/SearchInput";
 import GameCard from "../components/GameCard";
@@ -31,6 +32,7 @@ const Home = () => {
   const { contextData } = useContext(AppContext);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
   const { setShowFullDivLoading } = useContext(NavigationContext);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const [games, setGames] = useState([]);
   const [topGames, setTopGames] = useState([]);
   const [topArcade, setTopArcade] = useState([]);
@@ -188,6 +190,14 @@ const Home = () => {
     }
   };
 
+  const handleLoginClick = () => {
+    setShowLoginModal(true);
+  };
+
+  const handleLoginConfirm = () => {
+    setShowLoginModal(false);
+  };
+  
   const handleCategorySelect = (category) => {
     setActiveCategory(category);
     setSelectedProvider(null);
@@ -441,6 +451,13 @@ const Home = () => {
 
   return (
     <>
+      {showLoginModal && (
+        <LoginModal
+          isOpen={showLoginModal}
+          onClose={() => setShowLoginModal(false)}
+          onConfirm={handleLoginConfirm}
+        />
+      )}
       {shouldShowGameModal && selectedGameId !== null ? (
         <GameModal
           gameUrl={gameUrl}
@@ -492,7 +509,7 @@ const Home = () => {
                               <div className="search-text-desktop">
                                 <div className="games-category">
                                   <h3 className="title">
-                                    <span className="name-name">{txtSearch !== "" ? "BUSQUEDA: " + txtSearch : selectedProvider?.name ? selectedProvider.name : activeCategory?.name}</span>
+                                    <span className="name-name">{txtSearch.trim() !== "" ? "BUSQUEDA: " + txtSearch.trim() : selectedProvider?.name ? selectedProvider.name : activeCategory?.name}</span>
                                   </h3>
 
                                   <SearchInput
@@ -547,28 +564,28 @@ const Home = () => {
                                     if (isLogin) {
                                       launchGame(game);
                                     } else {
-                                      navigate("/login");
+                                      handleLoginClick();
                                     }
                                   }} />}
                                   {topArcade.length > 0 && <HotGameSlideshow games={topArcade} name="arcade" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
                                     if (isLogin) {
                                       launchGame(game);
                                     } else {
-                                      navigate("/login");
+                                      handleLoginClick();
                                     }
                                   }} />}
                                   {topCasino.length > 0 && <HotGameSlideshow games={topCasino} name="casino" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
                                     if (isLogin) {
                                       launchGame(game);
                                     } else {
-                                      navigate("/login");
+                                      handleLoginClick();
                                     }
                                   }} />}
                                   {topLiveCasino.length > 0 && <HotGameSlideshow games={topLiveCasino} name="liveCasino" title="Casino en Vivo" icon="spades" link="/live-casino" onGameClick={(game) => {
                                     if (isLogin) {
                                       launchGame(game);
                                     } else {
-                                      navigate("/login");
+                                      handleLoginClick();
                                     }
                                   }} />}
                                 </div>

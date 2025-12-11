@@ -7259,13 +7259,22 @@ body {
 }
 
 .holds-the-iframe {
-  background: url("../assets/img/loader.gif") 50% no-repeat;
   min-height: 200px;
   width: 100%;
   overflow-x: hidden;
-  background-size: 5%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  position: fixed;
+  z-index: 9999;
 
   @media (max-width: 767px) {
     background-size: 30%
   }
+}
+
+.holds-the-iframe img{
+  width: 100px;
 }
