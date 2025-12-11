@@ -356,7 +356,7 @@ const MyProfileHistoryModal = ({ isOpen, onClose }) => {
                                 </>
                             )}
                         </div>
-                        <div className="text-center">
+                        <div className="text-center pb-3">
                             <button
                                 className="btn"
                                 style={{

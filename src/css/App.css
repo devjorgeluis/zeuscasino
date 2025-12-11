@@ -2120,6 +2120,28 @@
   position: relative
 }
 
+.offcanvas-body .dropdown-item {
+  padding: .5rem .5rem;
+  background-color: transparent;
+  margin-left: 0;
+  font-size: 16px;
+}
+
+.offcanvas-body .avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+  text-align: center;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 5px;
+  background: #1c1c1c;
+  border: 1px solid #fff;
+  font-size: 1.6rem !important;
+  vertical-align: middle;
+  color: #fff;
+}
+
 .dropdown-item,
 .dropdown-menu {
   padding: 10px;
@@ -4655,7 +4677,9 @@ footer {
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 2px;
-  text-align: center
+  text-align: center;
+  max-width: 100px;
+  display: block;
 }
 
 .custom-table th {
