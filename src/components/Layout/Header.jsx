@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { AppContext } from "../../AppContext";
 import ImgLogo from "/src/assets/img/logo.webp";
 
 const Header = ({
@@ -8,13 +9,15 @@ const Header = ({
     isSlotsOnly,
     userBalance,
     handleLoginClick,
-    handleLogoutClick
+    handleLogoutClick,
+    handleMyProfileClick
 }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const pathname = location?.pathname ?? "";
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const { contextData } = useContext(AppContext);
 
     const navItems = isSlotsOnly === "false" ? [
         { path: ["/", "/home"], label: "INICIO" },
@@ -127,7 +130,7 @@ const Header = ({
                                     className="btn btn-dark dropdown-toggle btn-sm"
                                     style={{ borderRadius: "10px" }}
                                 >
-                                    <span style={{ margin: "20px", fontWeight: 800 }}>prueba123</span>
+                                    <span style={{ margin: "20px", fontWeight: 800 }}>{contextData?.session?.user?.username}</span>
                                 </button>
                                 <ul className={"dropdown-menu dropdown-menu-lg-end" + (dropdownOpen ? " show" : "")}>
                                     <li>
@@ -136,7 +139,7 @@ const Header = ({
                                             data-bs-target="#historial_ingresos"
                                             href="#"
                                             className="dropdown-item"
-                                            onClick={() => setDropdownOpen(false)}
+                                            onClick={() => { setDropdownOpen(false); handleMyProfileClick(); }}
                                         >
                                             <i className="fa fa-database"></i> Mis datos
                                         </a>

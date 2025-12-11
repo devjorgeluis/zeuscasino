@@ -8,6 +8,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import LoginModal from "../Modal/LoginModal";
 import VerifyAgeModal from "../Modal/VerifyAgeModal";
+import MyProfileModal from "../Modal/MyProfileModal";
 import { NavigationContext } from "./NavigationContext";
 import FullDivLoading from "../Loading/FullDivLoading";
 
@@ -19,6 +20,7 @@ const Layout = () => {
     const [userBalance, setUserBalance] = useState(0);
     const [isSlotsOnly, setIsSlotsOnly] = useState("");
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showMyProfileModal, setShowMyProfileModal] = useState(false);
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const [showMobileSearch, setShowMobileSearch] = useState(false);
     const [showFullDivLoading, setShowFullDivLoading] = useState(false);
@@ -121,6 +123,10 @@ const Layout = () => {
         }, null);
     };
 
+    const handleMyProfileClick = () => {
+        setShowMyProfileModal(true);
+    }
+
     const handleLoginSuccess = (balance) => {
         const parsed = balance ? parseFloat(balance) : 0;
         setUserBalance(Number.isFinite(parsed) ? parsed : 0);
@@ -162,6 +168,12 @@ const Layout = () => {
                             onLoginSuccess={handleLoginSuccess}
                         />
                     )}
+                    {showMyProfileModal && (
+                        <MyProfileModal
+                            isOpen={showMyProfileModal}
+                            onClose={() => setShowMyProfileModal(false)}
+                        />
+                    )}
                     <Header
                         isLogin={isLogin}
                         isMobile={isMobile}
@@ -169,6 +181,7 @@ const Layout = () => {
                         userBalance={userBalance}
                         handleLoginClick={handleLoginClick}
                         handleLogoutClick={handleLogoutClick}
+                        handleMyProfileClick={handleMyProfileClick}
                     />
                     {/* <Sidebar isSlotsOnly={isSlotsOnly} isMobile={isMobile} /> */}
                     <Outlet context={{ isSlotsOnly, isLogin, isMobile }} />
