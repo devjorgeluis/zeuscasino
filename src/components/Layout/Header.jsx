@@ -10,7 +10,8 @@ const Header = ({
     userBalance,
     handleLoginClick,
     handleLogoutClick,
-    handleMyProfileClick
+    handleMyProfileClick,
+    handleMyProfileHistoryClick
 }) => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -76,9 +77,8 @@ const Header = ({
                         id="navbarText"
                         style={{ width: "80%", display: "flex", justifyContent: "center", alignItems: "center" }}
                     >
-                        <div>
+                        <div id="menu-header">
                             <ul
-                                id="menu-zeus"
                                 className="nav nav-tabs"
                                 style={{
                                     "--background": "rgba(255, 255, 255, 0.08)",
@@ -146,23 +146,11 @@ const Header = ({
                                     </li>
                                     <li>
                                         <a
-                                            id="changePasswordBtn"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#changePasswordJm"
-                                            href="#"
-                                            className="dropdown-item"
-                                            onClick={() => setDropdownOpen(false)}
-                                        >
-                                            <i className="fa fa-key"></i> Cambiar contraseña
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
                                             data-bs-toggle="modal"
                                             data-bs-target="#myAccountZeus"
                                             href="#"
                                             className="dropdown-item"
-                                            onClick={() => setDropdownOpen(false)}
+                                            onClick={() => { setDropdownOpen(false); handleMyProfileHistoryClick(); }}
                                         >
                                             <i className="fa fa-history"></i> Historial de cuenta
                                         </a>

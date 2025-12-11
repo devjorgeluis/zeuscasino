@@ -87,7 +87,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                     >
                         <i className="fas fa-times"></i>
                     </button>
-                    <h6 id="exampleModalLabel" className="modal-title title text-center m-1 mb-5 p-0">
+                    <h6 id="exampleModalLabel" className="modal-title text-center m-1 mb-5 p-0">
                         Ingrese su usuario y contraseña para<br />
                         empezar a jugar.
                     </h6>

@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import LoginModal from "../Modal/LoginModal";
 import VerifyAgeModal from "../Modal/VerifyAgeModal";
 import MyProfileModal from "../Modal/MyProfileModal";
+import MyProfileHistoryModal from "../Modal/MyProfileHistoryModal";
 import { NavigationContext } from "./NavigationContext";
 import FullDivLoading from "../Loading/FullDivLoading";
 
@@ -21,6 +22,7 @@ const Layout = () => {
     const [isSlotsOnly, setIsSlotsOnly] = useState("");
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showMyProfileModal, setShowMyProfileModal] = useState(false);
+    const [showMyProfileHistoryModal, setShowMyProfileHistoryModal] = useState(false);
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const [showMobileSearch, setShowMobileSearch] = useState(false);
     const [showFullDivLoading, setShowFullDivLoading] = useState(false);
@@ -125,6 +127,10 @@ const Layout = () => {
 
     const handleMyProfileClick = () => {
         setShowMyProfileModal(true);
+    };
+
+    const handleMyProfileHistoryClick = () => {
+        setShowMyProfileHistoryModal(true);
     }
 
     const handleLoginSuccess = (balance) => {
@@ -174,6 +180,12 @@ const Layout = () => {
                             onClose={() => setShowMyProfileModal(false)}
                         />
                     )}
+                    {showMyProfileHistoryModal && (
+                        <MyProfileHistoryModal
+                            isOpen={showMyProfileHistoryModal}
+                            onClose={() => setShowMyProfileHistoryModal(false)}
+                        />
+                    )}
                     <Header
                         isLogin={isLogin}
                         isMobile={isMobile}
@@ -182,6 +194,7 @@ const Layout = () => {
                         handleLoginClick={handleLoginClick}
                         handleLogoutClick={handleLogoutClick}
                         handleMyProfileClick={handleMyProfileClick}
+                        handleMyProfileHistoryClick={handleMyProfileHistoryClick}
                     />
                     {/* <Sidebar isSlotsOnly={isSlotsOnly} isMobile={isMobile} /> */}
                     <Outlet context={{ isSlotsOnly, isLogin, isMobile }} />
