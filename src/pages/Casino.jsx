@@ -4,7 +4,6 @@ import { AppContext } from "../AppContext";
 import { LayoutContext } from "../components/Layout/LayoutContext";
 import { NavigationContext } from "../components/Layout/NavigationContext";
 import { callApi } from "../utils/Utils";
-import Slideshow from "../components/Home/Slideshow";
 import GameSlideshow from "../components/Home/GameSlideshow";
 import GameCard from "/src/components/GameCard";
 import GameModal from "../components/Modal/GameModal";
@@ -13,7 +12,6 @@ import ProviderModal from "../components/Modal/ProviderModal";
 import CategoryContainer from "../components/CategoryContainer";
 import ProviderContainer from "../components/ProviderContainer";
 import SearchInput from "../components/SearchInput";
-import LoadApi from "../components/Loading/LoadApi";
 import "animate.css";
 
 let selectedGameId = null;
@@ -333,6 +331,7 @@ const Casino = () => {
       setSelectedProvider(provider);
       setIsExplicitSingleCategoryView(true);
       setIsSingleCategoryView(true);
+      setTxtSearch("");
       if (categories.length > 0 && provider) {
         setActiveCategory(provider);
         setSelectedCategoryIndex(index);
@@ -388,7 +387,6 @@ const Casino = () => {
     }
   };
 
-  // Add a new function to perform the actual search
   const performSearch = (keyword) => {
     if (keyword.trim() === "") {
       return;
@@ -462,6 +460,13 @@ const Casino = () => {
               onCategorySelect={handleCategorySelect}
               isMobile={isMobile}
               pageType="casino"
+            />
+            <ProviderContainer
+              categories={categories}
+              selectedProvider={selectedProvider}
+              setSelectedProvider={setSelectedProvider}
+              onProviderSelect={handleProviderSelect}
+              onOpenProviders={() => setShowFilterModal(true)}
             />
 
             <div className="casino-page">

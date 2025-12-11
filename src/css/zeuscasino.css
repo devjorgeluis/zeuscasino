@@ -3031,6 +3031,14 @@ button.next {
     border-radius: 6px;
 }
 
+.live-games-grid .games-grid {
+    padding: 0;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    border-radius: 6px;
+}
+
 .game {
     box-sizing: border-box;
     border-radius: 10px;
