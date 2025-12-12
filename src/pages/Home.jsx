@@ -616,28 +616,28 @@ const Home = () => {
                                 <div className="home-item">
                                   {topGames.length > 0 && <HotGameSlideshow games={topGames} name="games" title="Juegos" icon="" link="/casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      launchGame(game);
+                                      launchGame(game, "slot", "tab");
                                     } else {
                                       handleLoginClick();
                                     }
                                   }} />}
                                   {topArcade.length > 0 && <HotGameSlideshow games={topArcade} name="arcade" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      launchGame(game);
+                                      launchGame(game, "slot", "tab");
                                     } else {
                                       handleLoginClick();
                                     }
                                   }} />}
                                   {topCasino.length > 0 && <HotGameSlideshow games={topCasino} name="casino" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      launchGame(game);
+                                      launchGame(game, "slot", "tab");
                                     } else {
                                       handleLoginClick();
                                     }
                                   }} />}
                                   {topLiveCasino.length > 0 && <HotGameSlideshow games={topLiveCasino} name="liveCasino" title="Casino en Vivo" icon="spades" link="/live-casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      launchGame(game);
+                                      launchGame(game, "slot", "tab");
                                     } else {
                                       handleLoginClick();
                                     }

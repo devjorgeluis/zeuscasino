@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import LoadApi from "../Loading/LoadApi";
 import IconEnlarge from "/src/assets/svg/enlarge.svg";
+import IconClose from "/src/assets/svg/game-close.svg";
 
 const GameModal = (props) => {
   const [url, setUrl] = useState(null);
@@ -100,13 +101,20 @@ const GameModal = (props) => {
         <div className="game-window">
           <div className="game-window-header">
             <div className="game-window-header-item align-center full-window">
+              <span
+                className="icon-originscreen"
+                onClick={toggleFullScreen}
+                title="Exit Fullscreen"
+              >
+                <img src={IconClose} />
+              </span>
               {isFullscreen ? (
                 <span
                   className="icon-originscreen"
                   onClick={toggleFullScreen}
                   title="Exit Fullscreen"
                 >
-                  <img src={IconShrink} />
+                  <img src={IconEnlarge} />
                 </span>
               ) : (
                 <span
