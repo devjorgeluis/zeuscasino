@@ -255,6 +255,24 @@ const Header = ({
                     </nav>
             }
 
+            <div
+                style={{
+                    position: "fixed",
+                    right: "10px",
+                    top: "0px",
+                    background: "rgba(0, 0, 0, 0.6)",
+                    color: "white",
+                    fontSize: "12px",
+                    padding: "2px 6px",
+                    borderRadius: "4px",
+                    zIndex: 9999,
+                    fontFamily: 'Roboto Condensed',
+                }}
+            >
+                v 1.7
+            </div>
+
+
             <Sidebar
                 isSlotsOnly={isSlotsOnly}
                 isLogin={isLogin}
