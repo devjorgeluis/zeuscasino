@@ -3781,6 +3781,10 @@ button.next {
     background-color: #1c1c1c;
 }
 
+.button-desktop.button-desktop_color_default {
+    padding: 0.5rem;
+}
+
 @media (max-width: 768px) {
     .title {
         font-size: 1.17em;
