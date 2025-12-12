@@ -206,7 +206,7 @@ const MyProfileHistoryModal = ({ isOpen, onClose }) => {
                     className="modal-content"
                     style={{ backgroundColor: 'rgb(4, 7, 19)', fontFamily: '"Exo 2", sans-serif' }}
                 >
-                    <div style={{ backgroundColor: "rgb(4, 7, 19)", fontFamily: "Exo 2, sans-serif" }} >
+                    <div className="modal-body p-4" >
                         <div className="container">
                             <h3 style={{ color: "white" }}><span className="fa fa-table mb-3"></span> Historial de cuenta</h3>
 

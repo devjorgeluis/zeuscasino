@@ -64,12 +64,17 @@ const FilterModal = ({ isLogin, isMobile, onClose }) => {
     };
 
     const search = (e) => {
-        let keyword = e.target.value;
+        const keyword = typeof e === 'string' ? e : (e?.target?.value ?? '');
         setTxtSearch(keyword);
 
-        if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
-            let keyword = e.target.value;
+        if (typeof e === 'string') {
             do_search(keyword);
+            return;
+        }
+
+        if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
+            const kw = e.target.value;
+            do_search(kw);
         } else {
             if (
                 (e.keyCode >= 48 && e.keyCode <= 57) ||

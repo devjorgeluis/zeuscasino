@@ -26,6 +26,11 @@ const HotGameSlideshow = ({ games, name, title, icon, link, onGameClick }) => {
                 modules={[Navigation]}
                 spaceBetween={10}
                 slidesPerView={9}
+                breakpoints={{
+                    0: { slidesPerView: 4, spaceBetween: 8 },
+                    576: { slidesPerView: 6, spaceBetween: 10 },
+                    992: { slidesPerView: 9, spaceBetween: 10 }
+                }}
                 navigation={{
                     prevEl: `.${uniqueId}-back`,
                     nextEl: `.${uniqueId}-next`,
@@ -34,9 +39,9 @@ const HotGameSlideshow = ({ games, name, title, icon, link, onGameClick }) => {
                 style={{ width: '100%' }}
             >
                 {games?.map((game, index) => (
-                    <SwiperSlide key={game.id || index} className="top-game-item">
+                    <SwiperSlide key={`hot-${name}-${game.id ?? index}-${index}`} className="top-game-item">
                         <GameCard
-                            key={game.id}
+                            key={`hotcard-${name}-${game.id ?? index}-${index}`}
                             id={game.id}
                             provider={'Casino'}
                             title={game.name}

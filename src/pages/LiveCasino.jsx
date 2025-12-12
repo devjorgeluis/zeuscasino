@@ -26,6 +26,7 @@ import ImgCategoryBlackjack from "/src/assets/svg/jackpots.svg";
 import ImgCategoryRoulette from "/src/assets/svg/roulette.svg";
 import ImgCategoryCrash from "/src/assets/svg/crash.svg";
 import ImgCategoryMegaways from "/src/assets/svg/megaways.svg";
+import Img777 from "/src/assets/svg/777.svg";
 
 const LiveCasino = () => {
   const pageTitle = "Live Casino";
@@ -305,8 +306,13 @@ const LiveCasino = () => {
   };
 
   const search = (e) => {
-    let keyword = e.target.value;
+    const keyword = typeof e === 'string' ? e : (e?.target?.value ?? '');
     setTxtSearch(keyword);
+
+    if (typeof e === 'string') {
+      performSearch(keyword);
+      return;
+    }
 
     if (e.key === "Enter" || e.keyCode === 13) {
       performSearch(keyword);
@@ -342,6 +348,7 @@ const LiveCasino = () => {
 
   const callbackSearch = (result) => {
     setShowFullDivLoading(false);
+    setIsSingleCategoryView(false);
     if (result.status === 500 || result.status === 422) {
       // Handle error
     } else {
@@ -374,6 +381,27 @@ const LiveCasino = () => {
       ) : (
         <div className="casino">
           <div className="casino-page-container">
+            <div className="brands-container-responsive">
+              <div className="content-responsive">
+                <SearchInput
+                  txtSearch={txtSearch}
+                  setTxtSearch={setTxtSearch}
+                  searchRef={searchRef}
+                  search={search}
+                  isMobile={isMobile}
+                />
+
+                <div className="boton-brands">
+                  <div className="boton-brands">
+                    <button onClick={() => setShowFilterModal(true)}>
+                      <img src={Img777} alt="Proveedores" />
+                      {" "}Proveedores
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <CategoryContainer
               categories={tags}
               selectedCategoryIndex={selectedCategoryIndex}
@@ -406,14 +434,17 @@ const LiveCasino = () => {
                     <div className="games-category">
                       <h3>{txtSearch.trim() !== '' ? `BUSQUEDA: ${txtSearch.trim()}` : (selectedProvider ? selectedProvider.name : activeCategory?.name || 'Casino')}</h3>
 
-                      <SearchInput
-                        txtSearch={txtSearch}
-                        setTxtSearch={setTxtSearch}
-                        searchRef={searchRef}
-                        search={search}
-                        isMobile={isMobile}
-                        onSearchClick={performSearch}
-                      />
+                      {
+                        !isMobile && (
+                          <SearchInput
+                            txtSearch={txtSearch}
+                            setTxtSearch={setTxtSearch}
+                            searchRef={searchRef}
+                            search={search}
+                            isMobile={isMobile}
+                            onSearchClick={performSearch}
+                          />
+                        )}
                     </div>
                   )}
 

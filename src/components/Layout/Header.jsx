@@ -86,46 +86,46 @@ const Header = ({
                                 <img src={ImgLogo} width="40%" alt="Logo" className="mx-2" />
                             </div>
 
-                            {
-                                isLogin ? <>
-                                    <div className="user-info mx-1">
-                                        <div className="avatar px-2 py-1 pb-0">
-                                            <i className="fa fa-user"></i>
+                            <div className="d-flex">
+                                {
+                                    isLogin ? <>
+                                        <div className="user-info mx-1">
+                                            <div className="avatar px-2 py-1 pb-0">
+                                                <i className="fa fa-user"></i>
+                                            </div>
                                         </div>
+
+                                        <div className="text-start" style={{ fontSize: "small" }}>
+                                            <span style={{ color: "white" }}>{contextData?.session?.user?.username}</span>
+                                            <br />
+                                            <span style={{ color: "white" }}>{formatBalance(userBalance)}</span>
+                                        </div>
+
+                                    </> : <div
+                                        className="btn mx-3 py-1 px-1 btn-outline"
+                                        style={{
+                                            fontSize: "11px",
+                                            cursor: "pointer",
+                                            fontWeight: "bold",
+                                            fontFamily: '"Exo 2", sans-serif'
+                                        }}
+                                        onClick={() => handleLoginClick()}
+                                    >
+                                        <span>INGRESAR</span>
                                     </div>
+                                }
 
-                                    <div className="text-start" style={{ fontSize: "small" }}>
-                                        <span style={{ color: "white" }}>{contextData?.session?.user?.username}</span>
-                                        <br />
-                                        <span style={{ color: "white" }}>{formatBalance(userBalance)}</span>
-                                    </div>
-
-                                </> : <div
-                                    className="btn mx-2 py-1 px-1 btn-outline"
-                                    style={{
-                                        fontSize: "11px",
-                                        cursor: "pointer",
-                                        fontWeight: "bold",
-                                        fontFamily: '"Exo 2", sans-serif'
-                                    }}
-                                    onClick={() => handleLoginClick()}
-                                >
-                                    <span>INGRESAR</span>
-                                </div>
-                            }
-
-                            <div />
-
-                            <div>
-                                <span
-                                    className="position-relative me-1"
-                                    onClick={() => setShowSidebar(true)}
-                                    style={{ cursor: "pointer" }}
-                                >
-                                    <span style={{ fontSize: "larger", color: "rgb(218, 65, 103)" }}>
-                                        <i className="fas fa-bars"></i>
+                                <div>
+                                    <span
+                                        className="position-relative me-1"
+                                        onClick={() => setShowSidebar(true)}
+                                        style={{ cursor: "pointer" }}
+                                    >
+                                        <span style={{ fontSize: "larger", color: "rgb(218, 65, 103)" }}>
+                                            <i className="fas fa-bars"></i>
+                                        </span>
                                     </span>
-                                </span>
+                                </div>
                             </div>
                         </div>
                     </nav> :

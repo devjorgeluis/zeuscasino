@@ -2124,10 +2124,12 @@
   padding: .5rem .5rem;
   background-color: transparent;
   margin-left: 0;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.offcanvas-body .avatar {
+.offcanvas-body .avatar,
+#mainHeader .avatar {
   width: 38px;
   height: 38px;
   border-radius: 6px;
@@ -4814,4 +4816,11 @@ body {
 
 .holds-the-iframe img{
   width: 100px;
+}
+
+@media (max-width: 768px) {
+  h3 {
+    font-size: 1.17em;
+    margin: 0;
+  }
 }

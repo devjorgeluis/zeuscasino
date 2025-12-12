@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { NavigationContext } from "../components/Layout/NavigationContext";
 import { callApi } from "../utils/Utils";
@@ -28,6 +28,7 @@ import ImgCategoryBlackjack from "/src/assets/svg/jackpots.svg";
 import ImgCategoryRoulette from "/src/assets/svg/roulette.svg";
 import ImgCategoryCrash from "/src/assets/svg/crash.svg";
 import ImgCategoryMegaways from "/src/assets/svg/megaways.svg";
+import Img777 from "/src/assets/svg/777.svg";
 
 const Home = () => {
   const { contextData } = useContext(AppContext);
@@ -173,7 +174,7 @@ const Home = () => {
       const firstCategory = result.data.categories[0];
       setActiveCategory(firstCategory);
 
-      const firstFiveCategories = result.data.categories.slice(0, 5);      
+      const firstFiveCategories = result.data.categories.slice(0, 5);
       if (firstFiveCategories.length > 0) {
         setFirstFiveCategoriesGames([]);
         pendingCategoryFetchesRef.current = firstFiveCategories.length;
@@ -203,7 +204,7 @@ const Home = () => {
   const handleLoginConfirm = () => {
     setShowLoginModal(false);
   };
-  
+
   const handleCategorySelect = (category) => {
     setActiveCategory(category);
     setSelectedProvider(null);
@@ -392,63 +393,57 @@ const Home = () => {
   };
 
   const search = (e) => {
-    let keyword = e.target.value;
+    const keyword = typeof e === 'string' ? e : (e?.target?.value ?? '');
     setTxtSearch(keyword);
 
-    if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
-      let keyword = e.target.value;
-      do_search(keyword);
-    } else {
-      if (
-        (e.keyCode >= 48 && e.keyCode <= 57) ||
-        (e.keyCode >= 65 && e.keyCode <= 90) ||
-        e.keyCode == 8 ||
-        e.keyCode == 46
-      ) {
-        do_search(keyword);
-      }
+    if (typeof e === 'string') {
+      performSearch(keyword);
+      return;
     }
 
-    if (e.key === "Enter" || e.keyCode === 13 || e.key === "Escape" || e.keyCode === 27) {
+    if (e.key === "Enter" || e.keyCode === 13) {
+      performSearch(keyword);
+      searchRef.current?.blur();
+    }
+
+    if (e.key === "Escape" || e.keyCode === 27) {
       searchRef.current?.blur();
     }
   };
 
-  const do_search = (keyword) => {
-    clearTimeout(searchDelayTimer);
-
-    if (keyword == "") {
+  const performSearch = (keyword) => {
+    if (keyword.trim() === "") {
       return;
     }
 
     setGames([]);
-    setIsLoadingGames(true);
+    setIsSingleCategoryView(true);
+    setShowFullDivLoading(true);
 
     let pageSize = 30;
 
-    let searchDelayTimerTmp = setTimeout(function () {
-      callApi(
-        contextData,
-        "GET",
-        "/search-content?keyword=" + txtSearch + "&page_group_code=" + pageData.page_group_code + "&length=" + pageSize,
-        callbackSearch,
-        null
-      );
-    }, 1000);
-
-    setSearchDelayTimer(searchDelayTimerTmp);
+    callApi(
+      contextData,
+      "GET",
+      "/search-content?keyword=" + encodeURIComponent(keyword) +
+      "&page_group_code=" + pageData.page_group_code +
+      "&length=" + pageSize,
+      callbackSearch,
+      null
+    );
   };
 
   const callbackSearch = (result) => {
+    setShowFullDivLoading(false);
+    setIsSingleCategoryView(false);
     if (result.status === 500 || result.status === 422) {
-
+      // Handle error
     } else {
       configureImageSrc(result);
       setGames(result.content);
       pageCurrent = 0;
     }
-    setIsLoadingGames(false);
-  };
+  };  
 
   return (
     <>
@@ -477,6 +472,28 @@ const Home = () => {
               <div className="content">
                 <div className="main">
                   <Slideshow />
+
+                  <div className="brands-container-responsive">
+                    <div className="content-responsive">
+                      <SearchInput
+                        txtSearch={txtSearch}
+                        setTxtSearch={setTxtSearch}
+                        searchRef={searchRef}
+                        search={search}
+                        isMobile={isMobile}
+                      />
+
+                      <div className="boton-brands">
+                        <div className="boton-brands">
+                          <button onClick={() => setShowFilterModal(true)}>
+                            <img src={Img777} alt="Proveedores" />
+                            {" "}Proveedores
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <CategoryContainer
                     categories={tags}
                     selectedCategoryIndex={selectedCategoryIndex}
@@ -513,13 +530,15 @@ const Home = () => {
                                     <span className="name-name">{txtSearch.trim() !== "" ? "BUSQUEDA: " + txtSearch.trim() : selectedProvider?.name ? selectedProvider.name : activeCategory?.name}</span>
                                   </h3>
 
-                                  <SearchInput
-                                    txtSearch={txtSearch}
-                                    setTxtSearch={setTxtSearch}
-                                    searchRef={searchRef}
-                                    search={search}
-                                    isMobile={isMobile}
-                                  />
+                                  {
+                                    !isMobile && <SearchInput
+                                      txtSearch={txtSearch}
+                                      setTxtSearch={setTxtSearch}
+                                      searchRef={searchRef}
+                                      search={search}
+                                      isMobile={isMobile}
+                                    />
+                                  }
                                 </div>
                               </div>
                             </div>

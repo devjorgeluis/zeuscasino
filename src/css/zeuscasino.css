@@ -2771,7 +2771,6 @@
     padding: 5px;
     background: #ffffff26;
     font-size: 0.875rem;
-    height: 34px;
 }
 
 .buscador {
@@ -2824,7 +2823,7 @@
     color: #fff;
 }
 
-.boton-brands svg {
+.boton-brands img {
     margin-right: 8px;
     width: 20px;
     fill: #fff;
@@ -3124,6 +3123,12 @@ button.next {
     text-align: left;
     flex: 0 0 50%;
     max-width: 50%;
+}
+
+@media (max-width: 818px) {
+    .footer-app .left {
+        max-width: 100%;
+    }
 }
 
 .footer-app .right {
@@ -3774,4 +3779,24 @@ button.next {
     text-align: center;
     padding: 20px;
     background-color: #1c1c1c;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.17em;
+    }
+
+    .single-games-grid .games-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .ver-todos {
+        width: unset;
+        padding: 0;
+    }
+
+    .home-section-container,
+    .home-page>.content {
+        padding: 0;
+    }
 }
