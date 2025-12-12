@@ -330,24 +330,44 @@ const Home = () => {
   };
 
   const launchGame = (game, type, launcher) => {
-    setShouldShowGameModal(true);
+    // Only show modal when explicitly using modal launcher
+    if (launcher === "modal") {
+      setShouldShowGameModal(true);
+    } else {
+      setShouldShowGameModal(false);
+    }
     setShowFullDivLoading(true);
-    selectedGameId = game.id !== null ? game.id : selectedGameId;
-    selectedGameType = type !== null ? type : selectedGameType;
-    selectedGameLauncher = launcher !== null ? launcher : selectedGameLauncher;
-    selectedGameName = game?.name;
-    selectedGameImg = game?.image_local != null ? contextData.cdnUrl + game?.image_local : null;
+    selectedGameId = game?.id != null ? game.id : selectedGameId;
+    selectedGameType = type != null ? type : selectedGameType;
+    selectedGameLauncher = launcher != null ? launcher : selectedGameLauncher;
+    selectedGameName = game?.name || selectedGameName;
+    selectedGameImg = game?.image_local != null ? contextData.cdnUrl + game?.image_local : selectedGameImg;
     callApi(contextData, "GET", `/get-game-url?game_id=${selectedGameId}`, callbackLaunchGame, null);
   };
 
   const callbackLaunchGame = (result) => {
     setShowFullDivLoading(false);
     if (result.status === "0") {
-      switch (selectedGameLauncher) {
-        case "modal":
-        case "tab":
-          setGameUrl(result.url);
-          break;
+      if (selectedGameLauncher === "tab") {
+        // Open in a new tab for 'tab' launches (keeps the SPA intact)
+        try {
+          window.open(result.url, "_blank", "noopener,noreferrer");
+        } catch (err) {
+          // fallback to navigation if window.open fails
+          window.location.href = result.url;
+        }
+        // Cleanup game selection since we are not showing modal
+        selectedGameId = null;
+        selectedGameType = null;
+        selectedGameLauncher = null;
+        selectedGameName = null;
+        selectedGameImg = null;
+        setGameUrl("");
+        setShouldShowGameModal(false);
+      } else {
+        // show modal
+        setGameUrl(result.url);
+        setShouldShowGameModal(true);
       }
     }
   };
@@ -616,28 +636,28 @@ const Home = () => {
                                 <div className="home-item">
                                   {topGames.length > 0 && <HotGameSlideshow games={topGames} name="games" title="Juegos" icon="" link="/casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      launchGame(game, "slot", "tab");
+                                      launchGame(game, "slot", "modal");
                                     } else {
                                       handleLoginClick();
                                     }
                                   }} />}
                                   {topArcade.length > 0 && <HotGameSlideshow games={topArcade} name="arcade" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      launchGame(game, "slot", "tab");
+                                      launchGame(game, "slot", "modal");
                                     } else {
                                       handleLoginClick();
                                     }
                                   }} />}
                                   {topCasino.length > 0 && <HotGameSlideshow games={topCasino} name="casino" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      launchGame(game, "slot", "tab");
+                                      launchGame(game, "slot", "modal");
                                     } else {
                                       handleLoginClick();
                                     }
                                   }} />}
                                   {topLiveCasino.length > 0 && <HotGameSlideshow games={topLiveCasino} name="liveCasino" title="Casino en Vivo" icon="spades" link="/live-casino" onGameClick={(game) => {
                                     if (isLogin) {
-                                      launchGame(game, "slot", "tab");
+                                      launchGame(game, "slot", "modal");
                                     } else {
                                       handleLoginClick();
                                     }

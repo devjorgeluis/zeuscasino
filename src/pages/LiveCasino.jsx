@@ -228,24 +228,40 @@ const LiveCasino = () => {
   };
 
   const launchGame = (game, type, launcher) => {
-    setShouldShowGameModal(true);
+    // Only show modal when explicitly using modal launcher
+    if (launcher === "modal") {
+      setShouldShowGameModal(true);
+    } else {
+      setShouldShowGameModal(false);
+    }
     setShowFullDivLoading(true);
-    selectedGameId = game.id != null ? game.id : selectedGameId;
+    selectedGameId = game?.id != null ? game.id : selectedGameId;
     selectedGameType = type != null ? type : selectedGameType;
     selectedGameLauncher = launcher != null ? launcher : selectedGameLauncher;
-    selectedGameName = game?.name;
-    selectedGameImg = game?.image_local != null ? contextData.cdnUrl + game.image_local : game.image_url;
+    selectedGameName = game?.name || selectedGameName;
+    selectedGameImg = game?.image_local != null ? contextData.cdnUrl + game.image_local : selectedGameImg;
     callApi(contextData, "GET", "/get-game-url?game_id=" + selectedGameId, callbackLaunchGame, null);
   };
 
   const callbackLaunchGame = (result) => {
     setShowFullDivLoading(false);
     if (result.status == "0") {
-      switch (selectedGameLauncher) {
-        case "modal":
-        case "tab":
-          setGameUrl(result.url);
-          break;
+      if (selectedGameLauncher === "tab") {
+        try {
+          window.open(result.url, "_blank", "noopener,noreferrer");
+        } catch (err) {
+          window.location.href = result.url;
+        }
+        selectedGameId = null;
+        selectedGameType = null;
+        selectedGameLauncher = null;
+        selectedGameName = null;
+        selectedGameImg = null;
+        setGameUrl("");
+        setShouldShowGameModal(false);
+      } else {
+        setGameUrl(result.url);
+        setShouldShowGameModal(true);
       }
     }
   };

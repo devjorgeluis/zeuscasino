@@ -31,22 +31,38 @@ const FilterModal = ({ isLogin, isMobile, onClose }) => {
     const navigate = useNavigate();
 
     const launchGame = (game, type, launcher) => {
-        setShouldShowGameModal(true);
-        selectedGameId = game.id != null ? game.id : selectedGameId;
-        selectedGameType = type != null ? type : selectedGameType;
-        selectedGameLauncher = launcher != null ? launcher : selectedGameLauncher;
-        selectedGameName = game?.name;
-        selectedGameImg = game?.image_local != null ? contextData.cdnUrl + game?.image_local : null;
-        callApi(contextData, "GET", "/get-game-url?game_id=" + game.id, callbackLaunchGame, null);
+        // Only show modal when explicitly using modal launcher
+        if (launcher === "modal") {
+            setShouldShowGameModal(true);
+        } else {
+            setShouldShowGameModal(false);
+        }
+            selectedGameId = game?.id != null ? game.id : selectedGameId;
+            selectedGameType = type != null ? type : selectedGameType;
+            selectedGameLauncher = launcher != null ? launcher : selectedGameLauncher;
+            selectedGameName = game?.name || selectedGameName;
+            selectedGameImg = game?.image_local != null ? contextData.cdnUrl + game?.image_local : selectedGameImg;
+        callApi(contextData, "GET", "/get-game-url?game_id=" + selectedGameId, callbackLaunchGame, null);
     };
 
     const callbackLaunchGame = (result) => {
         if (result.status == "0") {
-            switch (selectedGameLauncher) {
-                case "modal":
-                case "tab":
-                    setGameUrl(result.url);
-                    break;
+            if (selectedGameLauncher === "tab") {
+                try {
+                    window.open(result.url, "_blank", "noopener,noreferrer");
+                } catch (err) {
+                    window.location.href = result.url;
+                }
+                selectedGameId = null;
+                selectedGameType = null;
+                selectedGameLauncher = null;
+                selectedGameName = null;
+                selectedGameImg = null;
+                setGameUrl("");
+                setShouldShowGameModal(false);
+            } else {
+                setGameUrl(result.url);
+                setShouldShowGameModal(true);
             }
         } else {
             setIsGameLoadingError(true);

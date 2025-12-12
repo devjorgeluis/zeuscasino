@@ -91,9 +91,7 @@ const GameModal = (props) => {
     setIframeLoaded(false);
   }
 
-  if (props.isMobile) {
-    return null;
-  }
+  // Render modal for all devices, including mobile, so user navigates inside modal
 
   return (
     <>
