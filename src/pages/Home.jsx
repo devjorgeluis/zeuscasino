@@ -348,6 +348,24 @@ const Home = () => {
   const callbackLaunchGame = (result) => {
     setShowFullDivLoading(false);
     if (result.status === "0") {
+      // On mobile, always navigate to the game URL (replace current SPA)
+      if (isMobile) {
+        try {
+          window.location.href = result.url;
+        } catch (err) {
+          // fallback to opening in new tab
+          try { window.open(result.url, "_blank", "noopener,noreferrer"); } catch (err) {}
+        }
+        selectedGameId = null;
+        selectedGameType = null;
+        selectedGameLauncher = null;
+        selectedGameName = null;
+        selectedGameImg = null;
+        setGameUrl("");
+        setShouldShowGameModal(false);
+        return;
+      }
+
       if (selectedGameLauncher === "tab") {
         // Open in a new tab for 'tab' launches (keeps the SPA intact)
         try {
@@ -380,7 +398,23 @@ const Home = () => {
     selectedGameImg = null;
     setGameUrl("");
     setShouldShowGameModal(false);
-  };
+
+    // Defensive cleanup: ensure game view container is hidden and iframe reset
+    try {
+      const el = document.getElementsByClassName("game-view-container")[0];
+      if (el) {
+        el.classList.add("d-none");
+        el.classList.remove("fullscreen");
+        el.classList.remove("with-background");
+      }
+      const iframeWrapper = document.getElementById("game-window-iframe");
+      if (iframeWrapper) iframeWrapper.classList.add("d-none");
+    } catch (err) {
+      // ignore DOM errors
+    }
+    // Refresh home page data as defensive measure in production environments
+    try { getPage('home'); } catch (e) {}
+  }; 
 
   const handleProviderSelect = (provider, index = 0) => {
     setSelectedProvider(provider);

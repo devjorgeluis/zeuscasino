@@ -246,6 +246,22 @@ const LiveCasino = () => {
   const callbackLaunchGame = (result) => {
     setShowFullDivLoading(false);
     if (result.status == "0") {
+      if (isMobile) {
+        try {
+          window.location.href = result.url;
+        } catch (err) {
+          try { window.open(result.url, "_blank", "noopener,noreferrer"); } catch (err) {}
+        }
+        selectedGameId = null;
+        selectedGameType = null;
+        selectedGameLauncher = null;
+        selectedGameName = null;
+        selectedGameImg = null;
+        setGameUrl("");
+        setShouldShowGameModal(false);
+        return;
+      }
+
       if (selectedGameLauncher === "tab") {
         try {
           window.open(result.url, "_blank", "noopener,noreferrer");
@@ -274,7 +290,21 @@ const LiveCasino = () => {
     selectedGameImg = null;
     setGameUrl("");
     setShouldShowGameModal(false);
-  };
+
+    try {
+      const el = document.getElementsByClassName("game-view-container")[0];
+      if (el) {
+        el.classList.add("d-none");
+        el.classList.remove("fullscreen");
+        el.classList.remove("with-background");
+      }
+      const iframeWrapper = document.getElementById("game-window-iframe");
+      if (iframeWrapper) iframeWrapper.classList.add("d-none");
+    } catch (err) {
+      // ignore DOM errors
+    }
+    try { getPage('livecasino'); } catch (e) {}
+  }; 
 
   const handleCategorySelect = (category) => {
     setActiveCategory(category);

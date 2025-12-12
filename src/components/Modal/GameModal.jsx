@@ -9,17 +9,39 @@ const GameModal = (props) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
+    const el = document.getElementsByClassName("game-view-container")[0];
     if (props.gameUrl !== null && props.gameUrl !== "") {
       if (props.isMobile) {
-        window.location.href = props.gameUrl;
+        try {
+          window.location.href = props.gameUrl;
+        } catch (err) {
+          try { window.open(props.gameUrl, "_blank", "noopener,noreferrer"); } catch (e) {}
+        }
       } else {
-        document
-          .getElementsByClassName("game-view-container")[0]
-          .classList.remove("d-none");
+        if (el) el.classList.remove("d-none");
         setUrl(props.gameUrl);
       }
+    } else {
+      if (el) el.classList.add("d-none");
+      setUrl(null);
+      setIframeLoaded(false);
     }
-  }, [props.gameUrl, props.isMobile]);
+  }, [props.gameUrl]);
+  
+  // Cleanup when the modal unmounts or gameUrl changes to ensure the container is hidden
+  useEffect(() => {
+    return () => {
+      const el = document.getElementsByClassName("game-view-container")[0];
+      if (el) {
+        el.classList.add("d-none");
+        el.classList.remove("fullscreen");
+        el.classList.remove("with-background");
+      }
+      setUrl(null);
+      setIframeLoaded(false);
+      setIsFullscreen(false);
+    };
+  }, []);
 
   const toggleFullScreen = () => {
     const gameWindow = document.getElementsByClassName("game-window")[0];
@@ -35,6 +57,8 @@ const GameModal = (props) => {
       } else if (gameWindow.msRequestFullscreen) {
         gameWindow.msRequestFullscreen();
       }
+      const container = document.getElementsByClassName("game-view-container")[0];
+      if (container) container.classList.add("fullscreen");
       setIsFullscreen(true);
     } else {
       // Exit fullscreen
@@ -47,6 +71,8 @@ const GameModal = (props) => {
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen();
       }
+      const container = document.getElementsByClassName("game-view-container")[0];
+      if (container) container.classList.remove("fullscreen");
       setIsFullscreen(false);
     }
   };
