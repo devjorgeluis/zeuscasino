@@ -102,9 +102,11 @@ const GameModal = (props) => {
           <div className="game-window-header">
             <div className="game-window-header-item align-center full-window">
               <span
-                className="icon-originscreen"
-                onClick={toggleFullScreen}
-                title="Exit Fullscreen"
+                className="icon-close"
+                onClick={() => { if (typeof props.onClose === 'function') props.onClose(); }}
+                title="Close"
+                role="button"
+                aria-label="Close game"
               >
                 <img src={IconClose} />
               </span>
