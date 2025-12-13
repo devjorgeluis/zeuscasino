@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useLocation } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { NavigationContext } from "../components/Layout/NavigationContext";
 import { callApi } from "../utils/Utils";
@@ -65,6 +65,7 @@ const Home = () => {
   const lastLoadedTagRef = useRef("");
   const lastProcessedPageRef = useRef({ page: null, ts: 0 });
   const { isSlotsOnly, isLogin, isMobile } = useOutletContext();
+  const location = useLocation();
   const searchRef = useRef(null);
 
   useEffect(() => {
@@ -78,7 +79,7 @@ const Home = () => {
       setIsExplicitSingleCategoryView(false);
       getPage(hashCode);
     }
-  }, [location.hash]);
+  }, [location.hash, tags]);
 
   useEffect(() => {
     selectedGameId = null;
@@ -161,6 +162,8 @@ const Home = () => {
 
     const now = Date.now();
     if (lastProcessedPageRef.current.page === page && now - lastProcessedPageRef.current.ts < 3000) {
+      setShowFullDivLoading(false);
+      setIsLoadingGames(false);
       return;
     }
     lastProcessedPageRef.current = { page, ts: now };
@@ -210,9 +213,9 @@ const Home = () => {
       setIsExplicitSingleCategoryView(false);
       setCategories(mainCategories.length > 0 ? mainCategories : []);
       configureImageSrc(result);
-      setGames(result.data.categories || []);
+      setGames(result.data.content || result.data.categories || []);
       setActiveCategory(tags[tagIndex] || { name: page });
-      setHasMoreGames(result.data.categories && result.data.categories.length === 30);
+      setHasMoreGames((result.data.content && result.data.content.length === 30) || (result.data.categories && result.data.categories.length === 30));
       pageCurrent = 1;
       setShowFullDivLoading(false);
     }
@@ -597,6 +600,7 @@ const Home = () => {
                         setIsExplicitSingleCategoryView(false);
                         if (window.location.hash !== `#${tag.code}`) {
                           window.location.hash = `#${tag.code}`;
+                          getPage(tag.code);
                         } else {
                           setSelectedCategoryIndex(index);
                           getPage(tag.code);
@@ -792,6 +796,7 @@ const Home = () => {
           setShowFullDivLoading(true);
           if (window.location.hash !== `#${tag.code}`) {
             window.location.hash = `#${tag.code}`;
+            getPage(tag.code);
           } else {
             setSelectedCategoryIndex(index);
             setIsSingleCategoryView(false);
