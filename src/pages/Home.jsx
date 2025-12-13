@@ -4,6 +4,7 @@ import { AppContext } from "../AppContext";
 import { NavigationContext } from "../components/Layout/NavigationContext";
 import { callApi } from "../utils/Utils";
 import Slideshow from "../components/Home/Slideshow";
+import GameSlideshow from "../components/Home/GameSlideshow";
 import CategoryContainer from "../components/CategoryContainer";
 import ProviderContainer from "../components/ProviderContainer";
 import BannerContainer from "../components/Home/BannerContainer";
@@ -42,6 +43,7 @@ const Home = () => {
   const [topLiveCasino, setTopLiveCasino] = useState([]);
   const [categories, setCategories] = useState([]);
   const [mainCategories, setMainCategories] = useState([]);
+  const [firstFiveCategoriesGames, setFirstFiveCategoriesGames] = useState([]);
   const [activeCategory, setActiveCategory] = useState({});
   const [categoryType, setCategoryType] = useState("");
   const [txtSearch, setTxtSearch] = useState("");
@@ -59,6 +61,8 @@ const Home = () => {
   const [hasMoreGames, setHasMoreGames] = useState(true);
   const refGameModal = useRef();
   const pendingPageRef = useRef(new Set());
+  const pendingCategoryFetchesRef = useRef(0);
+  const lastLoadedTagRef = useRef("");
   const lastProcessedPageRef = useRef({ page: null, ts: 0 });
   const { isSlotsOnly, isLogin, isMobile } = useOutletContext();
   const searchRef = useRef(null);
@@ -136,8 +140,10 @@ const Home = () => {
     pendingPageRef.current.add(page);
 
     setIsLoadingGames(true);
+    setShowFullDivLoading(true);
     setCategories([]);
     setGames([]);
+    setFirstFiveCategoriesGames([]);
     setIsSingleCategoryView(false);
     setIsExplicitSingleCategoryView(false);
 
@@ -149,6 +155,7 @@ const Home = () => {
 
     if (result.status === 500 || result.status === 422) {
       setIsLoadingGames(false);
+      setShowFullDivLoading(false);
       return;
     }
 
@@ -179,10 +186,25 @@ const Home = () => {
         setFirstFiveCategoriesGames([]);
         pendingCategoryFetchesRef.current = firstFiveCategories.length;
         setIsLoadingGames(true);
+        setShowFullDivLoading(true);
         firstFiveCategories.forEach((item, index) => {
           fetchContentForCategory(item, item.id, item.table_name, index, true, result.data.page_group_code);
         });
       }
+      // If the requested page is a tag (e.g. 'arcade') and the server returned categories,
+      // find the matching category and open it directly in single-category view.
+      if (page && (page === "arcade" || (tags[tagIndex] && tags[tagIndex].code === "arcade"))) {
+        const matchIndex = result.data.categories.findIndex((c) => c.table_name === "arcade" || (c.name && c.name.toLowerCase().includes("arcade")) || (c.name && c.name.toLowerCase().includes("crash")));
+        const categoryToShow = matchIndex !== -1 ? result.data.categories[matchIndex] : result.data.categories[0];
+        if (categoryToShow) {
+          setIsSingleCategoryView(true);
+          setIsExplicitSingleCategoryView(false);
+          setActiveCategory(categoryToShow);
+          setSelectedCategoryIndex(tagIndex !== -1 ? tagIndex : 0);
+          fetchContent(categoryToShow, categoryToShow.id, categoryToShow.table_name, 0, true, result.data.page_group_code);
+        }
+      }
+      
     } else if (result.data && result.data.page_group_type === "games") {
       setIsSingleCategoryView(true);
       setIsExplicitSingleCategoryView(false);
@@ -192,9 +214,11 @@ const Home = () => {
       setActiveCategory(tags[tagIndex] || { name: page });
       setHasMoreGames(result.data.categories && result.data.categories.length === 30);
       pageCurrent = 1;
+      setShowFullDivLoading(false);
     }
 
     setIsLoadingGames(false);
+    setShowFullDivLoading(false);
   };
 
   const handleLoginClick = () => {
@@ -258,6 +282,7 @@ const Home = () => {
     pendingCategoryFetchesRef.current = Math.max(0, pendingCategoryFetchesRef.current - 1);
     if (pendingCategoryFetchesRef.current === 0) {
       setIsLoadingGames(false);
+      setShowFullDivLoading(false);
     }
   };
 
@@ -265,6 +290,20 @@ const Home = () => {
     if (!activeCategory) return;
     setIsLoadingGames(true);
     fetchContent(activeCategory, activeCategory.id, activeCategory.table_name, selectedCategoryIndex, false);
+  };
+
+  const loadMoreContent = (category, categoryIndex) => {
+    if (!category) return;
+    if (isMobile) {
+      setMobileShowMore(true);
+    }
+    setIsSingleCategoryView(true);
+    setIsExplicitSingleCategoryView(true);
+    setSelectedCategoryIndex(categoryIndex);
+    setActiveCategory(category);
+    fetchContent(category, category.id, category.table_name, categoryIndex, true);
+    lastLoadedTagRef.current = category.code || "";
+    window.scrollTo(0, 0);
   };
 
   const fetchContent = (category, categoryId, tableName, categoryIndex, resetCurrentPage, pageGroupCode) => {
@@ -553,13 +592,16 @@ const Home = () => {
                     selectedCategoryIndex={selectedCategoryIndex}
                     selectedProvider={selectedProvider}
                     onCategoryClick={(tag, _id, _table, index) => {
-                      if (window.location.hash !== `#${tag.code}`) {
-                        window.location.hash = `#${tag.code}`;
-                      } else {
-                        setSelectedCategoryIndex(index);
-                        getPage(tag.code);
-                      }
-                    }}
+                        setTxtSearch("");
+                        setShowFullDivLoading(true);
+                        setIsExplicitSingleCategoryView(false);
+                        if (window.location.hash !== `#${tag.code}`) {
+                          window.location.hash = `#${tag.code}`;
+                        } else {
+                          setSelectedCategoryIndex(index);
+                          getPage(tag.code);
+                        }
+                      }}
                     onCategorySelect={handleCategorySelect}
                     isMobile={isMobile}
                     pageType="casino"
@@ -668,34 +710,61 @@ const Home = () => {
                                   </h3>
                                 </div>
                                 <div className="home-item">
-                                  {topGames.length > 0 && <HotGameSlideshow games={topGames} name="games" title="Juegos" icon="" link="/casino" onGameClick={(game) => {
-                                    if (isLogin) {
-                                      launchGame(game, "slot", "modal");
-                                    } else {
-                                      handleLoginClick();
-                                    }
-                                  }} />}
-                                  {topArcade.length > 0 && <HotGameSlideshow games={topArcade} name="arcade" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
-                                    if (isLogin) {
-                                      launchGame(game, "slot", "modal");
-                                    } else {
-                                      handleLoginClick();
-                                    }
-                                  }} />}
-                                  {topCasino.length > 0 && <HotGameSlideshow games={topCasino} name="casino" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
-                                    if (isLogin) {
-                                      launchGame(game, "slot", "modal");
-                                    } else {
-                                      handleLoginClick();
-                                    }
-                                  }} />}
-                                  {topLiveCasino.length > 0 && <HotGameSlideshow games={topLiveCasino} name="liveCasino" title="Casino en Vivo" icon="spades" link="/live-casino" onGameClick={(game) => {
-                                    if (isLogin) {
-                                      launchGame(game, "slot", "modal");
-                                    } else {
-                                      handleLoginClick();
-                                    }
-                                  }} />}
+                                  {firstFiveCategoriesGames.length > 0 ? (
+                                    firstFiveCategoriesGames.map((entry, catIndex) => {
+                                      if (!entry || !entry.games) return null;
+
+                                      return (
+                                        <GameSlideshow
+                                          key={entry?.category?.id || catIndex}
+                                          games={entry.games.slice(0, 6)}
+                                          name={entry?.category?.name}
+                                          title={entry?.category?.name}
+                                          icon=""
+                                          slideshowKey={entry?.category?.id}
+                                          loadMoreContent={() => loadMoreContent(entry.category, catIndex)}
+                                          onGameClick={(g) => {
+                                            if (isLogin) {
+                                              launchGame(g, "slot", "tab");
+                                            } else {
+                                              handleLoginClick();
+                                            }
+                                          }}
+                                        />
+                                      );
+                                    })
+                                  ) : (
+                                    <>
+                                      {tags[selectedCategoryIndex]?.code === 'home' && topGames.length > 0 && <HotGameSlideshow games={topGames} name="games" title="Juegos" icon="" link="/casino" onGameClick={(game) => {
+                                        if (isLogin) {
+                                          launchGame(game, "slot", "modal");
+                                        } else {
+                                          handleLoginClick();
+                                        }
+                                      }} />}
+                                      {tags[selectedCategoryIndex]?.code === 'home' && topArcade.length > 0 && <HotGameSlideshow games={topArcade} name="arcade" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
+                                        if (isLogin) {
+                                          launchGame(game, "slot", "modal");
+                                        } else {
+                                          handleLoginClick();
+                                        }
+                                      }} />}
+                                      {tags[selectedCategoryIndex]?.code === 'home' && topCasino.length > 0 && <HotGameSlideshow games={topCasino} name="casino" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
+                                        if (isLogin) {
+                                          launchGame(game, "slot", "modal");
+                                        } else {
+                                          handleLoginClick();
+                                        }
+                                      }} />}
+                                      {tags[selectedCategoryIndex]?.code === 'home' && topLiveCasino.length > 0 && <HotGameSlideshow games={topLiveCasino} name="liveCasino" title="Casino en Vivo" icon="spades" link="/live-casino" onGameClick={(game) => {
+                                        if (isLogin) {
+                                          launchGame(game, "slot", "modal");
+                                        } else {
+                                          handleLoginClick();
+                                        }
+                                      }} />}
+                                    </>
+                                  )}
                                 </div>
                               </div>
                             )}
@@ -719,12 +788,14 @@ const Home = () => {
           handleCategorySelect(category);
         }}
         onCategoryClick={(tag, _id, _table, index) => {
-          setIsLoadingGames(true);
+          setTxtSearch("");
+          setShowFullDivLoading(true);
           if (window.location.hash !== `#${tag.code}`) {
             window.location.hash = `#${tag.code}`;
           } else {
             setSelectedCategoryIndex(index);
             setIsSingleCategoryView(false);
+            setIsExplicitSingleCategoryView(false);
             getPage(tag.code);
           }
         }}
