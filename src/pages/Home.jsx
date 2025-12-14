@@ -372,63 +372,28 @@ const Home = () => {
   };
 
   const launchGame = (game, type, launcher) => {
-    // Only show modal when explicitly using modal launcher
-    if (launcher === "modal") {
-      setShouldShowGameModal(true);
-    } else {
-      setShouldShowGameModal(false);
-    }
+    setShouldShowGameModal(true);
     setShowFullDivLoading(true);
-    selectedGameId = game?.id != null ? game.id : selectedGameId;
-    selectedGameType = type != null ? type : selectedGameType;
-    selectedGameLauncher = launcher != null ? launcher : selectedGameLauncher;
-    selectedGameName = game?.name || selectedGameName;
-    selectedGameImg = game?.image_local != null ? contextData.cdnUrl + game?.image_local : selectedGameImg;
-    callApi(contextData, "GET", `/get-game-url?game_id=${selectedGameId}`, callbackLaunchGame, null);
+    selectedGameId = game.id !== null ? game.id : selectedGameId;
+    selectedGameType = type !== null ? type : selectedGameType;
+    selectedGameLauncher = launcher !== null ? launcher : selectedGameLauncher;
+    selectedGameName = game?.name;
+    selectedGameImg = game?.image_local != null ? contextData.cdnUrl + game?.image_local : null;
+    callApi(contextData, "GET", "/get-game-url?game_id=" + selectedGameId, callbackLaunchGame, null);
   };
 
-  const callbackLaunchGame = (result) => {
-    setShowFullDivLoading(false);
-    if (result.status === "0") {
-      // On mobile, always navigate to the game URL (replace current SPA)
-      if (isMobile) {
-        try {
-          window.location.href = result.url;
-        } catch (err) {
-          // fallback to opening in new tab
-          try { window.open(result.url, "_blank", "noopener,noreferrer"); } catch (err) {}
-        }
-        selectedGameId = null;
-        selectedGameType = null;
-        selectedGameLauncher = null;
-        selectedGameName = null;
-        selectedGameImg = null;
-        setGameUrl("");
-        setShouldShowGameModal(false);
-        return;
-      }
 
-      if (selectedGameLauncher === "tab") {
-        // Open in a new tab for 'tab' launches (keeps the SPA intact)
-        try {
-          window.open(result.url, "_blank", "noopener,noreferrer");
-        } catch (err) {
-          // fallback to navigation if window.open fails
-          window.location.href = result.url;
-        }
-        // Cleanup game selection since we are not showing modal
-        selectedGameId = null;
-        selectedGameType = null;
-        selectedGameLauncher = null;
-        selectedGameName = null;
-        selectedGameImg = null;
-        setGameUrl("");
-        setShouldShowGameModal(false);
-      } else {
-        // show modal
-        setGameUrl(result.url);
-        setShouldShowGameModal(true);
+  const callbackLaunchGame = (result) => {
+    // setShowFullDivLoading(false);
+    if (result.status === "0") {
+      switch (selectedGameLauncher) {
+        case "modal":
+        case "tab":
+          setGameUrl(result.url);
+          break;
       }
+    } else {
+      setIsGameLoadingError(true);
     }
   };
 
@@ -440,23 +405,7 @@ const Home = () => {
     selectedGameImg = null;
     setGameUrl("");
     setShouldShowGameModal(false);
-
-    // Defensive cleanup: ensure game view container is hidden and iframe reset
-    try {
-      const el = document.getElementsByClassName("game-view-container")[0];
-      if (el) {
-        el.classList.add("d-none");
-        el.classList.remove("fullscreen");
-        el.classList.remove("with-background");
-      }
-      const iframeWrapper = document.getElementById("game-window-iframe");
-      if (iframeWrapper) iframeWrapper.classList.add("d-none");
-    } catch (err) {
-      // ignore DOM errors
-    }
-    // Refresh home page data as defensive measure in production environments
-    try { getPage('home'); } catch (e) {}
-  }; 
+  };
 
   const handleProviderSelect = (provider, index = 0) => {
     setSelectedProvider(provider);

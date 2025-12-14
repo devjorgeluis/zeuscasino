@@ -9,24 +9,17 @@ const GameModal = (props) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
-    const el = document.getElementsByClassName("game-view-container")[0];
     if (props.gameUrl !== null && props.gameUrl !== "") {
       if (props.isMobile) {
-        try {
-          window.location.href = props.gameUrl;
-        } catch (err) {
-          try { window.open(props.gameUrl, "_blank", "noopener,noreferrer"); } catch (e) {}
-        }
+        window.location.href = props.gameUrl;
       } else {
-        if (el) el.classList.remove("d-none");
+        document
+          .getElementsByClassName("game-view-container")[0]
+          .classList.remove("d-none");
         setUrl(props.gameUrl);
       }
-    } else {
-      if (el) el.classList.add("d-none");
-      setUrl(null);
-      setIframeLoaded(false);
     }
-  }, [props.gameUrl]);
+  }, [props.gameUrl, props.isMobile]);
   
   // Cleanup when the modal unmounts or gameUrl changes to ensure the container is hidden
   useEffect(() => {
