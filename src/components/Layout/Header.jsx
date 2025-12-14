@@ -3,16 +3,19 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { AppContext } from "../../AppContext";
 import Sidebar from "./Sidebar";
 import ImgLogo from "/src/assets/img/logo.webp";
+import ImgSupport from "/src/assets/svg/support-black.svg";
 
 const Header = ({
     isLogin,
     isMobile,
     isSlotsOnly,
     userBalance,
+    supportParent,
     handleLoginClick,
     handleLogoutClick,
     handleMyProfileClick,
-    handleMyProfileHistoryClick
+    handleMyProfileHistoryClick,
+    openSupportModal
 }) => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -86,9 +89,13 @@ const Header = ({
                                 <img src={ImgLogo} width="40%" alt="Logo" className="mx-2" />
                             </div>
 
-                            <div className="d-flex">
+                            <div className="d-flex align-items-center">
                                 {
                                     isLogin ? <>
+                                        <button className="button-support" onClick={() => { openSupportModal(false); }}>
+                                            <img src={ImgSupport} />
+                                        </button>
+
                                         <div className="user-info mx-1">
                                             <div className="avatar px-2 py-1 pb-0">
                                                 <i className="fa fa-user"></i>
@@ -100,19 +107,23 @@ const Header = ({
                                             <br />
                                             <span style={{ color: "white" }}>{formatBalance(userBalance)}</span>
                                         </div>
-
-                                    </> : <div
-                                        className="btn mx-3 py-1 px-1 btn-outline"
-                                        style={{
-                                            fontSize: "11px",
-                                            cursor: "pointer",
-                                            fontWeight: "bold",
-                                            fontFamily: '"Exo 2", sans-serif'
-                                        }}
-                                        onClick={() => handleLoginClick()}
-                                    >
-                                        <span>INGRESAR</span>
-                                    </div>
+                                    </> : <>
+                                        <button className="button-support" onClick={() => { openSupportModal(false); }}>
+                                            <img src={ImgSupport} />
+                                        </button>
+                                        <div
+                                            className="btn mx-3 py-1 px-1 btn-outline"
+                                            style={{
+                                                fontSize: "11px",
+                                                cursor: "pointer",
+                                                fontWeight: "bold",
+                                                fontFamily: '"Exo 2", sans-serif'
+                                            }}
+                                            onClick={() => handleLoginClick()}
+                                        >
+                                            <span>INGRESAR</span>
+                                        </div>
+                                    </>
                                 }
 
                                 <div>
@@ -173,6 +184,9 @@ const Header = ({
                             </div>
                             {
                                 isLogin ? <div className="d-flex align-items-center">
+                                    <button className="button-support" onClick={() => { openSupportModal(false); }}>
+                                        <img src={ImgSupport} />
+                                    </button>
                                     <div className="dropdown nav-item">
                                         <div>
                                             <div
@@ -205,8 +219,6 @@ const Header = ({
                                         <ul className={"dropdown-menu dropdown-menu-lg-end" + (dropdownOpen ? " show" : "")}>
                                             <li>
                                                 <a
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#historial_ingresos"
                                                     href="#"
                                                     className="dropdown-item"
                                                     onClick={() => { setDropdownOpen(false); handleMyProfileClick(); }}
@@ -216,13 +228,20 @@ const Header = ({
                                             </li>
                                             <li>
                                                 <a
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#myAccountZeus"
                                                     href="#"
                                                     className="dropdown-item"
                                                     onClick={() => { setDropdownOpen(false); handleMyProfileHistoryClick(); }}
                                                 >
                                                     <i className="fa fa-history"></i> Historial de cuenta
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a
+                                                    href="#"
+                                                    className="dropdown-item"
+                                                    onClick={() => { setDropdownOpen(false); openSupportModal(true); }}
+                                                >
+                                                    <i className="fa fa-phone-flip"></i> Contactá a Tu Cajero
                                                 </a>
                                             </li>
                                             <li>
@@ -232,24 +251,30 @@ const Header = ({
                                             </li>
                                         </ul>
                                     </div>
-                                </div> : <div
-                                    className="btn btn-sm text-end"
-                                    style={{
-                                        fontWeight: "bold",
-                                        fontSize: "small",
-                                        fontFamily: '"Exo 2", sans-serif',
-                                        backgroundColor: "rgb(218, 65, 103)",
-                                        color: "rgb(2, 15, 29)",
-                                        borderColor: "rgb(218, 65, 103)",
-                                        transition: "0.3s",
-                                        float: "right",
-                                    }}
-                                    onClick={handleLoginClick}
-                                >
-                                    <span style={{ display: "table-cell", verticalAlign: "middle" }}>
-                                        INGRESAR
-                                    </span>
-                                </div>
+                                </div> :
+                                <>
+                                    <button className="button-support" onClick={() => { openSupportModal(false); }}>
+                                        <img src={ImgSupport} />
+                                    </button>
+                                    <div
+                                        className="btn btn-sm text-end"
+                                        style={{
+                                            fontWeight: "bold",
+                                            fontSize: "small",
+                                            fontFamily: '"Exo 2", sans-serif',
+                                            backgroundColor: "rgb(218, 65, 103)",
+                                            color: "rgb(2, 15, 29)",
+                                            borderColor: "rgb(218, 65, 103)",
+                                            transition: "0.3s",
+                                            float: "right",
+                                        }}
+                                        onClick={handleLoginClick}
+                                    >
+                                        <span style={{ display: "table-cell", verticalAlign: "middle" }}>
+                                            INGRESAR
+                                        </span>
+                                    </div>
+                                </>
                             }
                         </div>
                     </nav>
@@ -279,8 +304,10 @@ const Header = ({
                 show={showSidebar}
                 onClose={() => setShowSidebar(false)}
                 userBalance={userBalance}
+                supportParent={supportParent}
                 handleMyProfileHistoryClick={handleMyProfileHistoryClick}
                 handleLogoutClick={handleLogoutClick}
+                openSupportModal={openSupportModal}
             />
         </>
     );

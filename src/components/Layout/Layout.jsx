@@ -5,6 +5,7 @@ import { AppContext } from "../../AppContext";
 import { LayoutContext } from "./LayoutContext";
 import { callApi } from "../../utils/Utils";
 import Header from "./Header";
+import SupportModal from "../Modal/SupportModal";
 import Footer from "./Footer";
 import LoginModal from "../Modal/LoginModal";
 import VerifyAgeModal from "../Modal/VerifyAgeModal";
@@ -19,12 +20,18 @@ const Layout = () => {
     const [isLogin, setIsLogin] = useState(contextData.session !== null);
     const [isMobile, setIsMobile] = useState(false);
     const [userBalance, setUserBalance] = useState(0);
+    const [supportWhatsApp, setSupportWhatsApp] = useState("");
+    const [supportTelegram, setSupportTelegram] = useState("");
+    const [supportEmail, setSupportEmail] = useState("");
+    const [supportParent, setSupportParent] = useState("");
     const [isSlotsOnly, setIsSlotsOnly] = useState("");
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showMyProfileModal, setShowMyProfileModal] = useState(false);
     const [showMyProfileHistoryModal, setShowMyProfileHistoryModal] = useState(false);
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const [showMobileSearch, setShowMobileSearch] = useState(false);
+    const [showSupportModal, setShowSupportModal] = useState(false);
+    const [supportParentOnly, setSupportParentOnly] = useState(false);
     const [showFullDivLoading, setShowFullDivLoading] = useState(false);
     const [showAgeModal, setShowAgeModal] = useState(false);
     const navigate = useNavigate();
@@ -49,6 +56,11 @@ const Layout = () => {
             if (contextData.session.user && contextData.session.user.balance) {
                 const parsed = parseFloat(contextData.session.user.balance);
                 setUserBalance(Number.isFinite(parsed) ? parsed : 0);
+
+                setSupportWhatsApp(contextData.session.support_whatsapp || "");
+                setSupportTelegram(contextData.session.support_telegram || "");
+                setSupportEmail(contextData.session.support_email || "");
+                setSupportParent(contextData.session.support_parent || "");
             }
 
             refreshBalance();
@@ -105,6 +117,11 @@ const Layout = () => {
             setIsSlotsOnly("true");
         }
 
+        setSupportWhatsApp(result && result.support_whatsapp ? result.support_whatsapp : "");
+        setSupportTelegram(result && result.support_telegram ? result.support_telegram : "");
+        setSupportEmail(result && result.support_email ? result.support_email : "");
+        setSupportParent(result && result.support_parent ? result.support_parent : "");
+
         if (result && result.user === null) {
             localStorage.removeItem("session");
         }
@@ -112,6 +129,16 @@ const Layout = () => {
 
     const handleLoginClick = () => {
         setShowLoginModal(true);
+    };
+
+    const openSupportModal = (parentOnly = false) => {
+        setSupportParentOnly(Boolean(parentOnly));
+        setShowSupportModal(true);
+    };
+
+    const closeSupportModal = () => {
+        setShowSupportModal(false);
+        setSupportParentOnly(false);
     };
 
     const handleLogoutClick = () => {
@@ -146,12 +173,16 @@ const Layout = () => {
     const layoutContextValue = {
         isLogin,
         userBalance,
+        supportWhatsApp,
+        supportTelegram,
+        supportEmail,
         handleLogoutClick,
         refreshBalance,
         isSidebarExpanded,
         toggleSidebar,
         showMobileSearch,
-        setShowMobileSearch
+        setShowMobileSearch,
+        openSupportModal
     };
 
     return (
@@ -195,10 +226,21 @@ const Layout = () => {
                         handleLogoutClick={handleLogoutClick}
                         handleMyProfileClick={handleMyProfileClick}
                         handleMyProfileHistoryClick={handleMyProfileHistoryClick}
+                        supportParent={supportParent}
+                        openSupportModal={openSupportModal}
                     />
-                    {/* <Sidebar isSlotsOnly={isSlotsOnly} isMobile={isMobile} /> */}
+                    {/* Sidebar is rendered inside Header; no duplicate here. */}
                     <Outlet context={{ isSlotsOnly, isLogin, isMobile }} />
                     {!isSportsPage &&  <Footer isLogin={isLogin} isSlotsOnly={isSlotsOnly} /> }
+                    <SupportModal
+                        isOpen={showSupportModal}
+                        onClose={closeSupportModal}
+                        supportWhatsApp={supportWhatsApp}
+                        supportTelegram={supportTelegram}
+                        supportEmail={supportEmail}
+                        supportParentOnly={supportParentOnly}
+                        supportParent={supportParent}
+                    />
                 </>
             </NavigationContext.Provider>
         </LayoutContext.Provider>

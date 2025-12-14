@@ -6,7 +6,17 @@ import ImgCasino from "/src/assets/svg/casino.svg";
 import ImgLiveCasino from "/src/assets/svg/casino-vivo.svg";
 import ImgSports from "/src/assets/img/deporte.webp";
 
-const Sidebar = ({ isSlotsOnly, isLogin, show, onClose, userBalance, handleMyProfileHistoryClick, handleLogoutClick }) => {
+const Sidebar = ({
+    isLogin,
+    isSlotsOnly,
+    show,
+    onClose,
+    userBalance,
+    supportParent,
+    handleLogoutClick,
+    handleMyProfileHistoryClick,
+    openSupportModal
+}) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { contextData } = useContext(AppContext);
@@ -21,7 +31,7 @@ const Sidebar = ({ isSlotsOnly, isLogin, show, onClose, userBalance, handleMyPro
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
-    };    
+    };
 
     const isSlotsOnlyMode = isSlotsOnly === "true" || isSlotsOnly === true;
     const menuItems = !isSlotsOnlyMode
@@ -72,40 +82,82 @@ const Sidebar = ({ isSlotsOnly, isLogin, show, onClose, userBalance, handleMyPro
                     style={{ position: "relative", background: "rgb(4, 7, 19)" }}
                 >
                     {
-                        isLogin && <>
-                            <div className="d-flex" style={{ cursor: "pointer" }}>
-                                <div className="user-info mx-1">
-                                    <div className="avatar px-2 py-1 pb-0">
-                                        <i className="fa fa-user"></i>
+                        isLogin ? (
+                            <>
+                                <div className="d-flex" style={{ cursor: "pointer" }}>
+                                    <div className="user-info mx-1">
+                                        <div className="avatar px-2 py-1 pb-0">
+                                            <i className="fa fa-user"></i>
+                                        </div>
+                                    </div>
+
+                                    <div className="m-0 p-0 text-start" style={{ fontSize: "small" }}>
+                                        <span style={{ color: "white" }}>
+                                            {contextData?.session?.user?.username}
+                                        </span>
+                                        <br />
+                                        <span style={{ color: "white" }}>
+                                            {formatBalance(userBalance)}
+                                        </span>
                                     </div>
                                 </div>
 
-                                <div className="m-0 p-0 text-start" style={{ fontSize: "small" }}>
-                                    <span style={{ color: "white" }}>{contextData?.session?.user?.username}</span>
-                                    <br />
-                                    <span style={{ color: "white" }}>{formatBalance(userBalance)}</span>
+                                <div className="d-flex align-items-center">
+                                    <table className="table table-striped custom-table">
+                                        <tbody>
+                                            <tr>
+                                                <td style={{ textAlign: "center" }}>
+                                                    <a
+                                                        href="#"
+                                                        className="dropdown-item"
+                                                        style={{ color: "white" }}
+                                                        onClick={handleMyProfileHistoryClick}
+                                                    >
+                                                        <i className="fa fa-history"></i> Historial
+                                                    </a>
+                                                </td>
+
+                                                {supportParent && (
+                                                    <td style={{ textAlign: "center" }}>
+                                                        <a
+                                                            href="#"
+                                                            className="dropdown-item"
+                                                            style={{ color: "white" }}
+                                                            onClick={() => openSupportModal(true)}
+                                                        >
+                                                            <i className="fa fa-phone-flip"></i> Contactá a Tu Cajero
+                                                        </a>
+                                                    </td>
+                                                )}
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div>
-                            <div className="d-flex align-items-center">
-                                <table className="table table-striped custom-table">
-                                    <tbody>
-                                        <tr>
-                                            <td style={{ textAlign: "center" }}>
-                                                <a
-                                                    href="#"
-                                                    className="dropdown-item"
-                                                    style={{ color: "white" }}
-                                                    onClick={() => handleMyProfileHistoryClick()}
-                                                >
-                                                    <i className="fa fa-history"></i> Historial
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </>
+                            </>
+                        ) : (
+                            supportParent && (
+                                <div className="d-flex align-items-center">
+                                    <table className="table table-striped custom-table">
+                                        <tbody>
+                                            <tr>
+                                                <td style={{ textAlign: "center" }}>
+                                                    <a
+                                                        href="#"
+                                                        className="dropdown-item"
+                                                        style={{ color: "white" }}
+                                                        onClick={() => openSupportModal(true)}
+                                                    >
+                                                        <i className="fa fa-phone-flip"></i> Contactá a Tu Cajero
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )
+                        )
                     }
+
 
                     {menuItems.map((item, index) => (
                         <div
