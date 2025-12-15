@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import LoadApi from "../Loading/LoadApi";
+import { NavigationContext } from "../Layout/NavigationContext";
 import IconEnlarge from "/src/assets/svg/enlarge.svg";
 import IconClose from "/src/assets/svg/game-close.svg";
 
@@ -7,6 +8,7 @@ const GameModal = (props) => {
   const [url, setUrl] = useState(null);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const { setShowFullDivLoading } = useContext(NavigationContext);
 
   useEffect(() => {
     if (props.gameUrl !== null && props.gameUrl !== "") {
@@ -20,7 +22,7 @@ const GameModal = (props) => {
       }
     }
   }, [props.gameUrl, props.isMobile]);
-  
+
   // Cleanup when the modal unmounts or gameUrl changes to ensure the container is hidden
   useEffect(() => {
     return () => {
@@ -102,6 +104,7 @@ const GameModal = (props) => {
     if (url != null) {
       document.getElementById("game-window-iframe").classList.remove("d-none");
       setIframeLoaded(true);
+      setShowFullDivLoading(false);
     }
   };
 
