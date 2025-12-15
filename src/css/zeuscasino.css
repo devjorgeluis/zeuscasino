@@ -4358,3 +4358,8 @@ button.next {
         margin: 0;
     }
 }
+
+#logo {
+    width: 300px;
+    padding: 5px; 
+}

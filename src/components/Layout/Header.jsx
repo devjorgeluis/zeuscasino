@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AppContext } from "../../AppContext";
 import Sidebar from "./Sidebar";
-import ImgLogo from "/src/assets/img/logo.webp";
+import ImgLogo from "/src/assets/img/logo.png";
 import ImgSupport from "/src/assets/svg/support-black.svg";
 
 const Header = ({
@@ -148,9 +148,8 @@ const Header = ({
                             <div className="float-left" style={{ cursor: "pointer" }}>
                                 <img
                                     src={ImgLogo}
-                                    width="90%"
-                                    alt="Zeus Casino Logo"
-                                    style={{ maxWidth: "170px", maxHeight: "45px" }}
+                                    id="logo"
+                                    alt="Jesee James Logo"
                                     onClick={() => navigate("/")}
                                 />
                             </div>

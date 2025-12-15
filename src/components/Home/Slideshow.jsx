@@ -7,11 +7,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './Slideshow.css';
 
-import ImgBanner1 from "/src/assets/img/amusnet1.jpg";
-import ImgBanner2 from "/src/assets/img/magicGems1.webp";
-import ImgBanner3 from "/src/assets/img/december25.jpg";
-import ImgBanner4 from "/src/assets/img/triplecherryexclu.webp";
-import ImgBanner5 from "/src/assets/img/Cash-Blast.png";
+import ImgBanner1 from "/src/assets/img/banner1.webp";
+import ImgBanner2 from "/src/assets/img/banner2.png";
+import ImgBanner3 from "/src/assets/img/banner3.png";
+import ImgBanner4 from "/src/assets/img/banner4.png";
+import ImgBanner5 from "/src/assets/img/banner5.webp";
 
 const Slideshow = () => {
   const slides = [
