@@ -8,7 +8,6 @@ import Header from "./Header";
 import SupportModal from "../Modal/SupportModal";
 import Footer from "./Footer";
 import LoginModal from "../Modal/LoginModal";
-import VerifyAgeModal from "../Modal/VerifyAgeModal";
 import MyProfileModal from "../Modal/MyProfileModal";
 import MyProfileHistoryModal from "../Modal/MyProfileHistoryModal";
 import { NavigationContext } from "./NavigationContext";
@@ -33,7 +32,6 @@ const Layout = () => {
     const [showSupportModal, setShowSupportModal] = useState(false);
     const [supportParentOnly, setSupportParentOnly] = useState(false);
     const [showFullDivLoading, setShowFullDivLoading] = useState(false);
-    const [showAgeModal, setShowAgeModal] = useState(false);
     const navigate = useNavigate();
 
     const toggleSidebar = () => {
@@ -42,13 +40,6 @@ const Layout = () => {
 
     const location = useLocation();
     const isSportsPage = location.pathname === "/sports" || location.pathname === "/live-sports";
-
-    useEffect(() => {
-        const isAgeVerified = localStorage.getItem("is-age-verified");
-        if (!isAgeVerified) {
-            setShowAgeModal(true);
-        }
-    });    
 
     useEffect(() => {
         if (contextData.session != null) {
@@ -165,11 +156,6 @@ const Layout = () => {
         setUserBalance(Number.isFinite(parsed) ? parsed : 0);
     };
 
-    const handleAgeVerifyConfirm = () => {
-        localStorage.setItem("is-age-verified", JSON.stringify({ value: true }));
-        setShowAgeModal(false);
-    };
-
     const layoutContextValue = {
         isLogin,
         userBalance,
@@ -190,12 +176,7 @@ const Layout = () => {
             <NavigationContext.Provider
                 value={{ selectedPage, setSelectedPage, getPage, showFullDivLoading, setShowFullDivLoading }}
             >
-                <>
-                    <VerifyAgeModal
-                        isOpen={showAgeModal}
-                        onClose={() => setShowAgeModal(false)}
-                        onConfirm={handleAgeVerifyConfirm}
-                    />                
+                <>              
                     <FullDivLoading show={showFullDivLoading} />
                     {showLoginModal && (
                         <LoginModal
