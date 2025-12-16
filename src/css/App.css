@@ -1710,10 +1710,6 @@
   }
 }
 
-.exo-2> {
-  font-family: Exo\ 2, sans-serif !important
-}
-
 .input-login {
   background-color: #020f1d;
   font-family: Exo\ 2, sans-serif;
@@ -1841,10 +1837,6 @@
   font-weight: 800
 }
 
-.exo-2> {
-  font-family: Exo\ 2, sans-serif !important
-}
-
 .modal-fade {
   border-radius: 10px 10px 10px 10px
 }
@@ -1964,10 +1956,6 @@
   font-weight: 700;
   margin-bottom: 12px;
   margin: 1rem auto
-}
-
-.exo-2> {
-  font-family: Exo\ 2, sans-serif !important
 }
 
 .modal-fade {
@@ -4651,10 +4639,6 @@ footer {
   border-bottom: var(--bar)
 }
 
-.icon_casino {
-  background-image: url(https://sports.jcasino.live/altenar/img/casino.b69021d3.svg)
-}
-
 .offcanvas-header {
   display: flex;
   align-items: center;
@@ -4705,10 +4689,6 @@ footer {
 
 a {
   text-decoration: none
-}
-
-.icon_poker {
-  src: url(/img/poker.dc8916cb.svg)
 }
 
 ::-webkit-scrollbar {
