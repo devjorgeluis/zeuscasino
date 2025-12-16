@@ -2640,11 +2640,6 @@
     transition: 0.3s all ease;
 }
 
-.ver-todos:hover {
-    background-color: #bf8200;
-    color: #fff;
-}
-
 .provider span {
     color: #fff;
     font-size: 10px;
