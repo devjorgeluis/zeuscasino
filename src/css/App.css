@@ -1710,18 +1710,6 @@
   }
 }
 
-.login-btn {
-  font-family: Exo\ 2, sans-serif;
-  font-weight: 700;
-  margin-bottom: 12px;
-  margin: 1rem auto
-}
-
-.login-btn {
-  color: #000 !important;
-  font-size: small !important
-}
-
 .exo-2> {
   font-family: Exo\ 2, sans-serif !important
 }
@@ -1799,19 +1787,6 @@
   font-weight: 800
 }
 
-.login-btn {
-  font-family: Exo\ 2, sans-serif;
-  color: #000 !important;
-  font-size: small !important;
-  font-weight: 700;
-  margin-bottom: 12px;
-  margin: .5rem auto
-}
-
-.exo-2> {
-  font-family: Exo\ 2, sans-serif !important
-}
-
 .modal-fade {
   border-radius: 10px 10px 10px 10px
 }
@@ -1864,15 +1839,6 @@
   height: auto;
   font-family: Exo 2, sans-serif;
   font-weight: 800
-}
-
-.login-btn {
-  font-family: Exo\ 2, sans-serif;
-  color: #000 !important;
-  font-size: small !important;
-  font-weight: 700;
-  margin-bottom: 12px;
-  margin: 1rem auto
 }
 
 .exo-2> {
@@ -1993,7 +1959,7 @@
 
 .login-btn {
   font-family: Exo\ 2, sans-serif;
-  color: #000 !important;
+  color: #fff !important;
   font-size: small !important;
   font-weight: 700;
   margin-bottom: 12px;
@@ -2615,11 +2581,6 @@ input[type=file]:focus {
   position: relative
 }
 
-.login-btn {
-  width: 100%;
-  border: none
-}
-
 .search-filter-slots-desktop__input input {
   padding-left: .625rem;
   border: none;
@@ -2881,11 +2842,6 @@ input[type=file]:focus {
   font-size: .875rem;
   font-weight: 700;
   line-height: .875rem
-}
-
-.login-btn {
-  width: 100%;
-  border: none
 }
 
 .img-login {
@@ -4538,11 +4494,6 @@ a {
   font-size: .875rem;
   font-weight: 700;
   line-height: .875rem
-}
-
-.login-btn {
-  width: 100%;
-  border: none
 }
 
 .img-login {
