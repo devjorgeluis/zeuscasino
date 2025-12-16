@@ -80,13 +80,13 @@ const Header = ({
                             className="d-flex align-items-center justify-content-between p-1 py-1"
                             style={{
                                 width: "100%",
-                                backgroundColor: "rgb(4, 7, 19)",
+                                backgroundColor: "rgba(0,0,0,0.5)",
                                 fontFamily: '"Exo 2", sans-serif',
                                 minHeight: "50px"
                             }}
                         >
-                            <div style={{ width: "60%" }} onClick={() => navigate("/")}>
-                                <img src={ImgLogo} width="40%" alt="Logo" className="mx-2" />
+                            <div onClick={() => navigate("/")}>
+                                <img src={ImgLogo} id="logo" alt="Logo" />
                             </div>
 
                             <div className="d-flex align-items-center">
@@ -112,13 +112,7 @@ const Header = ({
                                             <img src={ImgSupport} />
                                         </button>
                                         <div
-                                            className="btn mx-3 py-1 px-1 btn-outline"
-                                            style={{
-                                                fontSize: "11px",
-                                                cursor: "pointer",
-                                                fontWeight: "bold",
-                                                fontFamily: '"Exo 2", sans-serif'
-                                            }}
+                                            className="btn mobile-login-button"
                                             onClick={() => handleLoginClick()}
                                         >
                                             <span>INGRESAR</span>
@@ -128,13 +122,11 @@ const Header = ({
 
                                 <div>
                                     <span
-                                        className="position-relative me-1"
+                                        className="hamberger"
                                         onClick={() => setShowSidebar(true)}
                                         style={{ cursor: "pointer" }}
                                     >
-                                        <span style={{ fontSize: "larger", color: "rgb(218, 65, 103)" }}>
-                                            <i className="fas fa-bars"></i>
-                                        </span>
+                                        <i className="fas fa-bars"></i>
                                     </span>
                                 </div>
                             </div>
@@ -142,7 +134,7 @@ const Header = ({
                     </nav> :
                     <nav
                         className="navbar my-0 navbar-expand-lg bg-body-tertiary"
-                        style={{ backgroundColor: "rgb(4, 7, 19)", fontFamily: "'Exo 2', sans-serif" }}
+                        style={{ backgroundColor: "#242834", fontFamily: "'Exo 2', sans-serif" }}
                     >
                         <div className="container-fluid my-0">
                             <div className="float-left" style={{ cursor: "pointer" }}>
@@ -162,8 +154,8 @@ const Header = ({
                                         className="nav nav-tabs"
                                         style={{
                                             "--background": "rgba(255, 255, 255, 0.08)",
-                                            "--color": "#da4167",
-                                            "--border": "2px solid #da4167"
+                                            "--color": "#fff",
+                                            "--border": "2px solid #c78849"
                                         }}
                                     >
                                         {navItems.map((item, idx) => (
@@ -190,7 +182,7 @@ const Header = ({
                                         <div>
                                             <div
                                                 className="btn-support"
-                                                style={{ background: "rgb(218, 65, 103) !important", color: "rgb(2, 15, 29)" }}
+                                                style={{ background: "#c78849 !important", color: "#fff" }}
                                             >
                                                 <i className="fas fa-comment fa-fw"></i>
                                             </div>
@@ -261,9 +253,9 @@ const Header = ({
                                             fontWeight: "bold",
                                             fontSize: "small",
                                             fontFamily: '"Exo 2", sans-serif',
-                                            backgroundColor: "rgb(218, 65, 103)",
-                                            color: "rgb(2, 15, 29)",
-                                            borderColor: "rgb(218, 65, 103)",
+                                            backgroundColor: "#c78849",
+                                            color: "#fff",
+                                            borderColor: "#c78849",
                                             transition: "0.3s",
                                             float: "right",
                                         }}
@@ -278,24 +270,6 @@ const Header = ({
                         </div>
                     </nav>
             }
-
-            <div
-                style={{
-                    position: "fixed",
-                    right: "10px",
-                    top: "0px",
-                    background: "rgba(0, 0, 0, 0.6)",
-                    color: "white",
-                    fontSize: "12px",
-                    padding: "2px 6px",
-                    borderRadius: "4px",
-                    zIndex: 9999,
-                    fontFamily: 'Roboto Condensed',
-                }}
-            >
-                v 1.7
-            </div>
-
 
             <Sidebar
                 isSlotsOnly={isSlotsOnly}

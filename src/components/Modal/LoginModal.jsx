@@ -75,7 +75,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
             <div className="modal-dialog modal-dialog-lg modal-dialog-centered">
                 <div
                     className="modal-content exo-2"
-                    style={{ borderRadius: '20px', backgroundColor: 'rgb(4, 7, 19)', fontFamily: '"Exo 2", sans-serif' }}
+                    style={{ borderRadius: '20px', backgroundColor: '#242834', fontFamily: '"Exo 2", sans-serif' }}
                 >
                     <button
                         id="closeLogin1"
@@ -127,7 +127,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                                         id="submit_btn"
                                         type="submit"
                                         className="btn p-2 login-btn"
-                                        style={{ color: 'black', width: '100%', backgroundColor: 'rgb(218, 65, 103)' }}
+                                        style={{ color: 'black', width: '100%', backgroundColor: '#c78849' }}
                                         disabled={isLoading}
                                     >
                                         {isLoading ? 'INGRESANDO...' : 'INGRESAR'}

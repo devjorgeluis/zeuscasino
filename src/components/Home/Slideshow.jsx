@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { useOutletContext } from "react-router-dom";
 
 // Swiper styles
 import 'swiper/css';
@@ -13,8 +14,22 @@ import ImgBanner3 from "/src/assets/img/banner3.png";
 import ImgBanner4 from "/src/assets/img/banner4.png";
 import ImgBanner5 from "/src/assets/img/banner5.webp";
 
+import ImgMobileBanner1 from "/src/assets/img/mobile-banner1.webp";
+import ImgMobileBanner2 from "/src/assets/img/mobile-banner2.png";
+import ImgMobileBanner3 from "/src/assets/img/mobile-banner3.png";
+import ImgMobileBanner4 from "/src/assets/img/mobile-banner4.png";
+import ImgMobileBanner5 from "/src/assets/img/mobile-banner1.webp";
+
 const Slideshow = () => {
-  const slides = [
+  const { isMobile } = useOutletContext();
+
+  const slides = isMobile ? [
+    { id: 0, image: ImgMobileBanner1 },
+    { id: 1, image: ImgMobileBanner2 },
+    { id: 2, image: ImgMobileBanner3 },
+    { id: 3, image: ImgMobileBanner4 },
+    { id: 4, image: ImgMobileBanner5 }
+  ] : [
     { id: 0, image: ImgBanner1 },
     { id: 1, image: ImgBanner2 },
     { id: 2, image: ImgBanner3 },

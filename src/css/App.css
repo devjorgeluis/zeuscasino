@@ -1280,7 +1280,7 @@
 
 .input-custom {
   font-size: 14px;
-  background-color: #2e2e2e;
+  background-color: #000;
   color: #fff;
   border-radius: 6px;
   padding: 10px 20px;
@@ -2199,8 +2199,9 @@
   border-bottom: 2px solid transparent;
   color: #fff;
   font-weight: 700;
-  font-size: 12px "Exo 2";
-  padding: 16px
+  font-size: 11pt;
+  padding: 16px;
+  font-weight: bold;
 }
 
 #menu-header .nav-link.active {
@@ -2245,8 +2246,8 @@
 .page-item:focus .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #da4167 !important;
-  border-color: #da4167 !important;
+  background-color: #c78849 !important;
+  border-color: #c78849 !important;
   cursor: pointer;
   border-radius: 50%
 }
@@ -4365,7 +4366,7 @@ div {
 }
 
 .btn-support {
-  background-color: rgb(218, 65, 103) !important;
+  background-color: #c78849 !important;
   position: relative;
   display: flex;
   align-items: center;

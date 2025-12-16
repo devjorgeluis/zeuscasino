@@ -1,10 +1,10 @@
 import { useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "../../AppContext";
-import ImgHome from "/src/assets/svg/home.svg";
-import ImgCasino from "/src/assets/svg/casino.svg";
-import ImgLiveCasino from "/src/assets/svg/casino-vivo.svg";
-import ImgSports from "/src/assets/img/deporte.webp";
+import ImgHome from "/src/assets/img/icon_home.png";
+import ImgCasino from "/src/assets/img/icon_slots.png";
+import ImgLiveCasino from "/src/assets/img/icon_roulette.png";
+import ImgSports from "/src/assets/img/icon_deportes.png";
 
 const Sidebar = ({
     isLogin,
@@ -51,7 +51,7 @@ const Sidebar = ({
                 id="offcanvasExample2"
                 className={"offcanvas offcanvas-end" + (show ? " show" : "")}
                 style={{
-                    width: "85%",
+                    width: "70%",
                     fontFamily: '"Exo 2", sans-serif',
                     color: "rgb(204, 204, 204)",
                     visibility: show ? "visible" : "hidden",
@@ -62,24 +62,22 @@ const Sidebar = ({
                 <div
                     className="mx-0 text-end p-2"
                     style={{
-                        background: "rgb(4, 7, 19)",
+                        background: "#242834",
                         color: "rgb(204, 204, 204)"
                     }}
                 >
                     <button
                         type="button"
-                        className="btn btn-sm text-reset"
+                        className="close-btn"
                         onClick={onClose}
                     >
-                        <span style={{ color: "white", fontSize: "large" }}>
-                            <i className="fa fa-times"></i>
-                        </span>
+                        <i className="fa fa-times"></i>
                     </button>
                 </div>
 
                 <div
                     className="offcanvas-body p-2"
-                    style={{ position: "relative", background: "rgb(4, 7, 19)" }}
+                    style={{ position: "relative", background: "#242834" }}
                 >
                     {
                         isLogin ? (
@@ -162,7 +160,7 @@ const Sidebar = ({
                     {menuItems.map((item, index) => (
                         <div
                             key={item.id}
-                            className={`py-3 ${index % 2 === 0 ? "table-striped" : ""}`}
+                            className={`${index % 2 === 0 ? "sidebarMenu strip" : "sidebarMenu"}`}
                             onClick={() => {
                                 navigate(item.href);
                                 if (typeof onClose === 'function') onClose();
@@ -172,12 +170,7 @@ const Sidebar = ({
                             <div className="d-flex">
                                 <img
                                     src={item.icon}
-                                    className="me-1"
-                                    style={{
-                                        width: "36px",
-                                        height: "36px",
-                                        maxHeight: "22px"
-                                    }}
+                                    className="sidebarImg"
                                     alt={item.name}
                                 />
                                 <span

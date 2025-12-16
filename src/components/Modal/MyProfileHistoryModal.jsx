@@ -204,7 +204,7 @@ const MyProfileHistoryModal = ({ isOpen, onClose }) => {
             <div className="modal-dialog modal-fullscreen">
                 <div
                     className="modal-content"
-                    style={{ backgroundColor: 'rgb(4, 7, 19)', fontFamily: '"Exo 2", sans-serif' }}
+                    style={{ backgroundColor: '#242834', fontFamily: '"Exo 2", sans-serif' }}
                 >
                     <div className="modal-body p-4" >
                         <div className="container">
@@ -240,7 +240,7 @@ const MyProfileHistoryModal = ({ isOpen, onClose }) => {
                                 <div className="col-md-2 col-sm-12 mb-2">
                                     <button
                                         className="btn w-100"
-                                        style={{ fontSize: "small", fontWeight: "bold", textTransform: "uppercase", backgroundColor: "rgb(218, 65, 103)", color: "black" }}
+                                        style={{ fontSize: "small", fontWeight: "bold", textTransform: "uppercase", backgroundColor: "#c78849", color: "black" }}
                                         onClick={handleSubmit}
                                     >
                                         Buscar
@@ -258,7 +258,7 @@ const MyProfileHistoryModal = ({ isOpen, onClose }) => {
                                     {transactions.length > 0 ? (
                                         <div className="table-responsive my-3">
                                             <table className="table" style={{ color: "white", fontSize: "15px" }}>
-                                                <thead style={{ color: "rgb(218, 65, 103)" }}>
+                                                <thead style={{ color: "#c78849" }}>
                                                     <tr>
                                                         <th scope="col">Fecha</th>
                                                         <th scope="col">Operación</th>
@@ -363,7 +363,7 @@ const MyProfileHistoryModal = ({ isOpen, onClose }) => {
                                     fontSize: "small",
                                     fontWeight: "bold",
                                     textTransform: "uppercase",
-                                    backgroundColor: "rgb(218, 65, 103)",
+                                    backgroundColor: "#c78849",
                                     color: "black",
                                 }}
                                 onClick={() => onClose()}
