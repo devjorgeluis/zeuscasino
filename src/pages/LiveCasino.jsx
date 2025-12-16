@@ -525,7 +525,7 @@ const LiveCasino = () => {
                       games.length > 0 && (
                         <div className="text-center">
                           <a className="load-more" onClick={loadMoreGames}>
-                            Mostrar todo
+                            VER MÁS
                           </a>
                         </div>
                       )}

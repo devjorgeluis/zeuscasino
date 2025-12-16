@@ -102,7 +102,7 @@
 }
 
 .content {
-    background-color: #000032;
+    background-color: #000;
     display: flex;
     flex-direction: column;
 }
@@ -131,36 +131,6 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-}
-
-.home-section-container .home-section .home-title h3 {
-    color: #e2e2e2;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 10px;
-}
-
-.home-section-container .home-section .home-title h3:before {
-    content: "";
-    position: relative;
-    width: 100%;
-    height: 3px;
-    flex: 1;
-    background: linear-gradient(to right, transparent, #e2e2e2);
-}
-
-.home-section-container .home-section .home-title h3:after {
-    content: "";
-    position: relative;
-    width: 100%;
-    height: 3px;
-    flex: 1;
-    background: linear-gradient(to left, transparent, #e2e2e2);
 }
 
 .home-item {
@@ -2622,6 +2592,7 @@
     padding: 7px 0;
     min-width: 75px;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .item img {
@@ -2664,13 +2635,14 @@
 
 .ver-todos span {
     color: #fff;
-    font-size: 10px;
+    font-size: 16px;
     text-align: center;
     transition: 0.3s all ease;
 }
 
-.ver-todos:hover span {
-    color: #bf8200;
+.ver-todos:hover {
+    background-color: #bf8200;
+    color: #fff;
 }
 
 .provider span {
@@ -3021,7 +2993,7 @@ button.next {
 }
 
 .single-games-grid .games-grid {
-    background-color: #1c1c1c;
+    background-color: #000;
     padding: 20px 0;
     display: grid;
     grid-gap: 10px;
@@ -3113,7 +3085,7 @@ button.next {
 
 .games-no-live-page {
     padding: 0 10px;
-    background-color: #000032;
+    background-color: #000;
 }
 
 .footer-app .left {
@@ -3154,7 +3126,7 @@ button.next {
     width: 100%;
     height: 3px;
     flex: 1;
-    background: linear-gradient(to right, transparent, #e2e2e2);
+    background: linear-gradient(to right, transparent, #c78849);
 }
 
 .home-section-container .home-section .home-title h3:after {
@@ -3163,7 +3135,7 @@ button.next {
     width: 100%;
     height: 3px;
     flex: 1;
-    background: linear-gradient(to left, transparent, #e2e2e2);
+    background: linear-gradient(to left, transparent, #c78849);
 }
 
 .modal-providers-container {
@@ -3195,7 +3167,6 @@ button.next {
     color: #fff;
     padding: 5px 10px;
     border-radius: 5px;
-    background: #000;
     display: flex;
     align-items: flex-start;
 }
@@ -3203,9 +3174,8 @@ button.next {
 .casino-filters {
     display: flex;
     justify-content: flex-end;
-    background-color: #212529;
+    background-color: #555;
     align-items: center;
-    margin-bottom: 15px;
     padding: 5px;
     position: sticky;
     z-index: 10;
@@ -3219,7 +3189,7 @@ button.next {
 }
 
 .list-exclusive {
-    background-color: #000;
+    background-color: #242834;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -3246,9 +3216,10 @@ button.next {
     width: 100%;
     text-decoration: none;
     color: #fff;
-    padding: 1px;
-    border-radius: 32px;
+    padding: 5px 17px;
+    border-radius: 5px;
     transition: all 0.3s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .list-exclusive li a:hover {
@@ -3257,12 +3228,6 @@ button.next {
 
 .list-exclusive li a:hover i {
     color: #fff;
-}
-
-.list-exclusive i {
-    color: #bf8200;
-    font-size: 1.125rem;
-    margin-right: 7px;
 }
 
 .list {
@@ -3390,7 +3355,6 @@ button.next {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    margin-top: 10px;
 }
 
 .games-vertodos h3 {
@@ -3401,14 +3365,14 @@ button.next {
 }
 
 .games-vertodos span {
-    color: #da4167;
+    color: #c78849;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .games-vertodos i {
     font-weight: 700;
-    color: #da4167;
+    color: #c78849;
     margin-left: 5px;
     font-weight: 900;
     font-size: 20px;
@@ -3560,17 +3524,23 @@ button.next {
 }
 
 .load-more {
-    font-weight: bold;
-    font-size: small;
-    font-family: "Exo 2", sans-serif;
-    background-color: #c78849;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    font-family: "Exo 2", Arial, sans-serif;
+    font-size: 8pt;
+    text-decoration: none;
     color: #fff;
-    border-color: #c78849;
-    transition: 0.3s;
-    padding: .5rem .5rem;
+    border-radius: 6px;
+    padding: 12px 40px;
+    background-color: #000;
+    font-weight: bold;
     display: inline-block;
-    margin-top: 1.5rem;
-    border-radius: .2rem;
+}
+
+.load-more:hover {
+    background-color: var(--color);
+    color: #fff;
 }
 
 .game-iframe-view_gameIframeWrapper {
@@ -3778,7 +3748,7 @@ button.next {
 .loading-container {
     text-align: center;
     padding: 20px;
-    background-color: #1c1c1c;
+    background-color: #000;
 }
 
 .button-desktop.button-desktop_color_default {
@@ -4358,22 +4328,6 @@ button.next {
     padding: 5px; 
 }
 
-@media (max-width: 768px) {
-    #success-alert, #error-alert {
-        margin: 0;
-    }
-
-    #logo {
-        width: 100%;
-        height: 36px;
-        object-fit: contain;
-    }
-
-    .button-item span {
-        font-size: 8pt;
-    }
-}
-
 .mobile-login-button {
     cursor: pointer;
     text-decoration: none;
@@ -4439,4 +4393,32 @@ button.next {
 .close-btn i {
     color: #fff;
     font-size: 25px;
+}
+
+@media (max-width: 768px) {
+    #success-alert, #error-alert {
+        margin: 0;
+    }
+
+    #logo {
+        width: 100%;
+        height: 36px;
+        object-fit: contain;
+    }
+
+    .button-item span {
+        font-size: 8pt;
+    }
+
+    .games-vertodos {
+        margin-top: 10px;
+    }
+
+    .games-vertodos span {
+        font-size: 16px;
+    }
+
+    .games-vertodos i {
+        font-size: 16px;
+    }
 }
