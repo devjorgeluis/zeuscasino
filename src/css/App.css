@@ -4683,10 +4683,6 @@ footer {
   border-bottom: var(--bar)
 }
 
-.icon_casino {
-  background-image: url(https://sports.jcasino.live/altenar/img/casino.b69021d3.svg)
-}
-
 .offcanvas-header {
   display: flex;
   align-items: center;
@@ -4737,10 +4733,6 @@ footer {
 
 a {
   text-decoration: none
-}
-
-.icon_poker {
-  src: url(/img/poker.dc8916cb.svg)
 }
 
 ::-webkit-scrollbar {
