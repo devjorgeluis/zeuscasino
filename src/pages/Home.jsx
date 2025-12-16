@@ -207,7 +207,7 @@ const Home = () => {
           fetchContent(categoryToShow, categoryToShow.id, categoryToShow.table_name, 0, true, result.data.page_group_code);
         }
       }
-      
+
     } else if (result.data && result.data.page_group_type === "games") {
       setIsSingleCategoryView(true);
       setIsExplicitSingleCategoryView(false);
@@ -488,7 +488,7 @@ const Home = () => {
       setGames(result.content);
       pageCurrent = 0;
     }
-  };  
+  };
 
   return (
     <>
@@ -544,17 +544,17 @@ const Home = () => {
                     selectedCategoryIndex={selectedCategoryIndex}
                     selectedProvider={selectedProvider}
                     onCategoryClick={(tag, _id, _table, index) => {
-                        setTxtSearch("");
-                        setShowFullDivLoading(true);
-                        setIsExplicitSingleCategoryView(false);
-                        if (window.location.hash !== `#${tag.code}`) {
-                          window.location.hash = `#${tag.code}`;
-                          getPage(tag.code);
-                        } else {
-                          setSelectedCategoryIndex(index);
-                          getPage(tag.code);
-                        }
-                      }}
+                      setTxtSearch("");
+                      setShowFullDivLoading(true);
+                      setIsExplicitSingleCategoryView(false);
+                      if (window.location.hash !== `#${tag.code}`) {
+                        window.location.hash = `#${tag.code}`;
+                        getPage(tag.code);
+                      } else {
+                        setSelectedCategoryIndex(index);
+                        getPage(tag.code);
+                      }
+                    }}
                     onCategorySelect={handleCategorySelect}
                     isMobile={isMobile}
                     pageType="casino"
@@ -622,7 +622,7 @@ const Home = () => {
                                 games.length > 0 && (
                                   <div className="text-center">
                                     <a className="load-more" onClick={loadMoreGames}>
-                                      Mostrar todo
+                                      VER MÁS
                                     </a>
                                   </div>
                                 )}
@@ -650,7 +650,7 @@ const Home = () => {
                                 {games.length > 0 && (
                                   <div className="text-center">
                                     <a className="load-more" onClick={() => loadMoreGames()}>
-                                      Mostrar todo
+                                      VER MÁS
                                     </a>
                                   </div>
                                 )}
@@ -663,7 +663,78 @@ const Home = () => {
                                   </h3>
                                 </div>
                                 <div className="home-item">
-                                  {firstFiveCategoriesGames.length > 0 ? (
+                                  {/* Always show HotGameSlideshows first when on home page */}
+                                  {tags[selectedCategoryIndex]?.code === 'home' && (
+                                    <>
+                                      {topGames.length > 0 && (
+                                        <HotGameSlideshow
+                                          games={topGames}
+                                          name="games"
+                                          title="Juegos"
+                                          icon=""
+                                          link="/casino"
+                                          onGameClick={(game) => {
+                                            if (isLogin) {
+                                              launchGame(game, "slot", "modal");
+                                            } else {
+                                              handleLoginClick();
+                                            }
+                                          }}
+                                        />
+                                      )}
+                                      {topArcade.length > 0 && (
+                                        <HotGameSlideshow
+                                          games={topArcade}
+                                          name="arcade"
+                                          title="Tragamonedas"
+                                          icon="cherry"
+                                          link="/casino"
+                                          onGameClick={(game) => {
+                                            if (isLogin) {
+                                              launchGame(game, "slot", "modal");
+                                            } else {
+                                              handleLoginClick();
+                                            }
+                                          }}
+                                        />
+                                      )}
+                                      {topCasino.length > 0 && (
+                                        <HotGameSlideshow
+                                          games={topCasino}
+                                          name="casino"
+                                          title="Tragamonedas"
+                                          icon="cherry"
+                                          link="/casino"
+                                          onGameClick={(game) => {
+                                            if (isLogin) {
+                                              launchGame(game, "slot", "modal");
+                                            } else {
+                                              handleLoginClick();
+                                            }
+                                          }}
+                                        />
+                                      )}
+                                      {topLiveCasino.length > 0 && (
+                                        <HotGameSlideshow
+                                          games={topLiveCasino}
+                                          name="liveCasino"
+                                          title="Casino en Vivo"
+                                          icon="spades"
+                                          link="/live-casino"
+                                          onGameClick={(game) => {
+                                            if (isLogin) {
+                                              launchGame(game, "slot", "modal");
+                                            } else {
+                                              handleLoginClick();
+                                            }
+                                          }}
+                                        />
+                                      )}
+                                    </>
+                                  )}
+
+                                  {/* Then show category games if available and NOT on home */}
+                                  {tags[selectedCategoryIndex]?.code !== 'home' && firstFiveCategoriesGames.length > 0 && (
                                     firstFiveCategoriesGames.map((entry, catIndex) => {
                                       if (!entry || !entry.games) return null;
 
@@ -686,37 +757,6 @@ const Home = () => {
                                         />
                                       );
                                     })
-                                  ) : (
-                                    <>
-                                      {tags[selectedCategoryIndex]?.code === 'home' && topGames.length > 0 && <HotGameSlideshow games={topGames} name="games" title="Juegos" icon="" link="/casino" onGameClick={(game) => {
-                                        if (isLogin) {
-                                          launchGame(game, "slot", "modal");
-                                        } else {
-                                          handleLoginClick();
-                                        }
-                                      }} />}
-                                      {tags[selectedCategoryIndex]?.code === 'home' && topArcade.length > 0 && <HotGameSlideshow games={topArcade} name="arcade" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
-                                        if (isLogin) {
-                                          launchGame(game, "slot", "modal");
-                                        } else {
-                                          handleLoginClick();
-                                        }
-                                      }} />}
-                                      {tags[selectedCategoryIndex]?.code === 'home' && topCasino.length > 0 && <HotGameSlideshow games={topCasino} name="casino" title="Tragamonedas" icon="cherry" link="/casino" onGameClick={(game) => {
-                                        if (isLogin) {
-                                          launchGame(game, "slot", "modal");
-                                        } else {
-                                          handleLoginClick();
-                                        }
-                                      }} />}
-                                      {tags[selectedCategoryIndex]?.code === 'home' && topLiveCasino.length > 0 && <HotGameSlideshow games={topLiveCasino} name="liveCasino" title="Casino en Vivo" icon="spades" link="/live-casino" onGameClick={(game) => {
-                                        if (isLogin) {
-                                          launchGame(game, "slot", "modal");
-                                        } else {
-                                          handleLoginClick();
-                                        }
-                                      }} />}
-                                    </>
                                   )}
                                 </div>
                               </div>
