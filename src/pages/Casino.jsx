@@ -320,7 +320,7 @@ const Casino = () => {
         try {
           window.location.href = result.url;
         } catch (err) {
-          try { window.open(result.url, "_blank", "noopener,noreferrer"); } catch (err) {}
+          try { window.open(result.url, "_blank", "noopener,noreferrer"); } catch (err) { }
         }
         selectedGameId = null;
         selectedGameType = null;
@@ -373,8 +373,8 @@ const Casino = () => {
     } catch (err) {
       // ignore DOM errors
     }
-    try { getPage('casino'); } catch (e) {}
-  }; 
+    try { getPage('casino'); } catch (e) { }
+  };
 
   const handleCategorySelect = (category) => {
     setActiveCategory(category);
@@ -442,11 +442,20 @@ const Casino = () => {
 
   const performSearch = (keyword) => {
     if (keyword.trim() === "") {
+      // Optional: reset to lobby view
+      setIsSingleCategoryView(false);
+      setIsExplicitSingleCategoryView(false);
+      setGames([]);
+      getPage("casino");
       return;
     }
 
+    setTxtSearch(keyword.trim());
     setGames([]);
-    setIsSingleCategoryView(true);
+    setIsSingleCategoryView(true);         // Prepare UI for single grid
+    setIsExplicitSingleCategoryView(true);
+    setActiveCategory({ name: `Búsqueda: "${keyword.trim()}"` });
+    setSelectedProvider(null);
     setShowFullDivLoading(true);
 
     let pageSize = 30;
@@ -454,7 +463,7 @@ const Casino = () => {
     callApi(
       contextData,
       "GET",
-      "/search-content?keyword=" + encodeURIComponent(keyword) +
+      "/search-content?keyword=" + encodeURIComponent(keyword.trim()) +
       "&page_group_code=" + pageData.page_group_code +
       "&length=" + pageSize,
       callbackSearch,
@@ -464,14 +473,23 @@ const Casino = () => {
 
   const callbackSearch = (result) => {
     setShowFullDivLoading(false);
-    setIsSingleCategoryView(false);
+
     if (result.status === 500 || result.status === 422) {
-      // Handle error
+      setGames([]);
+      setHasMoreGames(false);
+      // Optionally show a "no results" message
     } else {
       configureImageSrc(result);
-      setGames(result.content);
-      pageCurrent = 0;
+      setGames(result.content || []);
+      setHasMoreGames((result.content || []).length === 30);
+      pageCurrent = 1; // Next loadMore would request page 1
     }
+
+    // Critical fixes:
+    setIsSingleCategoryView(true);        // Show single grid
+    setIsExplicitSingleCategoryView(true); // Ensures correct header and layout
+    setActiveCategory({ name: `Búsqueda: "${txtSearch}"` }); // Optional: better title
+    setSelectedProvider(null); // Clear provider filter if active
   };
 
   return (
@@ -593,7 +611,6 @@ const Casino = () => {
                       {isLoadingGames && <LoadApi />}
 
                       {(isExplicitSingleCategoryView || selectedProvider) &&
-                        hasMoreGames &&
                         games.length > 0 && (
                           <div className="text-center">
                             <a className="load-more" onClick={loadMoreGames}>
