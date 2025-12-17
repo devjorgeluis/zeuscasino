@@ -69,6 +69,46 @@ const Home = () => {
   const searchRef = useRef(null);
 
   useEffect(() => {
+    const handleVisibilityChange = () => {
+      // When page becomes visible (user returns via back button)
+      if (document.visibilityState === 'visible') {
+        const currentPath = window.location.pathname;
+
+        // Check if we're on home page
+        if (currentPath === '/' || currentPath === '') {
+          console.log('User returned to home page from external URL');
+
+          // Force refresh home data
+          setShowFullDivLoading(true);
+
+          // Clear any existing pending requests
+          pendingPageRef.current.clear();
+
+          // Reset page tracking
+          lastProcessedPageRef.current = { page: null, ts: 0 };
+
+          // Fetch fresh data
+          getPage("home");
+          getStatus();
+
+          // Clear any stale game states
+          selectedGameId = null;
+          selectedGameType = null;
+          selectedGameLauncher = null;
+          setShouldShowGameModal(false);
+          setGameUrl("");
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!location.hash || tags.length === 0) return;
     const hashCode = location.hash.replace('#', '');
     const tagIndex = tags.findIndex(t => t.code === hashCode);
