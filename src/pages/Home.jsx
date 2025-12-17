@@ -69,6 +69,33 @@ const Home = () => {
   const searchRef = useRef(null);
 
   useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        const currentPath = window.location.pathname;
+        if (currentPath === '/' || currentPath === '') {
+          setShowFullDivLoading(true);
+          pendingPageRef.current.clear();
+          lastProcessedPageRef.current = { page: null, ts: 0 };
+
+          getPage("home");
+          getStatus();
+
+          selectedGameId = null;
+          selectedGameType = null;
+          selectedGameLauncher = null;
+          setShouldShowGameModal(false);
+          setGameUrl("");
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!location.hash || tags.length === 0) return;
     const hashCode = location.hash.replace('#', '');
     const tagIndex = tags.findIndex(t => t.code === hashCode);
