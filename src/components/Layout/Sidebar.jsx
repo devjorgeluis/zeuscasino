@@ -118,7 +118,6 @@ const Sidebar = ({
                                                 {supportParent && (
                                                     <td style={{ textAlign: "center" }}>
                                                         <a
-                                                            href="#"
                                                             className="dropdown-item"
                                                             style={{ color: "white" }}
                                                             onClick={() => openSupportModal(true)}
@@ -140,7 +139,6 @@ const Sidebar = ({
                                             <tr>
                                                 <td style={{ textAlign: "center" }}>
                                                     <a
-                                                        href="#"
                                                         className="dropdown-item"
                                                         style={{ color: "white" }}
                                                         onClick={() => openSupportModal(true)}

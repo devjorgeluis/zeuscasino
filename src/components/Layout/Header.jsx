@@ -228,7 +228,6 @@ const Header = ({
                                             </li>
                                             <li>
                                                 <a
-                                                    href="#"
                                                     className="dropdown-item"
                                                     onClick={() => { setDropdownOpen(false); openSupportModal(true); }}
                                                 >
