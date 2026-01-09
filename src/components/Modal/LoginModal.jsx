@@ -30,6 +30,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
         const body = {
             username: username,
             password: password,
+            site_label: "main",
         };
 
         callApi(
@@ -53,6 +54,8 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
             setTimeout(() => {
                 onClose();
             }, 1000);
+        } else if (result.status === "country") {
+            setErrorMsg(result.message);
         } else {
             setErrorMsg("Combinación de nombre de usuario y contraseña no válida.");
         }
