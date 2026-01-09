@@ -4289,7 +4289,7 @@ button.next {
     margin-top: 3rem;
 }
 
-.alert {
+.alert#success-alert {
     position: relative;
     padding: 1rem 1rem;
     margin-bottom: 1rem;
