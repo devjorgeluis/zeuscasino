@@ -84,39 +84,10 @@ const Sidebar = ({
                     {
                         isLogin ? (
                             <>
-                                <div className="d-flex" style={{ cursor: "pointer" }}>
-                                    <div className="user-info mx-1">
-                                        <div className="avatar px-2 py-1 pb-0">
-                                            <i className="fa fa-user"></i>
-                                        </div>
-                                    </div>
-
-                                    <div className="m-0 p-0 text-start" style={{ fontSize: "small" }}>
-                                        <span style={{ color: "white" }}>
-                                            {contextData?.session?.user?.username}
-                                        </span>
-                                        <br />
-                                        <span style={{ color: "white" }}>
-                                            {formatBalance(userBalance)}
-                                        </span>
-                                    </div>
-                                </div>
-
                                 <div className="d-flex align-items-center">
                                     <table className="table table-striped custom-table">
                                         <tbody>
                                             <tr>
-                                                <td style={{ textAlign: "center" }}>
-                                                    <a
-                                                        href="#"
-                                                        className="dropdown-item"
-                                                        style={{ color: "white" }}
-                                                        onClick={handleMyProfileHistoryClick}
-                                                    >
-                                                        <i className="fa fa-history"></i> Historial
-                                                    </a>
-                                                </td>
-
                                                 {supportParent && (
                                                     <td style={{ textAlign: "center" }}>
                                                         <a
@@ -194,7 +165,7 @@ const Sidebar = ({
                         isLogin && <div style={{ position: "absolute", bottom: "10px" }}>
                             <a
                                 href="#"
-                                className="dropdown-item my-2"
+                                className="dropdown-item my-2 btn-logout"
                                 style={{ color: "white" }}
                                 onClick={handleLogoutClick}
                             >

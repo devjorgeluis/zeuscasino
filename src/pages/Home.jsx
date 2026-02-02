@@ -24,8 +24,8 @@ let selectedGameImg = null;
 let pageCurrent = 0;
 
 import ImgCategoryHome from "/src/assets/svg/lobby.svg";
-import ImgCategoryPopular from "/src/assets/svg/new.svg";
-import ImgCategoryBlackjack from "/src/assets/svg/jackpots.svg";
+import ImgCategoryPopular from "/src/assets/img/hot.png";
+import ImgCategoryBlackjack from "/src/assets/img/jokers.png";
 import ImgCategoryRoulette from "/src/assets/svg/roulette.svg";
 import ImgCategoryCrash from "/src/assets/svg/crash.svg";
 import ImgCategoryMegaways from "/src/assets/svg/megaways.svg";

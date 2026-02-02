@@ -102,7 +102,7 @@ const Header = ({
                                             </div>
                                         </div>
 
-                                        <div className="text-start" style={{ fontSize: "small" }}>
+                                        <div className="text-start btn-menu-top-login" style={{ fontSize: "small" }}>
                                             <span style={{ color: "white" }}>{contextData?.session?.user?.username}</span>
                                             <br />
                                             <span style={{ color: "white" }}>{formatBalance(userBalance)}</span>
@@ -191,18 +191,8 @@ const Header = ({
                                     <button className="button-support" onClick={() => { openSupportModal(false); }}>
                                         <img src={ImgSupport} />
                                     </button>
-                                    <div className="dropdown nav-item">
-                                        <div>
-                                            <div
-                                                className="btn-support"
-                                                style={{ background: "#f2ce00 !important", color: "rgb(2, 15, 29)" }}
-                                            >
-                                                <i className="fas fa-comment fa-fw"></i>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div className="nav-item mx-1" style={{ cursor: "pointer", color: "rgb(204, 204, 204)" }}>
-                                        <span className="pr-0 mx-1" style={{ fontWeight: 300, cursor: "pointer" }}>CRÉDITOS</span>
+                                        <span className="pr-0 mx-1" style={{ fontWeight: 700, cursor: "pointer" }}>CRÉDITOS:</span>
                                         <span style={{ fontWeight: 800 }}>{formatBalance(userBalance)}</span>
                                     </div>
                                     <div className="user-info mx-1">
