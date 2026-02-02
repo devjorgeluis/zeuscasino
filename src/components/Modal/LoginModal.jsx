@@ -91,8 +91,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                         <i className="fas fa-times"></i>
                     </button>
                     <h6 id="exampleModalLabel" className="modal-title text-center m-1 mb-5 p-0">
-                        Ingrese su usuario y contraseña para<br />
-                        empezar a jugar.
+                        Ingreso
                     </h6>
                     <div className="modal-body p-1">
                         <div className="text-center">
@@ -130,7 +129,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                                         id="submit_btn"
                                         type="submit"
                                         className="btn p-2 login-btn"
-                                        style={{ color: 'black', width: '100%', backgroundColor: 'rgb(218, 65, 103)' }}
+                                        style={{ color: 'black', width: '100%', backgroundColor: '#f2ce00' }}
                                         disabled={isLoading}
                                     >
                                         {isLoading ? 'INGRESANDO...' : 'INGRESAR'}

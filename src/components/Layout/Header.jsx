@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AppContext } from "../../AppContext";
 import Sidebar from "./Sidebar";
-import ImgLogo from "/src/assets/img/logo.webp";
+import ImgLogo from "/src/assets/img/logo.png";
 import ImgSupport from "/src/assets/svg/support-black.svg";
 
 const Header = ({
@@ -86,7 +86,7 @@ const Header = ({
                             }}
                         >
                             <div style={{ width: "60%" }} onClick={() => navigate("/")}>
-                                <img src={ImgLogo} width="40%" alt="Logo" className="mx-2" />
+                                <img src={ImgLogo} width="40%" alt="Logo" className="mx-2" id="logo" />
                             </div>
 
                             <div className="d-flex align-items-center">
@@ -112,16 +112,20 @@ const Header = ({
                                             <img src={ImgSupport} />
                                         </button>
                                         <div
-                                            className="btn mx-3 py-1 px-1 btn-outline"
+                                            className="btn mx-3 px-1 btn-outline"
                                             style={{
-                                                fontSize: "11px",
+                                                fontSize: "10px",
                                                 cursor: "pointer",
                                                 fontWeight: "bold",
-                                                fontFamily: '"Exo 2", sans-serif'
+                                                width: 77,
+                                                padding: 6,
+                                                borderRadius: 6,
+                                                border: "2px solid #626262",
+                                                margin: "0.4rem 0.2rem"
                                             }}
                                             onClick={() => handleLoginClick()}
                                         >
-                                            <span>INGRESAR</span>
+                                            <span>Ingresar</span>
                                         </div>
                                     </>
                                 }
@@ -132,7 +136,7 @@ const Header = ({
                                         onClick={() => setShowSidebar(true)}
                                         style={{ cursor: "pointer" }}
                                     >
-                                        <span style={{ fontSize: "larger", color: "rgb(218, 65, 103)" }}>
+                                        <span style={{ fontSize: 31, color: "#626262" }}>
                                             <i className="fas fa-bars"></i>
                                         </span>
                                     </span>
@@ -163,8 +167,8 @@ const Header = ({
                                         className="nav nav-tabs"
                                         style={{
                                             "--background": "rgba(255, 255, 255, 0.08)",
-                                            "--color": "#da4167",
-                                            "--border": "2px solid #da4167"
+                                            "--color": "#f2ce00",
+                                            "--border": "2px solid #f2ce00"
                                         }}
                                     >
                                         {navItems.map((item, idx) => (
@@ -191,7 +195,7 @@ const Header = ({
                                         <div>
                                             <div
                                                 className="btn-support"
-                                                style={{ background: "rgb(218, 65, 103) !important", color: "rgb(2, 15, 29)" }}
+                                                style={{ background: "#f2ce00 !important", color: "rgb(2, 15, 29)" }}
                                             >
                                                 <i className="fas fa-comment fa-fw"></i>
                                             </div>
@@ -261,9 +265,9 @@ const Header = ({
                                             fontWeight: "bold",
                                             fontSize: "small",
                                             fontFamily: '"Exo 2", sans-serif',
-                                            backgroundColor: "rgb(218, 65, 103)",
+                                            backgroundColor: "#f2ce00",
                                             color: "rgb(2, 15, 29)",
-                                            borderColor: "rgb(218, 65, 103)",
+                                            borderColor: "#f2ce00",
                                             transition: "0.3s",
                                             float: "right",
                                         }}
@@ -278,24 +282,6 @@ const Header = ({
                         </div>
                     </nav>
             }
-
-            <div
-                style={{
-                    position: "fixed",
-                    right: "10px",
-                    top: "0px",
-                    background: "rgba(0, 0, 0, 0.6)",
-                    color: "white",
-                    fontSize: "12px",
-                    padding: "2px 6px",
-                    borderRadius: "4px",
-                    zIndex: 9999,
-                    fontFamily: 'Roboto Condensed',
-                }}
-            >
-                v 1.7
-            </div>
-
 
             <Sidebar
                 isSlotsOnly={isSlotsOnly}

@@ -907,7 +907,7 @@
 }
 
 .md-form.md-outline.form-sm label.active {
-  transform: translateY(-85%);
+  transform: translateY(-60%);
   font-size: 10px
 }
 
@@ -2229,8 +2229,8 @@
 .page-item:focus .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #da4167 !important;
-  border-color: #da4167 !important;
+  background-color: #f2ce00 !important;
+  border-color: #f2ce00 !important;
   cursor: pointer;
   border-radius: 50%
 }
@@ -4349,7 +4349,7 @@ div {
 }
 
 .btn-support {
-  background-color: rgb(218, 65, 103) !important;
+  background-color: #f2ce00 !important;
   position: relative;
   display: flex;
   align-items: center;
@@ -4645,7 +4645,7 @@ footer {
 }
 
 .table-striped {
-  background-color: #020f1d
+  background-color: #1e1e1ea8
 }
 
 .custom-table {
@@ -4799,5 +4799,15 @@ body {
   h3 {
     font-size: 1.17em;
     margin: 0;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  #logo {
+    padding: 5px;
+    padding-top: 5px !important;
+    text-align: center;
+    height: 42px !important;
+    width: auto !important;
   }
 }

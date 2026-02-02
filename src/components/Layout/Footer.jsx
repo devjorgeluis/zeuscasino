@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import ImgLogo from "/src/assets/img/logo-footer.png";
 
 const Footer = ({ isSlotsOnly }) => {
     const navigate = useNavigate();
@@ -40,27 +41,26 @@ const Footer = ({ isSlotsOnly }) => {
 
     return (
         <div className="footer-app">
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="left">
-                        <p className="copyright">2024 Todos los derechos reservados. Sitio Operado bajo Licencia de Curazao - Antillas Holandesas.</p>
-                    </div>
-                    <div className="right">
-                        <div className="row-right">
-                            <div className="col">
-                                <h4>Secciones</h4>
-                                <ul>
-                                    {menuItems.map((menu, index) => (
-                                        <li key={index}>
-                                            <a
-                                                onClick={() => navigate(menu.href)}
-                                            >
-                                                {menu.name}
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+            <div className="row">
+                <div className="left">
+                    <img src={ImgLogo} />
+                    <p className="copyright">© Millonarios.bet - 2026. <br /> Todos los derechos reservados</p>
+                </div>
+                <div className="right">
+                    <div className="row-right">
+                        <div className="col">
+                            <h4>Secciones</h4>
+                            <ul>
+                                {menuItems.map((menu, index) => (
+                                    <li key={index}>
+                                        <a
+                                            onClick={() => navigate(menu.href)}
+                                        >
+                                            {menu.name}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>

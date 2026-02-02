@@ -1,3 +1,8 @@
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
 @font-face {
     font-family: "Exo 2";
     font-style: italic;
@@ -213,7 +218,7 @@
 .scroll-button {
     width: 27px;
     height: 45px;
-    color: #bf8200;
+    color: #93000e;
     background: #000000b3;
     padding: px;
     border-radius: 8px;
@@ -303,14 +308,14 @@
 
 .button-item span {
     width: auto;
-    background-color: #da4167 !important;
-    border-color: #da4167 !important;
+    background-color: #f2ce00 !important;
+    border-color: #f2ce00 !important;
     padding: 6px;
-    color: #2e2e2e;
+    color: #222;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 8px;
     transition: all 0.3s ease;
-    padding: 1vh 1vw;
+    padding: 15px 20px;
     border-radius: 6px;
 }
 
@@ -1054,7 +1059,7 @@
 .play-button {
     width: 100%;
     padding: 15px;
-    background: linear-gradient(135deg, #ff6b6b, #da4167);
+    background: linear-gradient(135deg, #ff6b6b, #f2ce00);
     border: none;
     border-radius: 12px;
     color: #fff;
@@ -1064,12 +1069,12 @@
     letter-spacing: 2px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px #da416766;
+    box-shadow: 0 4px 15px #f2ce0066;
 }
 
 .play-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px #da416799;
+    box-shadow: 0 6px 20px #f2ce0099;
     background: linear-gradient(135deg, #ff7b7b, #ea5177);
 }
 
@@ -1561,7 +1566,7 @@
     width: 100%;
     max-width: 400px;
     padding: 20px 40px;
-    background: linear-gradient(135deg, #ff6b6b, #da4167);
+    background: linear-gradient(135deg, #ff6b6b, #f2ce00);
     border: none;
     border-radius: 50px;
     color: #fff;
@@ -1572,7 +1577,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow:
-        0 8px 25px #da416799,
+        0 8px 25px #f2ce0099,
         inset 0 -4px 10px #0000004d;
     position: relative;
     overflow: hidden;
@@ -1603,7 +1608,7 @@
 .win-claim-button:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow:
-        0 12px 35px #da4167cc,
+        0 12px 35px #f2ce00cc,
         inset 0 -4px 10px #0000004d;
     background: linear-gradient(135deg, #ff7b7b, #ea5177);
 }
@@ -2273,7 +2278,7 @@
 }
 
 .success-cta-box {
-    background: linear-gradient(135deg, #ff6b6b33, #da416733);
+    background: linear-gradient(135deg, #ff6b6b33, #f2ce0033);
     border: 2px solid rgba(255, 107, 107, 0.3);
     border-radius: 15px;
     padding: 20px;
@@ -2346,7 +2351,7 @@
 .success-play-button {
     width: 100%;
     padding: 20px 40px;
-    background: linear-gradient(135deg, #ff6b6b, #da4167);
+    background: linear-gradient(135deg, #ff6b6b, #f2ce00);
     border: none;
     border-radius: 50px;
     color: #fff;
@@ -2357,7 +2362,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow:
-        0 8px 25px #da416799,
+        0 8px 25px #f2ce0099,
         inset 0 -4px 10px #0000004d;
     position: relative;
     overflow: hidden;
@@ -2382,7 +2387,7 @@
 .success-play-button:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow:
-        0 12px 35px #da4167cc,
+        0 12px 35px #f2ce00cc,
         inset 0 -4px 10px #0000004d;
 }
 
@@ -2671,7 +2676,7 @@
 }
 
 .ver-todos:hover span {
-    color: #bf8200;
+    color: #93000e;
 }
 
 .provider span {
@@ -2736,11 +2741,11 @@
 }
 
 .brands-container .item:hover .image {
-    border-color: #bf8200;
+    border-color: #93000e;
 }
 
 .brands-container .item:hover .provider-name {
-    color: #bf8200;
+    color: #93000e;
 }
 
 .provider-name {
@@ -2794,7 +2799,7 @@
     outline: none;
     box-shadow: none;
     font-size: 0.875rem;
-    background-color: #2e2e2e;
+    background-color: #040404;
     padding-left: 40px;
     color: #fff;
     border: none;
@@ -2808,7 +2813,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #2e2e2e;
+    background-color: #040404;
     color: #fff;
     padding: 10px;
     border-radius: 6px;
@@ -2819,7 +2824,7 @@
 .boton-brands button {
     display: inline-flex;
     align-items: center;
-    background-color: #2e2e2e;
+    background-color: #040404;
     color: #fff;
 }
 
@@ -2872,13 +2877,11 @@
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
 }
 
 .img-container {
     padding: 0;
-    color: #bf8200 !important;
+    color: #93000e !important;
     font-weight: 900;
     text-transform: uppercase;
     display: flex;
@@ -2928,8 +2931,8 @@
 
 @media (max-width: 818px) {
     .footer-app {
-        background-color: #2e2e2e;
-        padding: 80px 19px;
+        background-color: #161616;
+        padding: 20px 10px;
     }
 
     .row-right {
@@ -2942,19 +2945,20 @@
     }
 
     .copyright {
+        text-align: center;
         max-width: 100%;
         margin-top: 0;
         font-weight: 300;
     }
 
     .col h4 {
-        color: #bf8200;
         margin-bottom: 10px;
-        font-weight: 300;
+        font-weight: 700;
     }
 
     .col ul li {
         margin-bottom: 0;
+        margin-top: 15px;
     }
 }
 
@@ -3097,7 +3101,7 @@ button.next {
 
 .input-group button {
     padding: 10px 20px;
-    background-color: #da4167;
+    background-color: #f2ce00;
     border: 0px solid;
     font-size: .85rem;
     border-radius: 0 7px 7px 0;
@@ -3125,6 +3129,12 @@ button.next {
     max-width: 50%;
 }
 
+.footer-app .left img {
+    width: 250px;
+    margin: auto;
+    display: block;
+}
+
 @media (max-width: 818px) {
     .footer-app .left {
         max-width: 100%;
@@ -3135,6 +3145,7 @@ button.next {
     display: flex;
     flex: 0 0 50%;
     max-width: 50%;
+    margin-top: 20px;
 }
 
 .home-section-container .home-section .home-title h3 {
@@ -3234,12 +3245,6 @@ button.next {
     cursor: pointer;
 }
 
-.list-exclusive i {
-    color: #bf8200;
-    font-size: 1.125rem;
-    margin-right: 7px;
-}
-
 .list-exclusive li a {
     display: flex;
     justify-content: space-between;
@@ -3253,7 +3258,7 @@ button.next {
 }
 
 .list-exclusive li a:hover {
-    background-color: #bf8200;
+    background-color: #93000e;
 }
 
 .list-exclusive li a:hover i {
@@ -3261,7 +3266,7 @@ button.next {
 }
 
 .list-exclusive i {
-    color: #bf8200;
+    color: #f2ce00;
     font-size: 1.125rem;
     margin-right: 7px;
 }
@@ -3293,7 +3298,7 @@ button.next {
 }
 
 .list li a:hover {
-    background-color: #bf8200;
+    background-color: #93000e;
 }
 
 .list li a:hover i {
@@ -3337,7 +3342,7 @@ button.next {
 }
 
 .modal-providers-container::-webkit-scrollbar-thumb {
-    background-color: #bf8200;
+    background-color: #93000e;
     border-radius: 0;
 }
 
@@ -3401,14 +3406,14 @@ button.next {
 }
 
 .games-vertodos span {
-    color: #bf8200;
+    color: #93000e;
     font-weight: 700;
     font-size: 20px;
 }
 
 .games-vertodos i {
     font-weight: 700;
-    color: #bf8200;
+    color: #93000e;
     margin-left: 5px;
     font-weight: 900;
     font-size: 20px;
@@ -3563,9 +3568,9 @@ button.next {
     font-weight: bold;
     font-size: small;
     font-family: "Exo 2", sans-serif;
-    background-color: rgb(218, 65, 103);
+    background-color: #f2ce00;
     color: rgb(2, 15, 29);
-    border-color: rgb(218, 65, 103);
+    border-color: #f2ce00;
     transition: 0.3s;
     padding: .5rem .5rem;
     display: inline-block;
@@ -3764,9 +3769,9 @@ button.next {
     font-weight: bold;
     font-size: small;
     font-family: "Exo 2", sans-serif;
-    background-color: rgb(218, 65, 103);
+    background-color: #f2ce00;
     color: rgb(2, 15, 29);
-    border-color: rgb(218, 65, 103);
+    border-color: #f2ce00;
     transition: 0.3s;
     float: right;
 }
@@ -4126,7 +4131,7 @@ button.next {
     color: #f2008d;
     border-radius: 5px;
     padding: 0px;
-    margin-right: 10px;
+    margin-right: 0;
 }
 
 .button-support>img {
@@ -4356,5 +4361,9 @@ button.next {
 @media (max-width: 768px) {
     #success-alert, #error-alert {
         margin: 0;
+    }
+
+    .other-container {
+        padding: 0 20px;
     }
 }

@@ -23,7 +23,7 @@ const MyProfileModal = ({ isOpen, onClose }) => {
                     <div className="modal-body p-4">
                         <div className="form-large">
                             <form>
-                                <h1 style={{ color: "rgb(218, 65, 103)" }}>MI CUENTA</h1>
+                                <h1 style={{ color: "#f2ce00" }}>MI CUENTA</h1>
                                 <div className="pb-2 font-size-custom mb-3 my-3">
                                     <label style={{ color: "white" }}>Número de cuenta</label> <br />
                                     {
@@ -113,7 +113,7 @@ const MyProfileModal = ({ isOpen, onClose }) => {
                                         id="submit_btn"
                                         type="submit"
                                         className="btn p-2 mx-2"
-                                        style={{ color: 'black', fontSize: 'small', fontWeight: 'bold', backgroundColor: 'rgb(218, 65, 103)' }}
+                                        style={{ color: 'black', fontSize: 'small', fontWeight: 'bold', backgroundColor: '#f2ce00' }}
                                         onClick={() => onClose()}
                                     >
                                         GUARDAR
@@ -122,7 +122,7 @@ const MyProfileModal = ({ isOpen, onClose }) => {
                                         id="close_btn"
                                         type="button"
                                         className="btn p-2 mx-2"
-                                        style={{ color: 'black', fontSize: 'small', fontWeight: 'bold', backgroundColor: 'rgb(218, 65, 103)' }}
+                                        style={{ color: 'black', fontSize: 'small', fontWeight: 'bold', backgroundColor: '#f2ce00' }}
                                         onClick={() => onClose()}
                                     >
                                         CERRAR
