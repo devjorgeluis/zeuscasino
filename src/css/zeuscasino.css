@@ -3131,13 +3131,17 @@ button.next {
 
 .footer-app .left img {
     width: 250px;
-    margin: auto;
+    margin: 0 auto 0 0;
     display: block;
 }
 
 @media (max-width: 818px) {
     .footer-app .left {
         max-width: 100%;
+    }
+
+    .footer-app .left img {
+        margin: 0 auto;
     }
 }
 
